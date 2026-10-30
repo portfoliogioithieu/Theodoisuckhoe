@@ -1,414 +1,763 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Theo dõi sức khỏe mạn tính Pro</title>
-</script><style>
-:root{--blue:#1d4ed8;--bg:#eef2f7;--card:#fff;--green:#15803d;--red:#b91c1c;--gray:#475569;--text:#111827}
-*{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);font-size:18px;line-height:1.5}
-header{background:linear-gradient(135deg,#1e3a8a,#1d4ed8);color:#fff;padding:20px 16px}
-header h1{margin:0;font-size:24px}header p{margin:8px 0 0;font-size:15px;opacity:.95}
-main{max-width:1020px;margin:0 auto;padding:16px}
-.card{background:var(--card);border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 2px 10px rgba(15,23,42,.12);border:2px solid #dbe3ef}
-h2{font-size:22px;margin:0 0 14px}h3{font-size:19px;margin:16px 0 8px;color:#1e3a8a}
-label{display:block;font-size:16px;font-weight:700;margin:12px 0 6px}
-input,select,textarea{width:100%;padding:14px;border:2px solid #94a3b8;border-radius:12px;font-size:18px;background:#fff;color:var(--text)}
-textarea{min-height:90px;resize:vertical}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-.btn{display:inline-block;border:0;border-radius:14px;padding:16px 22px;font-size:19px;font-weight:800;cursor:pointer;background:var(--blue);color:#fff;text-decoration:none;min-height:52px}
-.btn.secondary{background:#e5eaf2;color:#111827;border:2px solid #94a3b8}.btn.danger{background:var(--red)}.btn.green{background:var(--green)}
-.btn.small{padding:10px 16px;font-size:17px;min-height:44px}
-.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;align-items:center}
-table{width:100%;border-collapse:collapse;font-size:17px}
-th,td{padding:12px;border-bottom:2px solid #e2e8f0;text-align:left;vertical-align:top}
-th{background:#dbeafe;color:#1e3a8a;font-size:16px}
-.badge{display:inline-block;padding:6px 12px;border-radius:999px;font-size:15px;font-weight:800}
-.ok{background:#dcfce7;color:#14532d}.warn{background:#fef3c7;color:#92400e}.bad{background:#fee2e2;color:#991b1b}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hồ sơ Sức khoẻ Gia đình</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=4xNUu-AFner-j3wmU6zYJxVWPTHvvuPHp3An7CwZuN4Y8fKjMNtxHPuZ7Ieep_4vtOzNat8U_Dg5CZ_FsBMjI1-cCAVmGQjaNq4d6KspLp2D6X5Sv80AC0vpLPX7nWo3ivw20TRBTsaqiDFQtS-Y9o-VcwLz6B7T3ogfzL5lusJv8N0rujFFaUmEfbmpmzE1PJifQMvoIeplhYU9F8SOtx38mhqXjFiYGdpDZ2IaEHs562Q8J2wMVzYoeb5t596DX4EOiDaA8_YSdCkU7KXYZJldH_nzg8g0-z3XiT3jWEHnd54T7nHkoQOSyAgUVvyjwboGoNx8-NLlHJhNZEI0PuzOj5U7XgiqdlSpjbOe1jA3m-uKkmaiMa7oUHMfaAdP9yC8ZmBWYm3Tufxw3ZL2BDuoqH-31emS7KL5bCgnd95wAozphU8szf-FSCwNv1ZKJ51aJd56Pmpmv_0oqG817aQ6GQtzslDwjyiGkNnOumRK36TdA7Zck8WQ7xAccUYLx1sZgnnq3g-WOO5mZkLcJChsPzfNaGuAciVif4p2hnW6x2UPtiBw6OLJlQ-FmdjH8AXyWpbFqsztTPNjIQHoQ-ACkfYdvwCpWBIHnDxZJxg04afNo3vPZIiExNfli0ytdSdKPca2Z-zCRV5pYJLC0E4Jfw5QW5EjUdhsmwcbPDHmRcA81KK_mSw5Q24ibOkJBjHMdMYkz1q1JIiNR-nryiEMJ1MiDUex1DWZjzHnZ2mZZYFjfHOVezcIsm-dRld59yYJbUAQBV5jlmS6w_SGmkCOUE0WRuNJjlMc0W_4FwBsAiItgr1AGNFJlYl1DiB-BdHN_sDSKG3FdNmQjJ28_dKInKdxPQKwbOK7ZswCYqAzoVrBbVfH3RLyxonb31RZGmMejBJD7wCcjfSdylf9vE2jiBqK_9yXyZTFOH94o_oeFLdjsIN_Uo3cw83X09r8Y1RQkuwr5VOYxRkLjBWJnLI6TM9LLDew8Q25h6_tlkhw722FItR1zJHyH14r5D_Pi_io1EIzkW1OlZnxixL9X_tDP3dptDMmVpMBWKD4grFtuv4fGAS4TuICACvmLuGHEkORWWdd3tO7qUl-UScnY-eqGo9lUnjGFfgS0ym9Nf6fr0iQf0cEYasIlpN92BNEJDXNFDRxoMAHW2dLf1dzPMCuSsJvgwvO31R_6JVuo9DBG0aQOBmc9lwbxIoIitA3bND2LbwmPtA77pqlsF-ROv4H7Fh4p-n5AXs-E-Zjr-7uGuLlSgMigE04AIidhzjdvrl7w4Ym39cCy4UgIb9X92Mc2JG8_z9WElx-afv2Ihv1mPmor6Fwh6FZ9S9r0i6BzgIgTPeUv9ZFDr7TtjOTX76-Zv5PkBJV_seM0S7svFSKOfHq0_hn5IFVyZyphdyUs6-Mvg6xi1hzzsw5cKgzDDLjjjuHgtmSyYDhSG-UOqFbThtKpmHQ7tcC9aPMxRi8LB89cs0PKjhiQX2tSXZQHGZbUOaDp3NagA58h76YStzod8Rfed5c_A-7jA9FmM-0WzaqMR7nSdkzPiKHfiimhswpqVQkf-swYO4reQSqy9kHwm4uqXgVMmdgX_w73_wavFLBQ5VxdWrgxh5fGOb2XuYF-o4oisUqna_1cuQyKLIQg4wTHiTbB-yQZj9GV4h1fM6Lf5FRj9hOp7E2Rra8ed-DzKG7mdqh3EzuGu3LnBqNpkomGGjBzOTa219dFqMf2lyar_X40SgNdxsx53CG-Ee931oENNmtNjv8Z1NRLXU0JZ-UWGS2uSGhyE-E-f3_4D3U9AMzCNmTQdFUtUXKt7R-A6XbzO5r5YYQTXtVLnWdgVGUwOPdNRoAc0y7hXRowSFuxb98iIeBALe-vqFC59CriuCL5PH9n8g7t4BKX44BNLHm2nuPNdMEfps3Y44v1KlDNOcOYyitGUlFg-2SE12PFG8G6WMpeAeNXsf6pTBx7f0Lkjj0XVYbeq5k54lQPd8bCn_RRlBPqyWVYXXpv0X3b--WzFUWD_HeTY7QE7Sf0ir3QUMqbhJJWudNGQcH9DqkYA0TKMQ2kz2Zqz-Cs4vX6penTdt_tio5SrP-j426lv-792o_qppyGKZU_ir790V209k3-ImR0y7mnsUQgHisoefFqJcIvyC2KSxo_BS9zFKsSHyfjVdlpzN1SrA-wJt7HxBbqgymHCcYrRG6RJ1kkUs9bd2CrfVawE9GGsx3kRCDOtn0V9ZprXTqE-_AHEfFEel_pBDlz3Z83eYDW2Nt5AHDyTJTmQnknLdNO261GiWYZ2KQn8NoipTyWVX9w31fW-zq1CjDJwLD4tvNzoGNYXhFdilzr6KS2ZVStdEIex9fj06DUqxf8GMBtXYbPoD2Hu9z9ShzBaGeDvEUByslbPqYj61Lfl_Zso-SUl6D1T49PILv_XwIP0DSw8a0WwzKhNe2L6OftZJT_c5n9FyaEllMF8rZqLQOa52t13mWSUbn0GrubA1YgBruTIoOn0VUgrc6BXNJ0Q5MkMutISY2z3D85qzqpoHSmvLuzXvBSLTo4hOIJh9ZQIr3o8zS1s2YSDIrupo3ve09yeE24PtA_KRoE9NO0kAGObJnXb0" charset="UTF-8"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{--brand:#6366f1;--brand2:#8b5cf6;--accent:#ec4899;--ink:#0f172a;--muted:#64748b;--line:#e6eaf3;--bg:#f6f7fd;--r:22px;--shadow:0 18px 44px rgba(79,70,229,.10)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,-apple-system,Arial;color:var(--ink);background:radial-gradient(900px 500px at 90% -10%,#e0e7ff,transparent 60%),radial-gradient(700px 420px at -10% 8%,#fce7f3,transparent 55%),var(--bg)}
+.shell{max-width:1160px;margin:0 auto;padding:16px 16px 40px}
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+.hi{max-width:1160px;margin:auto;padding:10px 16px;display:flex;align-items:center;gap:12px;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800}
+.mark{width:44px;height:44px;border-radius:15px;background:linear-gradient(135deg,var(--brand),var(--accent));display:grid;place-items:center;color:#fff;font-size:20px}
+.brand small{display:block;font-size:12px;color:var(--muted);font-weight:600}
+.user{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:999px;padding:6px 8px;min-width:0;flex:1;max-width:360px}
+.pfp{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--accent));color:#fff;display:grid;place-items:center;font-weight:800;cursor:pointer;overflow:hidden;flex:0 0 auto}
+.pfp img{width:100%;height:100%;object-fit:cover}
+.pname{flex:1;min-width:0}#profileSelect{width:100%;border:0;background:none;font:inherit;font-weight:700;outline:none}
+.btn{border:0;border-radius:14px;padding:12px 16px;font:inherit;font-weight:700;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--brand),#4338ca);transition:transform .15s,box-shadow .15s;min-height:44px}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(79,70,229,.28)}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:#eef2ff;color:#4338ca}.btn.danger{background:#fee2e2;color:#b91c1c}
+.btn.sm{padding:9px 12px;font-size:13px;border-radius:11px;min-height:38px}
+.tabs-main{display:flex;gap:8px;justify-content:flex-start;margin:0 0 14px;flex-wrap:nowrap;overflow-x:auto;padding:4px 2px;scrollbar-width:none}
+.tabs-main::-webkit-scrollbar{display:none}
+.main-tab{border:1.6px solid var(--line);background:rgba(255,255,255,.92);border-radius:999px;padding:11px 16px;font-weight:800;cursor:pointer;font-size:13.5px;transition:all .2s;white-space:nowrap;min-height:44px}
+.main-tab.on{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border-color:transparent;box-shadow:0 10px 22px rgba(99,102,241,.3)}
+.tabpane{animation:fade .26s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);margin-bottom:18px}
+h2{margin:0;font-size:18px}.sub{color:var(--muted);font-size:13px;margin:6px 0 16px}
+.grid{display:grid;gap:12px}.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}.g4{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+label{display:block;font-size:11.5px;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase}
+input,select,textarea{width:100%;padding:12px 13px;border:1.6px solid var(--line);border-radius:13px;font:inherit;font-size:16px;background:#fbfcff;outline:none;transition:border .15s,box-shadow .15s;min-height:46px}
+input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0 0 4px rgba(99,102,241,.13)}
+textarea{min-height:88px;resize:vertical}
+.f{margin-bottom:12px}.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.6px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;font-size:13px;font-weight:700;cursor:pointer;min-height:40px}
+.chip.on{background:linear-gradient(135deg,var(--brand),#4338ca);border-color:transparent;color:#fff}
+.kpi{background:linear-gradient(180deg,#fff,#f8faff);border:1px solid var(--line);border-radius:17px;padding:16px;transition:transform .16s}
+.kpi:hover{transform:translateY(-2px)}
+.kpi .k{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase}.kpi .v{font-size:23px;font-weight:800;margin:6px 0 3px}.kpi .s{font-size:12px;color:var(--muted)}
+.badge{display:inline-block;padding:5px 10px;border-radius:999px;font-size:11.5px;font-weight:800}
+.low{background:#dbeafe;color:#1e40af}.lowwarn{background:#cffafe;color:#155e75}.normal{background:#d1fae5;color:#065f46}.elevated{background:#fef3c7;color:#92400e}.stage1{background:#ffedd5;color:#9a3412}.stage2{background:#fee2e2;color:#991b1b}.crisis{background:#7f1d1d;color:#fff}
+.hr-low{background:#dbeafe;color:#1e40af}.hr-ok{background:#d1fae5;color:#065f46}.hr-fast{background:#fef3c7;color:#92400e}.hr-alert{background:#fee2e2;color:#991b1b}
+.doc-type{background:#eef2ff;color:#4338ca}
+.alert{border:1.6px solid #fecaca;background:#fff1f2;color:#881337;border-radius:16px;padding:14px;margin-top:12px}
+.info{border:1.6px solid #c7d2fe;background:#eef2ff;color:#3730a3;border-radius:16px;padding:14px;margin-top:12px}
+ul{margin:8px 0 0;padding-left:18px}li{margin:5px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{font-size:10.5px;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}
+td{padding:11px 8px;border-bottom:1px solid #f1f4fa;white-space:nowrap}
+.tw{overflow:auto;border:1px solid var(--line);border-radius:14px;-webkit-overflow-scrolling:touch}
+.empty{text-align:center;color:var(--muted);padding:30px}.note{font-size:12px;color:var(--muted);margin-top:12px}
 .hidden{display:none}
-.tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
-.tab{padding:14px 18px;border-radius:16px;background:#fff;border:2px solid #94a3b8;font-weight:800;cursor:pointer;white-space:nowrap;font-size:17px}
-.tab.active{background:var(--blue);color:#fff;border-color:var(--blue)}
-.alert{padding:16px;border-radius:12px;margin-bottom:12px;font-weight:800;font-size:17px}
-.alert.red{background:#fee2e2;color:#991b1b;border:2px solid #fca5a5}.alert.yellow{background:#fef3c7;color:#92400e;border:2px solid #fcd34d}.alert.blue{background:#dbeafe;color:#1e3a8a;border:2px solid #93c5fd}
-.small{font-size:15px;color:var(--gray)}
-.checkitem{display:flex;align-items:flex-start;gap:14px;padding:12px 0;border-bottom:2px solid #e2e8f0;font-weight:700;font-size:19px}
-.checkitem input{width:28px;height:28px;margin-top:2px;flex:0 0 auto}
-.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
-.chip{display:flex;align-items:center;gap:8px;background:#f1f5f9;border:2px solid #94a3b8;border-radius:999px;padding:10px 14px;font-size:16px;font-weight:700}
-.chip input{width:22px;height:22px}
-canvas{width:100%;height:280px;background:#fff;border:2px solid #cbd5e1;border-radius:12px;margin-top:12px}
-.statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px}
-.stat{background:#f8fafc;border:2px solid #cbd5e1;border-radius:12px;padding:14px}
-.stat b{display:block;font-size:24px;color:#1e3a8a}
-ol,ul{padding-left:26px}li{margin:8px 0}
-#bmiBox{margin-top:12px;padding:14px;border-radius:12px;background:#f8fafc;border:2px solid #cbd5e1;font-weight:800;font-size:19px}
-#adviceBox{margin-top:12px}
-.fontctl{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
-.fontctl button{min-width:56px;min-height:48px;font-size:20px}
-@media print{header,.tabs,.btn,.no-print{display:none!important}body{background:#fff}.card{box-shadow:none;border:2px solid #ddd;page-break-inside:avoid}}
+.tabs{display:flex;gap:8px;overflow-x:auto;margin-bottom:14px;padding-bottom:4px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{border:1.6px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;font-weight:800;font-size:12.5px;cursor:pointer;white-space:nowrap;min-height:40px}
+.tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.legend div{background:#f8faff;border:1px solid var(--line);border-radius:15px;padding:13px}
+.docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.doc{background:#fff;border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:0 8px 20px rgba(15,23,42,.06);transition:transform .16s}
+.doc:hover{transform:translateY(-3px)}
+.doc-body{padding:13px}.doc h3{margin:0 0 4px;font-size:14.5px}.doc .meta{font-size:12px;color:var(--muted)}
+.doc-actions{display:flex;gap:7px;margin-top:10px;flex-wrap:wrap}
+.dropzone{border:2px dashed #c7d2fe;background:#f8faff;border-radius:16px;padding:22px;text-align:center;cursor:pointer}
+.dropzone:hover{border-color:var(--brand);background:#eef2ff}
+.preview{display:flex;gap:9px;flex-wrap:wrap;margin-top:11px}
+.preview img{width:84px;height:84px;object-fit:cover;border-radius:11px;border:1px solid var(--line);cursor:pointer}
+.preview .file{width:110px;border:1px solid var(--line);border-radius:11px;padding:8px;font-size:11.5px;text-align:center;background:#fff;cursor:pointer}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.modal{position:fixed;inset:0;background:rgba(15,23,42,.6);display:none;align-items:flex-end;justify-content:center;z-index:100;padding:0}
+.modal.on{display:flex}
+.sheet{background:#fff;width:100%;max-width:640px;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:22px;animation:up .28s ease}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@media(min-width:700px){.modal{align-items:center;padding:20px}.sheet{border-radius:24px}}
+.viewer-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.viewer-nav{display:flex;gap:10px;align-items:center}
+.viewer-nav span{color:#fff;font-weight:800;min-width:70px;text-align:center}
+@media(max-width:600px){.brand small{display:none}.card{padding:16px}.hi{padding:8px 12px}}
 </style>
 </head>
 <body>
-<header>
- <h1>❤️ Theo dõi sức khỏe mạn tính</h1>
- <p>Chữ to, nút lớn, dễ dùng cho người lớn tuổi. Có gợi ý y tế theo triệu chứng.</p>
- <div class="fontctl">
-  <button class="btn secondary small" onclick="changeFont(-2)">A−</button>
-  <button class="btn secondary small" onclick="changeFont(0)">A</button>
-  <button class="btn secondary small" onclick="changeFont(2)">A+</button>
-  <span id="fontLabel" style="font-weight:800">Cỡ chữ: 18px</span>
+<header><div class="hi">
+ <div class="brand"><div class="mark">🏥</div><div>Hồ sơ Sức khoẻ<small>Tổng quan • huyết áp • khám bệnh</small></div></div>
+ <div class="user">
+  <div class="pfp" id="pfpBox" title="Nhấn để đổi ảnh">?</div>
+  <input type="file" id="pfpInput" accept="image/*" class="hidden">
+  <div class="pname"><select id="profileSelect"></select></div>
+  <button class="btn ghost sm" id="editBtn">Sửa</button>
+  <button class="btn sm" id="addBtn">＋ Thêm</button>
  </div>
-</header>
-<main>
-<div class="alert red hidden" id="emergency">⚠️ Cần cấp cứu ngay nếu: đau ngực kéo dài, khó thở nặng, ngất, yếu/liệt một bên, nói khó, co giật, hoặc huyết áp rất cao kèm đau đầu dữ dội/nhìn mờ/đau ngực.</div>
-<div class="tabs">
- <button class="tab active" data-tab="daily">📝 Ghi chép</button>
- <button class="tab" data-tab="checklist">✅ Việc cần làm</button>
- <button class="tab" data-tab="meds">💊 Nhắc thuốc</button>
- <button class="tab" data-tab="stats">📈 Biểu đồ</button>
- <button class="tab" data-tab="report">📄 Báo cáo</button>
- <button class="tab" data-tab="contact">💬 Nhắn tin</button>
- <button class="tab" data-tab="history">🗂️ Lịch sử</button>
- <button class="tab" data-tab="settings">⚙️ Cài đặt</button>
- <button class="tab" data-tab="guide">📘 Hướng dẫn</button>
+</div></header>
+
+<div class="shell">
+<div class="tabs-main" id="mainTabs">
+ <button class="main-tab on" data-tab="overview">🧠 Tổng quan</button>
+ <button class="main-tab" data-tab="tracking">❤️ Huyết áp & nhịp tim</button>
+ <button class="main-tab" data-tab="documents">📁 Xét nghiệm</button>
+ <button class="main-tab" data-tab="visits">🩺 Khám bệnh</button>
 </div>
 
-<section id="daily" class="card">
- <h2>📝 Ghi chép hôm nay</h2>
- <div class="grid">
-  <div><label>Ngày giờ</label><input type="datetime-local" id="dt"></div>
-  <div><label>Bệnh chính</label><select id="condition"><option>Tăng huyết áp</option><option>Tiểu đường</option><option>Suy tim / bệnh tim</option><option>Bệnh thận mạn</option><option>Gout</option><option>Khác</option></select></div>
-  <div><label>Huyết áp trên (tâm thu)</label><input type="number" id="sys" placeholder="120"></div>
-  <div><label>Huyết áp dưới (tâm trương)</label><input type="number" id="dia" placeholder="80"></div>
-  <div><label>Mạch (lần/phút)</label><input type="number" id="pulse" placeholder="70"></div>
-  <div><label>Đường huyết (mg/dL)</label><input type="number" id="glucose" placeholder="100"></div>
-  <div><label>Chiều cao (cm)</label><input type="number" id="height" placeholder="165"></div>
-  <div><label>Cân nặng (kg)</label><input type="number" step="0.1" id="weight" placeholder="60" oninput="calcBMILive()"></div>
-  <div><label>Giờ đã uống thuốc</label><input type="time" id="medTimeTaken"></div>
-  <div><label>Tình trạng thuốc</label><select id="medTaken"><option value="yes">Đã uống đủ</option><option value="partial">Uống một phần</option><option value="no">Chưa uống</option></select></div>
- </div>
- <div id="bmiBox" class="hidden"></div>
- <label>Bối cảnh lần đo</label><div class="chips" id="contextChips"></div>
- <label>Triệu chứng / ghi chú</label><textarea id="symptoms" placeholder="Ví dụ: chóng mặt, đau ngực, khó thở, sưng chân, đau khớp..." oninput="analyzeSymptoms()"></textarea>
- <div id="adviceBox"></div>
- <div class="row"><button class="btn" onclick="saveEntry()">💾 LƯU</button><button class="btn secondary" onclick="clearForm()">Xóa form</button><button class="btn secondary no-print" onclick="window.print()">🖨️ In</button><button class="btn danger" onclick="clearAll()">Xóa toàn bộ</button></div>
- <div id="saveStatus" class="small" style="margin-top:10px"></div>
-</section>
-
-<section id="checklist" class="card hidden">
- <h2>✅ Việc cần làm hôm nay</h2>
- <div class="row"><button class="btn secondary" onclick="resetChecklist()">🔄 Làm lại từ đầu</button></div>
- <h3>🌅 Buổi sáng</h3><div id="clMorning"></div>
- <h3>🌆 Buổi tối</h3><div id="clEvening"></div>
- <h3>🩺 Theo bệnh</h3>
- <label>Chọn bệnh</label><select id="clCondition" onchange="renderChecklist()"><option value="bp">Tăng huyết áp</option><option value="dm">Tiểu đường</option><option value="hf">Suy tim / bệnh tim</option><option value="ckd">Bệnh thận mạn</option><option value="gout">Gout</option></select>
- <div id="clConditionItems"></div><div id="clProgress" class="alert yellow"></div>
-</section>
-
-<section id="meds" class="card hidden">
- <h2>💊 Nhắc uống thuốc</h2>
- <div class="grid">
-  <div><label>Tên thuốc / liều</label><input id="medName" placeholder="Ví dụ: Amlodipine 5mg"></div>
-  <div><label>Giờ uống</label><input type="time" id="medTime"></div>
-  <div><label>Ghi chú</label><input id="medNote" placeholder="Sau ăn sáng"></div>
- </div>
+<section id="tab-overview" class="tabpane">
+<section class="card">
+ <h2>Sao lưu, phục hồi & báo cáo</h2>
+ <p class="sub">Xuất/nhập toàn bộ dữ liệu hoặc tạo báo cáo PDF.</p>
  <div class="row">
-  <button class="btn" onclick="addMed()">➕ Thêm giờ uống</button>
-  <button class="btn green" id="notifyBtn" onclick="askNotify()">🔔 Bật thông báo</button>
-  <button class="btn secondary" onclick="checkNotify()">🔍 Kiểm tra thông báo</button>
- </div>
- <div id="notifyStatus" class="small" style="margin-top:10px"></div>
- <div id="medAlert" class="alert yellow hidden"></div>
- <div style="overflow:auto"><table id="medTable"><thead><tr><th>Giờ</th><th>Thuốc</th><th>Ghi chú</th><th>Hôm nay</th><th></th></tr></thead><tbody></tbody></table></div>
- <p class="small">Nếu Safari không cho thông báo, hãy dùng thêm báo thức iPhone cho thuốc quan trọng.</p>
-</section>
-
-<section id="stats" class="card hidden">
- <h2>📈 Biểu đồ & thống kê</h2>
- <label>Khoảng thời gian</label>
- <select id="statRange" onchange="renderStats()"><option value="7">7 ngày</option><option value="30" selected>30 ngày</option><option value="90">90 ngày</option></select>
- <div id="statSummary"></div>
- <h3>Huyết áp</h3><canvas id="bpChart"></canvas>
- <h3>Đường huyết</h3><canvas id="glucoseChart"></canvas>
- <h3>Cân nặng</h3><canvas id="weightChart"></canvas>
- <h3>BMI</h3><canvas id="bmiChart"></canvas>
-</section>
-
-<section id="report" class="card hidden">
- <h2>📄 Báo cáo cho bác sĩ</h2>
- <label>Khoảng thời gian</label>
- <select id="reportRange" onchange="renderReport()"><option value="7">7 ngày</option><option value="30" selected>30 ngày</option><option value="90">90 ngày</option></select>
- <div id="reportContent"></div>
- <div class="row no-print"><button class="btn" onclick="window.print()">🖨️ In / Lưu PDF</button><button class="btn secondary" onclick="exportCSV()">⬇️ Xuất CSV</button></div>
-</section>
-
-<section id="contact" class="card hidden">
- <h2>💬 Nhắn tin cho người thân / bác sĩ</h2>
- <div class="grid">
-  <div><label>Tên người nhận</label><input id="contactName"></div>
-  <div><label>Số điện thoại</label><input id="contactPhone"></div>
- </div>
- <div class="row"><button class="btn green" onclick="saveContact()">💾 Lưu người nhận</button></div>
- <h3>Soạn tin nhanh</h3>
- <label>Chọn mẫu</label>
- <select id="smsTemplate" onchange="fillTemplate()">
-  <option value="update">Cập nhật sức khỏe hôm nay</option>
-  <option value="high">Báo huyết áp cao</option>
-  <option value="low">Báo đường huyết thấp</option>
-  <option value="symptom">Báo triệu chứng</option>
-  <option value="custom">Tự soạn</option>
- </select>
- <label>Nội dung tin nhắn</label><textarea id="smsText"></textarea>
- <div class="row">
-  <a class="btn green" id="smsLink" href="#" onclick="prepareSms()">💬 Mở tin nhắn SMS</a>
-  <a class="btn secondary" id="callLink" href="#">📞 Gọi</a>
-  <button class="btn secondary" onclick="copySms()">📋 Sao chép nội dung</button>
+  <button class="btn" id="jsonExportBtn">💾 Xuất JSON</button>
+  <button class="btn ghost" id="jsonImportBtn">📂 Nhập JSON</button>
+  <button class="btn ghost" id="pdfBtn">📄 Báo cáo PDF</button>
+  <input type="file" id="jsonInput" accept=".json,application/json" class="hidden">
  </div>
 </section>
-
-<section id="history" class="card hidden">
- <h2>🗂️ Lịch sử</h2><div id="summary"></div>
- <div style="overflow:auto"><table id="historyTable"><thead><tr><th>Thời gian</th><th>Huyết áp</th><th>Mạch</th><th>Đường huyết</th><th>Chiều cao</th><th>Cân nặng</th><th>BMI</th><th>Bối cảnh</th><th>Thuốc</th><th>Ghi chú</th><th></th></tr></thead><tbody></tbody></table></div>
+<section class="card">
+ <h2>Trạng thái sức khoẻ hiện tại</h2>
+ <div class="grid g2">
+  <div class="kpi" id="ovProfile"></div>
+  <div class="kpi" id="ovBp"></div>
+  <div class="kpi" id="ovHr"></div>
+  <div class="kpi" id="ovBmi"></div>
+ </div>
+ <div id="ovAlerts"></div>
+</section>
+<section class="card">
+ <h2>Tóm tắt lịch sử khám chữa bệnh</h2>
+ <div class="grid g4" id="ovStats"></div>
+ <div id="ovTimeline"></div>
+</section>
 </section>
 
-<section id="settings" class="card hidden">
- <h2>⚙️ Cài đặt</h2>
- <div class="grid">
-  <div><label>Họ tên</label><input id="pname"></div>
-  <div><label>Chiều cao (cm)</label><input type="number" id="heightSetting" placeholder="165"></div>
-  <div><label>Huyết áp mục tiêu</label><input id="bpTarget"></div>
-  <div><label>Đường huyết mục tiêu</label><input id="glucoseTarget"></div>
-  <div><label>Cân nặng mục tiêu</label><input id="weightTarget"></div>
+<section id="tab-tracking" class="tabpane hidden">
+<section class="card" id="inputCard">
+ <h2>Nhập kết quả đo</h2>
+ <p class="sub">Ngày giờ tự động theo thời gian thực.</p>
+ <form id="readingForm">
+  <div class="fg">
+   <div class="f"><label>Ngày giờ</label><input type="datetime-local" id="time" required></div>
+   <div class="f"><label>Tâm thu</label><input type="number" id="sys" min="40" max="300" required></div>
+   <div class="f"><label>Tâm trương</label><input type="number" id="dia" min="20" max="200" required></div>
+   <div class="f"><label>Nhịp tim</label><input type="number" id="pulse" min="30" max="250"></div>
+   <div class="f"><label>Tay đo</label><select id="arm"><option>Trái</option><option>Phải</option></select></div>
+   <div class="f"><label>Triệu chứng</label><select id="symptom">
+    <option value="none">Không có</option><option value="headache">Đau đầu</option><option value="dizzy">Chóng mặt</option>
+    <option value="faint">Ngất/gần ngất</option><option value="chest">Đau ngực/khó thở</option>
+    <option value="weak">Yếu liệt/nói khó/nhìn mờ</option><option value="nausea">Buồn nôn/nôn</option>
+    <option value="palpitation">Tim đập nhanh/không đều</option></select></div>
+  </div>
+  <div class="f"><label>Bối cảnh</label><div class="chips" id="chips"></div></div>
+  <div class="f"><label>Ghi chú</label><input id="note"></div>
+  <div class="grid g2"><button class="btn" type="submit">Lưu kết quả</button><button class="btn ghost" type="button" id="reminderBtn">🔔 Bật nhắc đo</button></div>
+ </form>
+</section>
+<section class="card">
+ <h2>Phân tích xu hướng</h2>
+ <div class="tabs" id="rangeTabs">
+  <button class="tab on" data-days="7">7 ngày</button><button class="tab" data-days="14">14 ngày</button>
+  <button class="tab" data-days="30">30 ngày</button><button class="tab" data-days="90">90 ngày</button>
  </div>
- <h3>Ngưỡng cảnh báo</h3>
- <div class="grid">
-  <div><label>Huyết áp cao: trên ≥</label><input type="number" id="thrSysHigh" value="140"></div>
-  <div><label>Huyết áp cao: dưới ≥</label><input type="number" id="thrDiaHigh" value="90"></div>
-  <div><label>Huyết áp nguy hiểm: trên ≥</label><input type="number" id="thrSysCrit" value="180"></div>
-  <div><label>Huyết áp nguy hiểm: dưới ≥</label><input type="number" id="thrDiaCrit" value="120"></div>
-  <div><label>Đường huyết thấp <</label><input type="number" id="thrGlLow" value="70"></div>
-  <div><label>Đường huyết cao ≥</label><input type="number" id="thrGlHigh" value="180"></div>
+ <div class="grid g4" id="analytics"></div><div id="trendBox"></div>
+</section>
+<section class="card"><h2>Tư vấn lần đo gần nhất</h2><div id="adviceBox" class="info">Hãy tạo hồ sơ và lưu kết quả đo.</div></section>
+<section class="card"><h2>Tổng quan</h2><div class="grid g4" id="kpiBox"></div></section>
+<section class="card">
+ <h2>Biểu đồ huyết áp</h2>
+ <p class="sub">Trái: lần đo gần nhất → Phải: các lần đo trước.</p>
+ <div style="height:320px"><canvas id="bpCanvas"></canvas></div>
+</section>
+<section class="card"><h2>Biểu đồ nhịp tim</h2><div style="height:280px"><canvas id="pulseCanvas"></canvas></div></section>
+<section class="card"><h2>So sánh thành viên</h2><div style="height:280px"><canvas id="memberCanvas"></canvas></div></section>
+<section class="card">
+ <h2>Lịch sử đo</h2>
+ <div class="tabs">
+  <button class="tab on" data-filter="all">Tất cả</button><button class="tab" data-filter="high">Huyết áp cao</button>
+  <button class="tab" data-filter="low">Huyết áp thấp</button><button class="tab" data-filter="pulse">Nhịp tim bất thường</button>
+  <button class="tab" data-filter="symptom">Có triệu chứng</button>
  </div>
- <label>Thuốc đang dùng</label><textarea id="medsText"></textarea>
- <div class="row"><button class="btn green" onclick="saveSettings()">💾 LƯU CÀI ĐẶT</button></div>
- <h3>💾 Sao lưu & khôi phục</h3>
- <div class="row">
-  <button class="btn" onclick="backupJSON()">⬇️ Xuất backup</button>
-  <label class="btn secondary" style="margin:0">⬆️ Chọn file khôi phục<input type="file" accept=".json" hidden onchange="restoreJSON(event)"></label>
-  <button class="btn danger" onclick="clearAll()">Xóa toàn bộ</button>
+ <div class="f"><label>Lọc bối cảnh</label><select id="tagFilter"><option value="all">Tất cả</option></select></div>
+ <div class="tw"><table><thead><tr><th>Thời gian</th><th>Huyết áp</th><th>Nhịp tim</th><th>Bối cảnh</th><th>Triệu chứng</th><th>Phân loại</th><th>Ghi chú</th><th></th></tr></thead><tbody id="historyBody"></tbody></table></div>
+ <div id="emptyBox" class="empty">Chưa có kết quả.</div>
+</section>
+<section class="card">
+ <h2>Thang phân loại</h2>
+ <div class="legend">
+  <div><span class="badge low">Huyết áp thấp</span><br>Dưới 90/60</div>
+  <div><span class="badge lowwarn">Thấp cần đánh giá</span><br>Dưới 80/50 hoặc kèm dấu hiệu nặng</div>
+  <div><span class="badge normal">Bình thường</span><br>Dưới 120/80</div>
+  <div><span class="badge elevated">Huyết áp cao</span><br>120–129 và dưới 80</div>
+  <div><span class="badge stage1">Tăng huyết áp độ 1</span><br>130–139 hoặc 80–89</div>
+  <div><span class="badge stage2">Tăng huyết áp độ 2</span><br>Từ 140/90</div>
+  <div><span class="badge crisis">Khủng hoảng</span><br>Từ 180/120</div>
+  <div><span class="badge hr-ok">Nhịp bình thường</span><br>60–100 bpm</div>
+  <div><span class="badge hr-low">Nhịp chậm</span><br>Dưới 60 bpm</div>
+  <div><span class="badge hr-fast">Nhịp hơi nhanh</span><br>101–120 bpm</div>
+  <div><span class="badge hr-alert">Nhịp nhanh</span><br>Trên 120 bpm</div>
  </div>
 </section>
-
-<section id="guide" class="card hidden">
- <h2>📘 Hướng dẫn chi tiết</h2>
- <div class="alert yellow"><b>Bắt đầu nhanh:</b> 1) Vào <b>Cài đặt</b> nhập tên, chiều cao → 2) Vào <b>Ghi chép</b> nhập số đo → 3) Vào <b>Nhắc thuốc</b> thêm giờ uống → 4) Vào <b>Báo cáo</b> để in/gửi bác sĩ.</div>
-
- <h3>1. Cài đặt lần đầu</h3>
- <ol>
-  <li>Vào <b>Cài đặt</b>, nhập họ tên và chiều cao (cm).</li>
-  <li>Nhập ngưỡng cảnh báo theo bác sĩ, hoặc giữ mặc định.</li>
-  <li>Bấm <b>Lưu cài đặt</b>.</li>
- </ol>
-
- <h3>2. Ghi chép mỗi ngày</h3>
- <ol>
-  <li>Vào <b>Ghi chép</b>.</li>
-  <li>Nhập cân nặng; app tự tính BMI.</li>
-  <li>Nhập huyết áp, mạch, đường huyết nếu có.</li>
-  <li>Gõ triệu chứng vào ô “Triệu chứng / ghi chú”; app sẽ hiện gợi ý y tế phù hợp.</li>
-  <li>Bấm <b>LƯU</b>.</li>
- </ol>
-
- <h3>3. Gợi ý theo triệu chứng</h3>
- <p class="small">App tìm từ khóa như “đau ngực”, “khó thở”, “chóng mặt”, “sưng chân”, “đau khớp”, “tê”, “mờ mắt”… và đưa lời khuyên tương ứng. Nếu có dấu hiệu nguy hiểm, app sẽ hiển thị cảnh báo đỏ và khuyên liên hệ y tế/cấp cứu.</p>
-
- <h3>4. Checklist & nhắc thuốc</h3>
- <ol>
-  <li>Checklist: tick việc cần làm.</li>
-  <li>Nhắc thuốc: thêm giờ, bật thông báo, đánh dấu đã uống.</li>
-  <li>Nếu Safari không cho thông báo, dùng báo thức iPhone.</li>
- </ol>
-
- <h3>5. Biểu đồ & báo cáo</h3>
- <ol>
-  <li>Biểu đồ: xem 7/30/90 ngày.</li>
-  <li>Báo cáo: In/Lưu PDF hoặc Xuất CSV.</li>
- </ol>
-
- <h3>6. Nhắn tin & sao lưu</h3>
- <ol>
-  <li>Nhắn tin: lưu số, chọn mẫu, mở SMS.</li>
-  <li>Sao lưu: Xuất backup JSON.</li>
- </ol>
-
- <h3>7. Dùng trên iPhone</h3>
- <ol>
-  <li>Gửi file vào iPhone qua AirDrop/Zalo/email.</li>
-  <li>Mở bằng Safari → Chia sẻ → Thêm vào Màn hình chính.</li>
-  <li>Đặt tên “Sức khỏe” rồi Thêm.</li>
- </ol>
-
- <h3>8. Lưu ý an toàn</h3>
- <ul>
-  <li>Gợi ý chỉ mang tính tham khảo, không thay thế bác sĩ.</li>
-  <li>Không tự thay đổi thuốc dựa trên app.</li>
-  <li>HA ≥180/120 kèm đau ngực, khó thở, tê/yếu, thay đổi nhìn hoặc khó nói: cấp cứu ngay.</li>
-  <li>Đường huyết <70 mg/dL: xử lý theo hướng dẫn bác sĩ.</li>
- </ul>
 </section>
-</main>
+
+<section id="tab-documents" class="tabpane hidden">
+<section class="card">
+ <h2 id="docFormTitle">Thêm tài liệu y tế</h2>
+ <form id="docForm">
+  <div class="fg">
+   <div class="f"><label>Loại tài liệu</label><select id="docType">
+    <option value="blood">Xét nghiệm máu</option><option value="urine">Xét nghiệm nước tiểu</option>
+    <option value="ultrasound">Siêu âm</option><option value="ecg">Điện tim (ECG)</option>
+    <option value="xray">X-quang phổi</option><option value="mri">MRI / CT</option>
+    <option value="prescription">Đơn thuốc</option><option value="other">Khác</option></select></div>
+   <div class="f"><label>Ngày kết quả</label><input type="date" id="docDate" required></div>
+   <div class="f"><label>Cơ sở y tế</label><input id="docFacility"></div>
+   <div class="f"><label>Tên phiếu / số hiệu</label><input id="docTitle"></div>
+  </div>
+  <div class="f"><label>Ghi chú</label><textarea id="docNote"></textarea></div>
+  <div class="f"><label>Ảnh / File PDF</label>
+   <div class="dropzone" id="docDrop">📷<b>Chụp ảnh hoặc chọn ảnh/PDF</b></div>
+   <input type="file" id="docFiles" accept="image/*,application/pdf" multiple class="hidden">
+   <div class="preview" id="docPreview"></div>
+  </div>
+  <div class="grid g2">
+   <button class="btn" type="submit" id="docSubmitBtn">Lưu tài liệu</button>
+   <button class="btn ghost hidden" type="button" id="docCancelBtn">Huỷ sửa</button>
+  </div>
+ </form>
+</section>
+<section class="card">
+ <h2>Kho tài liệu</h2>
+ <div class="tabs" id="docFilters">
+  <button class="tab on" data-type="all">Tất cả</button>
+  <button class="tab" data-type="blood">Máu</button><button class="tab" data-type="urine">Nước tiểu</button>
+  <button class="tab" data-type="ultrasound">Siêu âm</button><button class="tab" data-type="ecg">Điện tim</button>
+  <button class="tab" data-type="xray">X-quang</button><button class="tab" data-type="mri">MRI/CT</button>
+  <button class="tab" data-type="prescription">Đơn thuốc</button>
+ </div>
+ <div class="docs" id="docGrid"></div>
+ <div id="docEmpty" class="empty">Chưa có tài liệu nào.</div>
+</section>
+</section>
+
+<section id="tab-visits" class="tabpane hidden">
+<section class="card">
+ <h2 id="visitFormTitle">Thêm lần khám</h2>
+ <form id="visitForm">
+  <h2 style="font-size:16px">1. Thông tin hành chính</h2>
+  <div class="fg">
+   <div class="f"><label>Ngày khám</label><input type="date" id="vDate" required></div>
+   <div class="f"><label>Bệnh viện / Phòng khám</label><input id="vFacility"></div>
+   <div class="f"><label>Bác sĩ điều trị</label><input id="vDoctor"></div>
+   <div class="f"><label>Chuyên khoa</label><input id="vSpecialty"></div>
+  </div>
+  <div class="f"><label>Lý do khám / triệu chứng ban đầu</label><textarea id="vReason"></textarea></div>
+  <h2 style="font-size:16px;margin-top:16px">2. Kết quả cận lâm sàng</h2>
+  <p class="sub">Ảnh/PDF xét nghiệm máu, siêu âm, X-quang, MRI… — lưu riêng, tách biệt với đơn thuốc.</p>
+  <div class="f">
+   <div class="dropzone" id="vClinicalDrop">📎<b>Chọn ảnh hoặc PDF cận lâm sàng</b></div>
+   <input type="file" id="vClinicalFiles" accept="image/*,application/pdf" multiple class="hidden">
+   <div class="preview" id="vClinicalPreview"></div>
+  </div>
+  <h2 style="font-size:16px;margin-top:16px">3. Kết luận & đơn thuốc</h2>
+  <div class="f"><label>Chẩn đoán cuối cùng</label><textarea id="vDiagnosis"></textarea></div>
+  <div class="f"><label>Hướng dẫn / kết luận</label><textarea id="vConclusion"></textarea></div>
+  <div class="f"><label>Ảnh đơn thuốc (lưu riêng)</label>
+   <div class="dropzone" id="vRxDrop">💊<b>Chụp hoặc chọn ảnh/PDF đơn thuốc</b></div>
+   <input type="file" id="vRxFiles" accept="image/*,application/pdf" multiple class="hidden">
+   <div class="preview" id="vRxPreview"></div>
+  </div>
+  <div class="grid g2">
+   <button class="btn" type="submit" id="visitSubmitBtn">Lưu lần khám</button>
+   <button class="btn ghost hidden" type="button" id="visitCancelBtn">Huỷ sửa</button>
+  </div>
+ </form>
+</section>
+<section class="card">
+ <h2>Các lần khám đã lưu</h2>
+ <div id="visitList" class="grid g2"></div>
+ <div id="visitEmpty" class="empty">Chưa có lần khám nào.</div>
+</section>
+</section>
+</div>
+
+<div class="modal" id="profileModal">
+ <div class="sheet">
+  <h2 id="profileTitle">Thêm hồ sơ</h2>
+  <p class="sub">Tạo hoặc chỉnh sửa người dùng.</p>
+  <form id="profileForm">
+   <div class="fg">
+    <div class="f"><label>Tên</label><input id="pName" required></div>
+    <div class="f"><label>Giới tính</label><select id="pGender"><option value="male">Nam</option><option value="female">Nữ</option><option value="other">Khác</option></select></div>
+    <div class="f"><label>Tuổi</label><input id="pAge" type="number" min="1" max="120" required></div>
+    <div class="f"><label>Cân nặng (kg)</label><input id="pWeight" type="number" min="20" max="300" step="0.1"></div>
+    <div class="f"><label>Chiều cao (cm)</label><input id="pHeight" type="number" min="80" max="230"></div>
+    <div class="f"><label>Bệnh nền</label><select id="pCondition"><option value="none">Không</option><option value="pregnant">Đang mang thai</option><option value="kidney">Bệnh thận</option><option value="diabetes">Đái tháo đường</option><option value="heart">Bệnh tim mạch</option></select></div>
+   </div>
+   <div class="grid g2">
+    <button class="btn" type="submit">Lưu hồ sơ</button>
+    <button class="btn danger" type="button" id="deleteBtn">Xoá hồ sơ</button>
+   </div>
+  </form>
+  <button class="btn ghost" style="width:100%;margin-top:10px" id="closeProfile">Đóng</button>
+ </div>
+</div>
+
+<div class="modal" id="viewer">
+ <div class="viewer-wrap">
+  <img id="viewerImg" alt="" style="max-width:92vw;max-height:78vh;border-radius:14px">
+  <div class="viewer-nav">
+   <button class="btn ghost sm" id="viewerPrev">← Trước</button>
+   <span id="viewerCount"></span>
+   <button class="btn ghost sm" id="viewerNext">Sau →</button>
+  </div>
+ </div>
+</div>
 
 <script>
-const KEY='chronicHealthTrackerProV11';
-let D;
-try{D=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){D=null;}
-if(!D||!D.entries)D={entries:[],settings:{},checklist:{},medSchedule:[],medTakenToday:{},notified:{},contact:{}};
-function save(){try{localStorage.setItem(KEY,JSON.stringify(D));return true;}catch(e){return false;}}
-function $(id){return document.getElementById(id);}
-function nowLocal(){const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,16);}
-function todayKey(){return new Date().toISOString().slice(0,10);}
-function daysAgo(n){const d=new Date();d.setDate(d.getDate()-n);return d.toISOString().slice(0,10);}
-function inRange(e,n){const day=e.dt.slice(0,10);return day>=daysAgo(n-1)&&day<=todayKey();}
-function thr(){const s=D.settings||{};return{sysHigh:+s.thrSysHigh||140,diaHigh:+s.thrDiaHigh||90,sysCrit:+s.thrSysCrit||180,diaCrit:+s.thrDiaCrit||120,glLow:+s.thrGlLow||70,glHigh:+s.thrGlHigh||180};}
-function calcBMI(w,h){if(!w||!h)return null;const m=h/100;return w/(m*m);}
-function bmiClass(b){if(b==null)return{label:'',cls:''};if(b<18.5)return{label:'Suy dinh dưỡng',cls:'warn'};if(b<25)return{label:'Bình thường',cls:'ok'};if(b<30)return{label:'Thừa cân',cls:'warn'};return{label:'Béo phì',cls:'bad'};}
-const CONTEXTS=['Trước ăn','Sau ăn','Sau vận động','Khi chóng mặt','Tay trái','Tay phải','Sau uống thuốc','Trước uống thuốc','Buổi sáng','Buổi tối'];
-$('contextChips').innerHTML=CONTEXTS.map(c=>`<label class="chip"><input type="checkbox" class="ctx" value="${c}">${c}</label>`).join('');
-document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');['daily','checklist','meds','stats','report','contact','history','settings','guide'].forEach(id=>$(id).classList.toggle('hidden',id!==t.dataset.tab));if(t.dataset.tab==='stats')renderStats();if(t.dataset.tab==='report')renderReport();if(t.dataset.tab==='history')renderHistory();if(t.dataset.tab==='meds')renderMeds();if(t.dataset.tab==='checklist')renderChecklist();if(t.dataset.tab==='contact')loadContact();});
+'use strict';
+window.addEventListener('error',e=>console.error('Lỗi app:',e.message));
+const K={p:'hsg_profiles_v35',c:'hsg_current_v35',r:'hsg_readings_v35',d:'hsg_documents_v35',v:'hsg_visits_v35'};
+const TAGS={'before_med':'Trước thuốc','after_med':'Sau thuốc','exercise':'Tập luyện','meal':'Sau ăn','coffee':'Cà phê','alcohol':'Rượu/bia','stress':'Stress','poor_sleep':'Ngủ kém','morning':'Buổi sáng','evening':'Buổi tối'};
+const SYM={none:'Không',headache:'Đau đầu',dizzy:'Chóng mặt',faint:'Ngất/gần ngất',chest:'Đau ngực/khó thở',weak:'Yếu liệt/nói khó/nhìn mờ',nausea:'Buồn nôn/nôn',palpitation:'Tim đập nhanh/không đều'};
+const DOC_TYPES={blood:'Xét nghiệm máu',urine:'Xét nghiệm nước tiểu',ultrasound:'Siêu âm',ecg:'Điện tim (ECG)',xray:'X-quang phổi',mri:'MRI / CT',prescription:'Đơn thuốc',other:'Khác'};
+let profiles=JSON.parse(localStorage.getItem(K.p)||'{}');
+let currentId=localStorage.getItem(K.c)||'';
+let store=JSON.parse(localStorage.getItem(K.r)||'{}');
+let documents=JSON.parse(localStorage.getItem(K.d)||'{}');
+let visitStore=JSON.parse(localStorage.getItem(K.v)||'{}');
+if(!store[currentId])store[currentId]=[];
+if(!documents[currentId])documents[currentId]=[];
+if(!visitStore[currentId])visitStore[currentId]=[];
+let chosenTags=[],rangeDays=7,filter='all',tagFilter='all',docFilter='all',timeEdited=false,editingProfile=false;
+let pendingDocFiles=[],pendingClinical=[],pendingRx=[];
+let editingDocId=null,editingVisitId=null;
+let bpChart=null,pulseChart=null,memberChart=null;
+let viewerList=null,viewerDocId=null,viewerIndex=0;
+const $=id=>document.getElementById(id);
+function save(){try{localStorage.setItem(K.p,JSON.stringify(profiles));localStorage.setItem(K.c,currentId);localStorage.setItem(K.r,JSON.stringify(store));localStorage.setItem(K.d,JSON.stringify(documents));localStorage.setItem(K.v,JSON.stringify(visitStore))}catch(e){alert('Bộ nhớ trình duyệt đầy. Hãy xuất JSON và xoá bớt ảnh/PDF cũ.');console.error(e)}}
+const prof=()=>profiles[currentId]||null;
+const rows=()=>store[currentId]||[];
+const docs=()=>documents[currentId]||[];
+const visitsOf=()=>visitStore[currentId]||[];
+const avg=(a,k)=>a.length?Math.round(a.reduce((s,r)=>s+(Number(r[k])||0),0)/a.length):null;
+const age=r=>(Date.now()-new Date(r.time))/864e5;
+const newId=()=>Date.now()+'-'+Math.random().toString(36).slice(2,9);
+const localNow=()=>new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16);
+const fmtDT=d=>new Date(d).toLocaleString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+const fmtDate=d=>new Date(d).toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric'});
+function cls(s,d,x='none'){
+ if(s<80||d<50||((s<90||d<60)&&['faint','chest','weak'].includes(x)))return{t:'Huyết áp thấp cần đánh giá',c:'lowwarn',g:'low'};
+ if(s<90||d<60)return{t:'Huyết áp thấp',c:'low',g:'low'};
+ if(s>=180||d>=120)return{t:'Khủng hoảng huyết áp',c:'crisis',g:'high'};
+ if(s>=140||d>=90)return{t:'Tăng huyết áp độ 2',c:'stage2',g:'high'};
+ if(s>=130||d>=80)return{t:'Tăng huyết áp độ 1',c:'stage1',g:'high'};
+ if(s>=120)return{t:'Huyết áp cao',c:'elevated',g:'high'};
+ return{t:'Bình thường',c:'normal',g:'normal'};
+}
+function hrCls(p){
+ if(p==null)return{t:'Chưa có nhịp tim',c:'normal',g:'none'};
+ if(p<40)return{t:'Nhịp rất chậm',c:'hr-alert',g:'alert'};
+ if(p<60)return{t:'Nhịp chậm',c:'hr-low',g:'low'};
+ if(p<=100)return{t:'Nhịp bình thường',c:'hr-ok',g:'normal'};
+ if(p<=120)return{t:'Nhịp hơi nhanh',c:'hr-fast',g:'watch'};
+ if(p<=150)return{t:'Nhịp nhanh',c:'hr-alert',g:'alert'};
+ return{t:'Nhịp rất nhanh',c:'hr-alert',g:'alert'};
+}
+const bmi=p=>p&&p.weight&&p.height?+(p.weight/((p.height/100)**2)).toFixed(1):null;
+const bmiT=v=>v==null?'Chưa đủ dữ liệu':v<18.5?'Gầy':v<23?'Bình thường':v<25?'Thừa cân':v<30?'Béo phì độ I':'Béo phì độ II+';
+const bmiC=v=>v==null?'normal':v<18.5?'low':v<23?'normal':v<25?'elevated':'stage2';
+const bpZones={id:'bpZones',beforeDatasetsDraw(c){const a=c.chartArea;if(!a)return;const ctx=c.ctx,y=v=>c.scales.y.getPixelForValue(v);[[40,90,'rgba(59,130,246,.14)'],[90,120,'rgba(16,185,129,.14)'],[120,160,'rgba(245,158,11,.14)'],[160,200,'rgba(239,68,68,.17)']].forEach(([lo,hi,col])=>{ctx.save();ctx.fillStyle=col;ctx.fillRect(a.left,y(hi),a.right-a.left,y(lo)-y(hi));ctx.restore()})}};
+const pulseZones={id:'pulseZones',beforeDatasetsDraw(c){const a=c.chartArea;if(!a)return;const ctx=c.ctx,y=v=>c.scales.y.getPixelForValue(v);[[30,60,'rgba(59,130,246,.14)'],[60,100,'rgba(16,185,129,.14)'],[100,120,'rgba(245,158,11,.14)'],[120,250,'rgba(239,68,68,.17)']].forEach(([lo,hi,col])=>{ctx.save();ctx.fillStyle=col;ctx.fillRect(a.left,y(hi),a.right-a.left,y(lo)-y(hi));ctx.restore()})}};
 
-let fontSize=18;
-try{fontSize=+localStorage.getItem('appFontSize')||18;}catch(e){}
-function applyFont(){document.body.style.fontSize=fontSize+'px';$('fontLabel').textContent='Cỡ chữ: '+fontSize+'px';try{localStorage.setItem('appFontSize',fontSize);}catch(e){}}
-function changeFont(delta){if(delta===0)fontSize=18;else fontSize=Math.min(30,Math.max(14,fontSize+delta));applyFont();}
-applyFont();
+function switchTab(name){
+ document.querySelectorAll('.main-tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===name));
+ ['overview','tracking','documents','visits'].forEach(t=>{
+  const el=$('tab-'+t);el.classList.toggle('hidden',t!==name);
+  if(t===name){el.classList.remove('tabpane');void el.offsetWidth;el.classList.add('tabpane')}
+ });
+ if(name==='overview')renderOverview();
+ if(name==='tracking')renderTracking();
+ if(name==='documents')renderDocs();
+ if(name==='visits')renderVisits();
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.main-tab').forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
 
-function classify(e){const t=thr();let bp='',gl='';if(e.sys&&e.dia){if(+e.sys>=t.sysCrit||+e.dia>=t.diaCrit)bp='<span class="badge bad">Nguy hiểm</span>';else if(+e.sys>=t.sysHigh||+e.dia>=t.diaHigh)bp='<span class="badge bad">Vượt ngưỡng</span>';else bp='<span class="badge ok">Trong ngưỡng</span>';}if(e.glucose){if(+e.glucose<t.glLow)gl='<span class="badge bad">Thấp</span>';else if(+e.glucose>=t.glHigh)gl='<span class="badge warn">Cao</span>';else gl='<span class="badge ok">Trong ngưỡng</span>';}return{bp,gl};}
-function calcBMILive(){const w=+$('weight').value,h=+$('height').value;const b=calcBMI(w,h);const box=$('bmiBox');if(b==null){box.classList.add('hidden');return;}const c=bmiClass(b);box.classList.remove('hidden');box.innerHTML=`BMI: <b>${b.toFixed(1)}</b> — <span class="badge ${c.cls}">${c.label}</span>`;}
+function openProfile(edit){
+ editingProfile=!!edit&&!!currentId&&!!profiles[currentId];
+ const p=prof();
+ $('profileTitle').textContent=editingProfile?'Sửa hồ sơ: '+p.name:'Thêm hồ sơ';
+ if(editingProfile){$('pName').value=p.name;$('pGender').value=p.gender;$('pAge').value=p.age;$('pWeight').value=p.weight||'';$('pHeight').value=p.height||'';$('pCondition').value=p.condition||'none'}
+ else $('profileForm').reset();
+ $('deleteBtn').style.display=editingProfile?'':'none';
+ $('profileModal').classList.add('on');
+}
+function closeProfile(){$('profileModal').classList.remove('on')}
+$('addBtn').onclick=()=>openProfile(false);
+$('editBtn').onclick=()=>{if(!currentId)return alert('Chưa có hồ sơ. Hãy tạo người dùng trước.');openProfile(true)};
+$('closeProfile').onclick=closeProfile;
+$('profileModal').onclick=e=>{if(e.target===$('profileModal'))closeProfile()};
+$('profileForm').onsubmit=e=>{
+ e.preventDefault();
+ const id=editingProfile?currentId:newId();
+ profiles[id]={id:id,name:$('pName').value.trim(),gender:$('pGender').value,age:+$('pAge').value,weight:$('pWeight').value?+$('pWeight').value:null,height:$('pHeight').value?+$('pHeight').value:null,condition:$('pCondition').value,photo:editingProfile&&profiles[id]?profiles[id].photo:null};
+ currentId=id;
+ if(!store[id])store[id]=[];
+ if(!documents[id])documents[id]=[];
+ if(!visitStore[id])visitStore[id]=[];
+ save();closeProfile();renderOverview();renderProfileBar();
+ alert('Đã lưu hồ sơ: '+profiles[id].name);
+};
+$('deleteBtn').onclick=()=>{if(!currentId||!confirm('Xoá hồ sơ và toàn bộ dữ liệu?'))return;delete profiles[currentId];delete store[currentId];delete documents[currentId];delete visitStore[currentId];currentId=Object.keys(profiles)[0]||'';if(currentId){if(!store[currentId])store[currentId]=[];if(!documents[currentId])documents[currentId]=[];if(!visitStore[currentId])visitStore[currentId]=[]}save();closeProfile();renderOverview();renderProfileBar()};
 
-const SYMPTOM_RULES=[
-// ===== DẤU HIỆU ĐỎ =====
-{k:['đau ngực','tức ngực','đau thắt ngực'],a:'Đau ngực có thể liên quan tim mạch. Nếu kèm khó thở, vã mồ hôi, buồn nôn, lan vai/hàm: GỌI 115 hoặc cấp cứu NGAY.',l:'red'},
-{k:['khó thở','thở dốc','hụt hơi','ngộp thở'],a:'Khó thở cần đánh giá sớm. Nếu kèm đau ngực, môi tím, ngất: cấp cứu.',l:'red'},
-{k:['ngất','xỉu','mất ý thức'],a:'Ngất/mất ý thức cần khám sớm. Nếu kèm đau ngực, co giật, yếu liệt: cấp cứu.',l:'red'},
-{k:['yếu một bên','liệt','tê một bên','nói khó','méo miệng','mờ mắt đột ngột'],a:'Dấu hiệu có thể liên quan ĐỘT QUỴ. GỌI 115 hoặc cấp cứu NGAY.',l:'red'},
-{k:['co giật'],a:'Co giật cần cấp cứu/đánh giá ngay, nhất là lần đầu hoặc kéo dài >5 phút.',l:'red'},
-{k:['nôn ra máu','đi ngoài ra máu','đại tiện ra máu','phân đen'],a:'Nôn ra máu hoặc đi ngoài ra máu/phân đen có thể là xuất huyết tiêu hóa. Cần cấp cứu/khám khẩn.',l:'red'},
-{k:['đau bụng dữ dội','đau bụng tăng dần'],a:'Đau bụng dữ dội cần loại trừ nguyên nhân nghiêm trọng. Khám khẩn.',l:'red'},
-{k:['sốt cao','sốt ≥39','sốt 39'],a:'Sốt cao cần theo dõi; nếu kèm khó thở, lú lẫn, phát ban: khám khẩn.',l:'yellow'},
-
-// ===== HÔ HẤP =====
-{k:['ho','ho khan','ho có đờm'],a:'Ho có thể do nhiễm trùng, dị ứng hoặc bệnh phổi. Nếu kéo dài >2 tuần, ho ra máu, sốt cao hoặc khó thở: khám sớm.',l:'yellow'},
-{k:['đau họng','viêm họng'],a:'Đau họng có thể do virus hoặc vi khuẩn. Nếu kèm sốt cao, khó nuốt, khó thở: khám sớm.',l:'yellow'},
-{k:['nghẹt mũi','sổ mũi','cảm cúm'],a:'Nghẹt/sổ mũi thường do cảm hoặc dị ứng. Uống đủ nước, nghỉ ngơi; nếu sốt cao hoặc khó thở: khám sớm.',l:'blue'},
-{k:['khàn tiếng','mất tiếng'],a:'Khàn tiếng kéo dài >2 tuần cần được khám để loại trừ vấn đề thanh quản.',l:'yellow'},
-{k:['khò khè','thở có tiếng rít'],a:'Khò khè có thể liên quan hen hoặc dị ứng. Nếu kèm khó thở nặng: cấp cứu.',l:'yellow'},
-
-// ===== TIÊU HÓA =====
-{k:['đau bụng','đau quặn bụng','đau thượng vị'],a:'Đau bụng cần chú ý vị trí và mức độ. Nếu dữ dội, kèm sốt, nôn nhiều, vàng da hoặc phân đen: khám khẩn.',l:'yellow'},
-{k:['tiêu chảy','đi ngoài lỏng'],a:'Tiêu chảy có thể gây mất nước. Uống nước bù điện giải; nếu >2 ngày, có máu, sốt cao hoặc dấu mất nước: khám sớm.',l:'yellow'},
-{k:['táo bón','khó đi ngoài'],a:'Táo bón có thể cải thiện bằng nước, chất xơ, vận động. Nếu kèm đau bụng dữ dội, nôn: khám sớm.',l:'yellow'},
-{k:['buồn nôn','nôn','óe'],a:'Buồn nôn/nôn có thể do nhiều nguyên nhân. Nếu nôn nhiều, không giữ được nước, kèm đau bụng dữ dội: khám sớm.',l:'yellow'},
-{k:['ợ chua','trào ngược'],a:'Ợ chua/trào ngược có thể cải thiện bằng ăn chậm, tránh nằm ngay sau ăn. Nếu thường xuyên hoặc kèm đau ngực: khám sớm.',l:'blue'},
-{k:['vàng da','vàng mắt'],a:'Vàng da/mắt có thể liên quan gan hoặc mật. Cần khám sớm.',l:'yellow'},
-{k:['chán ăn','ăn không ngon'],a:'Chán ăn kéo dài có thể liên quan nhiều nguyên nhân. Nếu kèm sụt cân, sốt hoặc mệt mỏi: khám sớm.',l:'blue'},
-
-// ===== TIẾT NIỆU =====
-{k:['tiểu buốt','tiểu rắt','đau khi đi tiểu'],a:'Tiểu buốt/đau khi đi tiểu có thể do nhiễm trùng đường tiết niệu. Nếu kèm sốt, đau lưng, tiểu ra máu: khám sớm.',l:'yellow'},
-{k:['tiểu ra máu','nước tiểu đỏ','máu trong nước tiểu'],a:'Tiểu ra máu cần được khám sớm. Nếu kèm sốt hoặc đau lưng: khám khẩn.',l:'yellow'},
-{k:['đi tiểu nhiều','khát nước nhiều'],a:'Đi tiểu nhiều và khát nhiều có thể liên quan đường huyết cao. Hãy đo đường huyết và liên hệ bác sĩ nếu cao hoặc kéo dài.',l:'yellow'},
-{k:['tiểu ít','ít nước tiểu'],a:'Tiểu ít có thể do mất nước hoặc vấn đề thận. Nếu kèm phù, mệt mỏi hoặc tiểu gần như không có: khám sớm.',l:'yellow'},
-
-// ===== THẦN KINH / MẮT =====
-{k:['đau đầu','nhức đầu'],a:'Đau đầu có nhiều nguyên nhân. Nếu đau đột ngột dữ dội, kèm sốt, cứng cổ, yếu liệt hoặc mờ mắt: cấp cứu.',l:'yellow'},
-{k:['chóng mặt','hoa mắt','choáng'],a:'Chóng mặt có thể do huyết áp, đường huyết, thuốc hoặc mất nước. Nếu kèm ngất, yếu liệt, nói khó: cấp cứu.',l:'yellow'},
-{k:['mờ mắt','nhìn mờ'],a:'Mờ mắt cần được đánh giá sớm. Nếu kèm đau đầu, yếu liệt hoặc nói khó: cấp cứu.',l:'yellow'},
-{k:['tê bì','tê tay','tê chân','kim châm'],a:'Tê bì có thể liên quan đường huyết cao, thần kinh hoặc cột sống. Nếu tê đột ngột một bên người: cấp cứu.',l:'yellow'},
-{k:['run tay','run chân'],a:'Run có thể do nhiều nguyên nhân. Nếu mới xuất hiện hoặc kèm yếu liệt: khám sớm.',l:'blue'},
-{k:['mất ngủ','khó ngủ'],a:'Mất ngủ có thể liên quan căng thẳng, caffeine, thuốc. Nếu kéo dài >2 tuần: trao đổi bác sĩ.',l:'yellow'},
-{k:['lo lắng','căng thẳng','lo âu'],a:'Lo âu có thể ảnh hưởng huyết áp và giấc ngủ. Nếu ảnh hưởng cuộc sống hoặc có ý nghĩ tự hại: liên hệ chuyên khoa tâm thần ngay.',l:'yellow'},
-{k:['mệt mỏi','uể oải','yếu đuối'],a:'Mệt mỏi kéo dài có thể liên quan thiếu máu, đường huyết, giấc ngủ, thuốc. Nếu kèm sụt cân, sốt, khó thở: khám sớm.',l:'yellow'},
-
-// ===== CƠ XƯƠNG KHỚP =====
-{k:['đau lưng','đau thắt lưng'],a:'Đau lưng thường do cơ/cột sống. Nếu kèm tê yếu chân, mất kiểm soát tiểu tiện hoặc sốt: khám khẩn.',l:'yellow'},
-{k:['đau vai','đau cổ vai'],a:'Đau vai/cổ có thể do tư thế hoặc thoái hóa. Nếu kèm tê tay, yếu tay hoặc đau ngực: khám sớm.',l:'yellow'},
-{k:['đau khớp','sưng khớp','đau ngón chân'],a:'Đau/sưng khớp có thể do gout, viêm khớp hoặc chấn thương. Nếu sưng đỏ nóng nhiều hoặc sốt: khám sớm.',l:'yellow'},
-{k:['đau xương','đau cơ'],a:'Đau xương/cơ có thể do vận động hoặc thiếu chất. Nếu kéo dài hoặc kèm sốt: khám sớm.',l:'blue'},
-
-// ===== DA LIỄU =====
-{k:['ngứa','phát ban','mẩn đỏ','dị ứng'],a:'Ngứa/phát ban có thể do dị ứng. Nếu kèm khó thở, sưng môi/mặt, chóng mặt: cấp cứu (phản vệ).',l:'yellow'},
-{k:['mụn','mụn trứng cá'],a:'Mụn có thể liên quan da dầu, nội tiết hoặc chăm sóc da. Nếu nặng hoặc kèm đau: khám da liễu.',l:'blue'},
-
-// ===== NỘI TIẾT / ĐƯỜNG HUYẾT =====
-{k:['đường huyết cao','đường huyết tăng'],a:'Đường huyết cao cần theo dõi và điều chỉnh theo hướng dẫn bác sĩ. Nếu kèm nôn, lú lẫn hoặc thở sâu: cấp cứu.',l:'yellow'},
-{k:['đường huyết thấp','hạ đường huyết'],a:'Đường huyết thấp có thể nguy hiểm. Nếu có triệu chứng (run, vã mồ hôi, lú lẫn), xử lý theo hướng dẫn bác sĩ; nếu không cải thiện: cấp cứu.',l:'red'},
-{k:['sụt cân','gầy sút'],a:'Sụt cân không chủ ý cần được đánh giá. Nếu kèm mệt mỏi, sốt hoặc thay đổi ăn uống: khám sớm.',l:'yellow'},
-{k:['tim đập nhanh','đánh trống ngực','hồi hộp'],a:'Hồi hộp/tim đập nhanh có thể do lo lắng, caffeine, thuốc hoặc rối loạn nhịp. Nếu kèm đau ngực, ngất, khó thở: cấp cứu.',l:'yellow'}
-];
-
-function analyzeSymptoms(){
-  const text=($('symptoms').value||'').toLowerCase();
-  const box=$('adviceBox');
-  if(!text.trim()){box.innerHTML='';return;}
-  let advice=[],level='blue';
-  SYMPTOM_RULES.forEach(r=>{
-    if(r.k.some(w=>text.includes(w))){
-      advice.push(r.a);
-      if(r.l==='red')level='red';
-      else if(r.l==='yellow'&&level!=='red')level='yellow';
-    }
-  });
-  if(!advice.length){
-    advice.push('Đã ghi nhận triệu chứng. Hãy theo dõi thêm: nếu kéo dài, nặng hơn, hoặc kèm dấu hiệu bất thường, liên hệ cơ sở y tế.');
-  }
-  let html='';
-  if(level==='red')html+='<div class="alert red">🚨 '+advice.join('<br><br>')+'<br><br><b>Không tự ý thay đổi thuốc. Nếu nguy kịch, gọi 115.</b></div>';
-  else if(level==='yellow')html+='<div class="alert yellow">⚠️ '+advice.join('<br><br>')+'<br><br><b>Nên liên hệ cơ sở y tế/bác sĩ nếu kéo dài hoặc nặng hơn.</b></div>';
-  else html+='<div class="alert blue">💡 '+advice.join('<br><br>')+'</div>';
-  html+='<p class="small">Gợi ý chỉ mang tính tham khảo, không thay thế chẩn đoán của bác sĩ.</p>';
-  box.innerHTML=html;
-}   
-
-function saveEntry(){try{const e={dt:$('dt').value||nowLocal(),condition:$('condition').value,sys:$('sys').value,dia:$('dia').value,pulse:$('pulse').value,glucose:$('glucose').value,height:$('height').value,weight:$('weight').value,medTimeTaken:$('medTimeTaken').value,medTaken:$('medTaken').value,symptoms:$('symptoms').value.trim(),context:[...document.querySelectorAll('.ctx:checked')].map(x=>x.value)};e.bmi=calcBMI(e.weight,e.height);if(!e.sys&&!e.dia&&!e.glucose&&!e.weight&&!e.height&&!e.symptoms&&!e.medTimeTaken){alert('Nhập ít nhất một số đo, giờ thuốc hoặc triệu chứng.');return;}if(!Array.isArray(D.entries))D.entries=[];D.entries.unshift(e);const ok=save();clearForm();renderHistory();if(ok){$('saveStatus').textContent='✅ Đã lưu lúc '+new Date().toLocaleTimeString('vi-VN');alert('Đã lưu.');}else{$('saveStatus').textContent='⚠️ Không lưu được vào bộ nhớ trình duyệt.';alert('Không lưu được vào bộ nhớ trình duyệt. Hãy xuất backup ngay.');}}catch(err){alert('Lỗi khi lưu: '+err.message);}}
-function clearForm(){['sys','dia','pulse','glucose','weight','medTimeTaken','symptoms'].forEach(id=>$(id).value='');document.querySelectorAll('.ctx').forEach(x=>x.checked=false);$('dt').value=nowLocal();$('medTaken').value='yes';$('height').value=(D.settings&&D.settings.height)||'';$('bmiBox').classList.add('hidden');$('adviceBox').innerHTML='';}
-function avg(a){return a.length?a.reduce((x,y)=>x+y,0)/a.length:null}
-function fmt(n,d=0){return n==null?'—':(+n).toFixed(d)}
-function drawChart(canvas,points,color,label,unit){const c=canvas.getContext('2d');const W=canvas.width=canvas.clientWidth*2,H=canvas.height=560;c.clearRect(0,0,W,H);if(!points.length){c.fillStyle='#475569';c.font='30px system-ui';c.fillText('Chưa có dữ liệu',40,H/2);return;}const vals=points.map(p=>p.v);let min=Math.min(...vals),max=Math.max(...vals);if(min===max){min-=1;max+=1;}const pad=80,x0=pad,y0=40,x1=W-30,y1=H-80;c.strokeStyle='#cbd5e1';c.fillStyle='#475569';c.font='24px system-ui';for(let i=0;i<=4;i++){const y=y0+(y1-y0)*i/4;c.beginPath();c.moveTo(x0,y);c.lineTo(x1,y);c.stroke();c.fillText(fmt(max-(max-min)*i/4,1),5,y+8);}c.fillText(unit,W-80,30);const px=i=>points.length===1?(x0+x1)/2:x0+(x1-x0)*i/(points.length-1);const py=v=>y1-(y1-y0)*(v-min)/(max-min);c.beginPath();points.forEach((p,i)=>i?c.lineTo(px(i),py(p.v)):c.moveTo(px(i),py(p.v)));c.strokeStyle=color;c.lineWidth=6;c.stroke();points.forEach((p,i)=>{c.beginPath();c.arc(px(i),py(p.v),8,0,7);c.fillStyle=color;c.fill();});c.fillStyle='#111827';c.font='22px system-ui';const step=Math.max(1,Math.floor(points.length/5));points.forEach((p,i)=>{if(i%step===0||i===points.length-1)c.fillText(p.label,px(i)-40,H-40);});c.fillStyle=color;c.font='bold 26px system-ui';c.fillText(label,x0,30);}
-function statsFor(n){const es=(D.entries||[]).filter(e=>inRange(e,n)).slice().reverse();const bp=es.filter(e=>e.sys&&e.dia),gl=es.filter(e=>e.glucose),wt=es.filter(e=>e.weight),bm=es.filter(e=>e.bmi);const t=thr();const sysV=bp.map(e=>+e.sys),diaV=bp.map(e=>+e.dia),glV=gl.map(e=>+e.glucose),wtV=wt.map(e=>+e.weight),bmV=bm.map(e=>+e.bmi);return{es,bp,gl,wt,bm,t,sysAvg:avg(sysV),diaAvg:avg(diaV),sysMax:sysV.length?Math.max(...sysV):null,sysMin:sysV.length?Math.min(...sysV):null,diaMax:diaV.length?Math.max(...diaV):null,diaMin:diaV.length?Math.min(...diaV):null,bpHigh:bp.filter(e=>+e.sys>=t.sysHigh||+e.dia>=t.diaHigh).length,bpCrit:bp.filter(e=>+e.sys>=t.sysCrit||+e.dia>=t.diaCrit).length,glAvg:avg(glV),glMax:glV.length?Math.max(...glV):null,glMin:glV.length?Math.min(...glV):null,glLow:gl.filter(e=>+e.glucose<t.glLow).length,glHigh:gl.filter(e=>+e.glucose>=t.glHigh).length,wtAvg:avg(wtV),wtMax:wtV.length?Math.max(...wtV):null,wtMin:wtV.length?Math.min(...wtV):null,bmiAvg:avg(bmV),bmiMax:bmV.length?Math.max(...bmV):null,bmiMin:bmV.length?Math.min(...bmV):null,medFull:es.filter(e=>e.medTaken==='yes').length,medPartial:es.filter(e=>e.medTaken==='partial').length,medMiss:es.filter(e=>e.medTaken==='no').length};}
-function renderStats(){const n=+$('statRange').value,s=statsFor(n);const bc=bmiClass(s.bmiAvg);$('statSummary').innerHTML=`<div class="statgrid"><div class="stat"><b>${fmt(s.sysAvg)}/${fmt(s.diaAvg)}</b>Huyết áp trung bình<br><span class="small">Cao nhất ${fmt(s.sysMax)}/${fmt(s.diaMax)} · Thấp nhất ${fmt(s.sysMin)}/${fmt(s.diaMin)}</span></div><div class="stat"><b>${s.bpHigh}</b>lần vượt ngưỡng<br><span class="small">${s.bpCrit} lần nguy hiểm</span></div><div class="stat"><b>${fmt(s.glAvg,1)}</b>Đường huyết TB<br><span class="small">Cao nhất ${fmt(s.glMax)} · Thấp nhất ${fmt(s.glMin)}</span></div><div class="stat"><b>${s.glLow} / ${s.glHigh}</b>Lần thấp / cao</div><div class="stat"><b>${fmt(s.wtAvg,1)} kg</b>Cân nặng TB</div><div class="stat"><b>${fmt(s.bmiAvg,1)}</b>BMI trung bình<br><span class="small">${bc.label||'—'}</span></div><div class="stat"><b>${s.medFull}/${s.es.length}</b>Uống đủ thuốc</div></div>`;drawChart($('bpChart'),s.bp.map(e=>({v:+e.sys,label:new Date(e.dt).toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit'})})),'#b91c1c','Tâm thu','mmHg');drawChart($('glucoseChart'),s.gl.map(e=>({v:+e.glucose,label:new Date(e.dt).toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit'})})),'#1d4ed8','Đường huyết','mg/dL');drawChart($('weightChart'),s.wt.map(e=>({v:+e.weight,label:new Date(e.dt).toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit'})})),'#15803d','Cân nặng','kg');drawChart($('bmiChart'),s.bm.map(e=>({v:+e.bmi,label:new Date(e.dt).toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit'})})),'#6d28d9','BMI','');}
-function renderReport(){const n=+$('reportRange').value,s=statsFor(n);const bc=bmiClass(s.bmiAvg);const rows=s.es.map(e=>{const c=classify(e);const b=e.bmi?bmiClass(+e.bmi):{label:''};return `<tr><td>${new Date(e.dt).toLocaleString('vi-VN')}</td><td>${e.sys?e.sys+'/'+e.dia:''} ${c.bp}</td><td>${e.pulse||''}</td><td>${e.glucose||''} ${c.gl}</td><td>${e.height||''}</td><td>${e.weight||''}</td><td>${e.bmi?e.bmi.toFixed(1)+' '+b.label:''}</td><td>${e.medTimeTaken||''} / ${({yes:'Đủ',partial:'Một phần',no:'Chưa'})[e.medTaken]||''}</td><td>${(e.context||[]).join(', ')}</td><td>${e.symptoms||''}</td></tr>`}).join('');$('reportContent').innerHTML=`<h3>${(D.settings&&D.settings.name)||'Người bệnh'} — ${n} ngày gần nhất</h3><p><b>Huyết áp trung bình:</b> ${fmt(s.sysAvg)}/${fmt(s.diaAvg)} mmHg · <b>Vượt ngưỡng:</b> ${s.bpHigh} lần · <b>Nguy hiểm:</b> ${s.bpCrit} lần<br><b>Đường huyết TB:</b> ${fmt(s.glAvg,1)} mg/dL · <b>Thấp:</b> ${s.glLow} · <b>Cao:</b> ${s.glHigh}<br><b>Cân nặng TB:</b> ${fmt(s.wtAvg,1)} kg · <b>BMI trung bình:</b> ${fmt(s.bmiAvg,1)} (${bc.label||'—'}) · <b>Uống đủ thuốc:</b> ${s.medFull}/${s.es.length}</p><div style="overflow:auto"><table><thead><tr><th>Thời gian</th><th>Huyết áp</th><th>Mạch</th><th>Đường huyết</th><th>Chiều cao</th><th>Cân nặng</th><th>BMI</th><th>Thuốc</th><th>Bối cảnh</th><th>Ghi chú</th></tr></thead><tbody>${rows||'<tr><td colspan="10">Chưa có dữ liệu.</td></tr>'}</tbody></table></div>`;}
-function renderHistory(){const tb=document.querySelector('#historyTable tbody');tb.innerHTML='';(D.entries||[]).forEach((e,i)=>{const c=classify(e);const b=e.bmi?bmiClass(+e.bmi):{label:'',cls:''};tb.insertAdjacentHTML('beforeend',`<tr><td>${new Date(e.dt).toLocaleString('vi-VN')}</td><td>${e.sys?e.sys+'/'+e.dia:''} ${c.bp}</td><td>${e.pulse||''}</td><td>${e.glucose||''} ${c.gl}</td><td>${e.height||''}</td><td>${e.weight||''}</td><td>${e.bmi?e.bmi.toFixed(1)+' <span class="badge '+b.cls+'">'+b.label+'</span>':''}</td><td>${(e.context||[]).join(', ')}</td><td>${e.medTimeTaken||''} / ${({yes:'Đủ',partial:'Một phần',no:'Chưa'})[e.medTaken]||''}</td><td>${e.symptoms||''}</td><td><button class="btn danger" onclick="removeEntry(${i})">Xóa</button></td></tr>`);});const recent=(D.entries||[]).slice(0,7),t=thr();const high=recent.filter(e=>+e.sys>=t.sysHigh||+e.dia>=t.diaHigh).length,low=recent.filter(e=>+e.glucose>0&&+e.glucose<t.glLow).length;let s='<p><b>Tổng bản ghi:</b> '+(D.entries||[]).length+'</p>';if(high)s+='<div class="alert yellow">Có '+high+' lần huyết áp vượt ngưỡng trong 7 bản ghi gần nhất.</div>';if(low)s+='<div class="alert red">Có '+low+' lần đường huyết dưới ngưỡng thấp.</div>';$('summary').innerHTML=s;}
-function removeEntry(i){if(confirm('Xóa bản ghi này?')){D.entries.splice(i,1);save();renderHistory();}}
-function clearAll(){if(confirm('Xóa toàn bộ dữ liệu?')){D={entries:[],settings:D.settings||{},checklist:{},medSchedule:D.medSchedule||[],medTakenToday:{},notified:{},contact:D.contact||{}};save();renderHistory();renderStats();renderReport();}}
-const CHECK_ITEMS={morning:[['bp_am','Đo huyết áp sáng'],['glucose_am','Đo đường huyết nếu cần'],['weight','Cân nặng'],['med_am','Uống thuốc sáng'],['foot','Kiểm tra bàn chân'],['water','Uống đủ nước']],evening:[['bp_pm','Đo huyết áp tối'],['glucose_pm','Đo đường huyết tối'],['med_pm','Uống thuốc tối'],['symptoms','Ghi triệu chứng'],['lifestyle','Ghi ăn uống, vận động'],['prep','Chuẩn bị thuốc ngày mai']],condition:{bp:[['bp_low_salt','Hạn chế mặn'],['bp_move','Vận động nhẹ']],dm:[['dm_foot','Kiểm tra bàn chân'],['dm_diet','Hạn chế đường']],hf:[['hf_weight','Cân nặng sáng'],['hf_swelling','Kiểm tra phù, khó thở'],['hf_fluid','Hạn chế nước/muối']],ckd:[['ckd_weight','Cân nặng và phù'],['ckd_urine','Chú ý nước tiểu'],['ckd_diet','Ăn theo chỉ định']],gout:[['gout_pain','Ghi đau khớp'],['gout_diet','Tránh rượu, nội tạng'],['gout_water','Uống đủ nước']]}};
-function clKey(id){return todayKey()+'_'+id;}
-function toggleCheck(id){D.checklist[clKey(id)]=!D.checklist[clKey(id)];save();renderChecklist();}
-function resetChecklist(){const today=todayKey();Object.keys(D.checklist||{}).forEach(k=>{if(k.startsWith(today+'_'))delete D.checklist[k];});save();renderChecklist();}
-function itemHtml(id,text){const done=!!D.checklist[clKey(id)];return `<label class="checkitem"><input type="checkbox" ${done?'checked':''} onchange="toggleCheck('${id}')"><span>${text}</span></label>`;}
-function renderChecklist(){$('clMorning').innerHTML=CHECK_ITEMS.morning.map(([id,t])=>itemHtml(id,t)).join('');$('clEvening').innerHTML=CHECK_ITEMS.evening.map(([id,t])=>itemHtml(id,t)).join('');const c=$('clCondition').value;$('clConditionItems').innerHTML=CHECK_ITEMS.condition[c].map(([id,t])=>itemHtml(id,t)).join('');const all=[...CHECK_ITEMS.morning,...CHECK_ITEMS.evening,...CHECK_ITEMS.condition[c]];const done=all.filter(([id])=>D.checklist[clKey(id)]).length,pct=Math.round(done/all.length*100);$('clProgress').textContent=`Đã hoàn thành ${done}/${all.length} mục (${pct}%).`;$('clProgress').className='alert '+(pct===100?'ok':'yellow');}
-function addMed(){const name=$('medName').value.trim(),time=$('medTime').value,note=$('medNote').value.trim();if(!name||!time){alert('Nhập tên thuốc và giờ.');return;}D.medSchedule.push({name,time,note});D.medSchedule.sort((a,b)=>a.time.localeCompare(b.time));save();$('medName').value='';$('medTime').value='';$('medNote').value='';renderMeds();}
-function removeMed(i){if(confirm('Xóa lịch thuốc?')){D.medSchedule.splice(i,1);save();renderMeds();}}
-function markTaken(i){const k=todayKey()+'_'+i;D.medTakenToday[k]=!D.medTakenToday[k];save();renderMeds();}
-function renderMeds(){const tb=document.querySelector('#medTable tbody');tb.innerHTML='';const today=todayKey();(D.medSchedule||[]).forEach((m,i)=>{const done=!!D.medTakenToday[today+'_'+i];tb.insertAdjacentHTML('beforeend',`<tr><td><b>${m.time}</b></td><td>${m.name}</td><td>${m.note||''}</td><td><button class="btn ${done?'secondary':'green'}" onclick="markTaken(${i})">${done?'✔ Đã uống':'Đánh dấu đã uống'}</button></td><td><button class="btn danger" onclick="removeMed(${i})">Xóa</button></td></tr>`);});if(!(D.medSchedule||[]).length)tb.innerHTML='<tr><td colspan="5">Chưa có lịch thuốc.</td></tr>';}
-function askNotify(){const st=$('notifyStatus');if(!('Notification' in window)){st.textContent='⚠️ Trình duyệt không hỗ trợ thông báo.';alert('Trình duyệt không hỗ trợ thông báo.');return;}if(location.protocol==='file:'){st.textContent='⚠️ File mở trực tiếp từ máy (file://) thường không hỗ trợ thông báo trên Safari.';alert('Safari thường không cho thông báo với file mở trực tiếp từ máy.\n\nHãy thêm app vào Màn hình chính từ liên kết HTTPS, hoặc dùng báo thức iPhone.');return;}Notification.requestPermission().then(p=>{if(p==='granted'){st.textContent='✅ Đã cho phép thông báo.';new Notification('Đã bật nhắc uống thuốc');}else{st.textContent='⚠️ Chưa cho phép thông báo.';alert('Chưa cho phép thông báo. Hãy dùng báo thức iPhone.');}});}
-function checkNotify(){const st=$('notifyStatus');if(!('Notification' in window)){st.textContent='⚠️ Không hỗ trợ thông báo.';return;}st.textContent='Trạng thái: '+Notification.permission+(location.protocol==='file:'?' — file cục bộ, Safari có thể chặn.':'.');}
-function checkMeds(){const now=new Date(),cur=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0'),today=todayKey();let due=[];(D.medSchedule||[]).forEach((m,i)=>{if(m.time===cur&&!D.notified[today+'_'+m.time+'_'+i]){D.notified[today+'_'+m.time+'_'+i]=true;save();due.push(m);}});if(due.length){const text='Đến giờ uống: '+due.map(m=>m.name+' lúc '+m.time).join('; ');const box=$('medAlert');box.textContent='⏰ '+text;box.classList.remove('hidden');if('Notification' in window&&Notification.permission==='granted'){try{new Notification('Nhắc uống thuốc',{body:text});}catch(e){}}try{navigator.vibrate&&navigator.vibrate([300,150,300]);}catch(e){}setTimeout(()=>box.classList.add('hidden'),600000);}}
-function saveContact(){D.contact={name:$('contactName').value.trim(),phone:$('contactPhone').value.trim()};save();alert('Đã lưu người nhận.');}
-function loadContact(){$('contactName').value=(D.contact&&D.contact.name)||'';$('contactPhone').value=(D.contact&&D.contact.phone)||'';fillTemplate();}
-function latest(){return (D.entries||[])[0]||{}}
-function fillTemplate(){const e=latest(),name=(D.settings&&D.settings.name)||'Người bệnh';const bp=e.sys?`${e.sys}/${e.dia} mmHg`:'chưa có';const gl=e.glucose?`${e.glucose} mg/dL`:'chưa có';const base=`${name} - cập nhật sức khỏe (${new Date().toLocaleDateString('vi-VN')}):\nHuyết áp: ${bp}\nMạch: ${e.pulse||'chưa có'}\nĐường huyết: ${gl}\nCân nặng: ${e.weight?e.weight+' kg':'chưa có'}\nBMI: ${e.bmi?e.bmi.toFixed(1):'chưa có'}\nThuốc: ${({yes:'đã uống đủ',partial:'uống một phần',no:'chưa uống'})[e.medTaken]||'chưa ghi'}\nTriệu chứng: ${e.symptoms||'không có'}`;const v=$('smsTemplate').value;if(v==='high')$('smsText').value=`${name} vừa đo huyết áp ${bp}, mạch ${e.pulse||'—'}. Huyết áp cao, cần được tư vấn.`;else if(v==='low')$('smsText').value=`${name} có đường huyết ${gl}, có thể hạ đường huyết. Cần hỗ trợ kiểm tra.`;else if(v==='symptom')$('smsText').value=`${name} có triệu chứng: ${e.symptoms||'...'}. Huyết áp ${bp}, mạch ${e.pulse||'—'}, đường huyết ${gl}.`;else if(v==='custom'){}else $('smsText').value=base;updateSmsLinks();}
-function updateSmsLinks(){const phone=($('contactPhone').value||'').replace(/[^0-9+]/g,'');const text=$('smsText').value||'';$('smsLink').href=phone?('sms:'+phone+'?body='+encodeURIComponent(text)):'#';$('callLink').href=phone?('tel:'+phone):'#';}
-function copySms(){navigator.clipboard.writeText($('smsText').value).then(()=>alert('Đã sao chép.'));}
-function saveSettings(){D.settings={name:$('pname').value,height:$('heightSetting').value,bpTarget:$('bpTarget').value,glucoseTarget:$('glucoseTarget').value,weightTarget:$('weightTarget').value,meds:$('medsText').value,thrSysHigh:$('thrSysHigh').value,thrDiaHigh:$('thrDiaHigh').value,thrSysCrit:$('thrSysCrit').value,thrDiaCrit:$('thrDiaCrit').value,thrGlLow:$('thrGlLow').value,thrGlHigh:$('thrGlHigh').value};const ok=save();renderHistory();renderStats();renderReport();fillTemplate();alert(ok?'Đã lưu cài đặt.':'Không lưu được.');}
-function loadSettings(){const s=D.settings||{};$('pname').value=s.name||'';$('heightSetting').value=s.height||'';$('bpTarget').value=s.bpTarget||'';$('glucoseTarget').value=s.glucoseTarget||'';$('weightTarget').value=s.weightTarget||'';$('medsText').value=s.meds||'';$('thrSysHigh').value=s.thrSysHigh||140;$('thrDiaHigh').value=s.thrDiaHigh||90;$('thrSysCrit').value=s.thrSysCrit||180;$('thrDiaCrit').value=s.thrDiaCrit||120;$('thrGlLow').value=s.thrGlLow||70;$('thrGlHigh').value=s.thrGlHigh||180;$('height').value=s.height||'';}
-function backupJSON(){const blob=new Blob([JSON.stringify(D,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='backup-suc-khoe-'+todayKey()+'.json';a.click();}
-function restoreJSON(ev){const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const j=JSON.parse(r.result);if(!j.entries)throw 0;D=j;save();loadSettings();loadContact();renderHistory();renderStats();renderReport();renderMeds();renderChecklist();alert('Đã khôi phục.');}catch(e){alert('File không hợp lệ.');}};r.readAsText(f);}
-function exportCSV(){const rows=[['Thoi gian','HA tren','HA duoi','Mach','Duong huyet','Chieu cao','Can nang','BMI','Gio thuoc','Tinh trang','Boi canh','Ghi chu']];(D.entries||[]).forEach(e=>rows.push([e.dt,e.sys,e.dia,e.pulse,e.glucose,e.height,e.weight,e.bmi?e.bmi.toFixed(1):'',e.medTimeTaken,e.medTaken,(e.context||[]).join(' | '),e.symptoms]));const csv='\ufeff'+rows.map(r=>r.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='theo-doi-suc-khoe.csv';a.click();}
-
-$('dt').value=nowLocal();loadSettings();loadContact();renderHistory();renderMeds();renderChecklist();renderStats();renderReport();
-$('contactPhone').addEventListener('input',updateSmsLinks);$('smsText').addEventListener('input',updateSmsLinks);
-setInterval(checkMeds,15000);checkMeds();
+function renderOverview(){
+ const p=prof(),r=rows()[0],recent=rows().slice(0,7),vs=visitsOf().slice().sort((a,b)=>new Date(b.date)-new Date(a.date));
+ const cond={none:'Không có bệnh nền ghi nhận',pregnant:'Đang mang thai',kidney:'Bệnh thận',diabetes:'Đái tháo đường',heart:'Bệnh tim mạch'};
+ const b=bmi(p);
+ const pairs=rows().map(x=>x.sys+'/'+x.dia);
+ const freq={};pairs.forEach(x=>freq[x]=(freq[x]||0)+1);
+ const base=Object.entries(freq).sort((a,b)=>b[1]-a[1])[0];
+ let baseTxt='Chưa đủ dữ liệu';
+ if(base){const parts=base[0].split('/').map(Number);baseTxt=base[0]+' mmHg — '+cls(parts[0],parts[1]).t+' (xuất hiện '+base[1]+' lần)';}
+ const hr=avg(recent,'pulse'),hc=hr!=null?hrCls(hr):null;
+ $('ovProfile').innerHTML='<div class="k">Hồ sơ & thể trạng</div>'+
+  '<div style="display:flex;align-items:center;gap:12px;margin:10px 0">'+
+  (p&&p.photo?'<img src="'+p.photo+'" style="width:54px;height:54px;border-radius:50%;object-fit:cover">':'<div class="pfp" style="width:54px;height:54px">'+(p?p.name.slice(0,1):'?')+'</div>')+
+  '<div><div class="v" style="font-size:19px">'+(p?p.name:'Chưa có hồ sơ')+'</div><div class="s">'+(p?p.age+' tuổi • '+cond[p.condition||'none']:'Hãy tạo hồ sơ')+'</div></div></div>';
+ $('ovBp').innerHTML='<div class="k">Huyết áp nền</div><div class="v">'+(base?base[0]:'—')+'</div><div class="s">'+baseTxt+'</div>';
+ $('ovHr').innerHTML='<div class="k">Tim mạch 7 ngày</div><div class="v">'+(hr??'—')+'</div><div class="s">'+(hc?hc.t+' bpm':'Chưa đủ dữ liệu')+'</div>';
+ $('ovBmi').innerHTML='<div class="k">BMI</div><div class="v">'+(b??'—')+'</div><div class="s"><span class="badge '+bmiC(b)+'">'+bmiT(b)+'</span></div>';
+ let alerts='';
+ if(r){const k=cls(r.sys,r.dia,r.symptom);
+  if(k.g!=='normal')alerts+='<div class="alert"><b>⚠️ Lần đo gần nhất:</b> '+r.sys+'/'+r.dia+' mmHg — '+k.t+'.</div>';
+  const h=hrCls(r.pulse);if(h.g==='alert')alerts+='<div class="alert"><b>⚠️ Nhịp tim gần nhất:</b> '+r.pulse+' bpm — '+h.t+'.</div>';
+ }
+ $('ovAlerts').innerHTML=alerts;
+ const totalRx=vs.reduce((s,v)=>s+((v.rx||[]).length),0);
+ const totalFiles=vs.reduce((s,v)=>s+((v.clinical||[]).length+(v.rx||[]).length),0);
+ $('ovStats').innerHTML=
+  '<div class="kpi"><div class="k">Lần khám</div><div class="v">'+vs.length+'</div><div class="s">Tổng số lần đi khám</div></div>'+
+  '<div class="kpi"><div class="k">Đơn thuốc</div><div class="v">'+totalRx+'</div><div class="s">Ảnh/PDF đơn thuốc</div></div>'+
+  '<div class="kpi"><div class="k">Tệp y tế</div><div class="v">'+totalFiles+'</div><div class="s">Cận lâm sàng & đơn thuốc</div></div>'+
+  '<div class="kpi"><div class="k">Tài liệu xét nghiệm</div><div class="v">'+docs().length+'</div><div class="s">Trong kho hồ sơ</div></div>';
+ $('ovTimeline').innerHTML=vs.length?
+  '<div style="margin-top:14px">'+vs.map(v=>'<div style="display:flex;gap:12px;margin-bottom:12px"><div style="width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--accent));margin-top:6px;flex:0 0 auto"></div><div><b>'+fmtDate(v.date)+'</b> | '+(v.facility||'Chưa ghi cơ sở')+'<div class="note" style="margin-top:2px">Chẩn đoán: '+(v.diagnosis||'Chưa ghi')+'</div></div></div>').join('')+'</div>'
+  :'<div class="empty">Chưa có lịch sử khám bệnh.</div>';
+}
+function advice(r,p){
+ const s=r.sys,d=r.dia,x=r.symptom||'none',hr=r.pulse,hc=hrCls(hr),em=[],ad=[];
+ if(s>=180||d>=120)em.push('Huyết áp từ 180/120 mmHg trở lên: cần đánh giá y tế khẩn cấp.');
+ if(x==='chest'||x==='weak')em.push('Đau ngực/khó thở hoặc yếu liệt, nói khó, nhìn mờ: gọi cấp cứu ngay.');
+ if(x==='faint')em.push('Ngất hoặc gần ngất: cần đánh giá y tế sớm.');
+ if(hc.g==='alert')em.push('Nhịp tim '+hr+' bpm ('+hc.t.toLowerCase()+') cần được đánh giá y tế.');
+ if(hc.g==='alert'&&x==='none')em.push('Nhịp tim bất thường ngay cả khi không có triệu chứng: nên khám sớm.');
+ if(p&&p.condition==='pregnant'&&(s>=140||d>=90||x!=='none'))em.push('Phụ nữ mang thai có huyết áp cao/triệu chứng: liên hệ bác sĩ sản khoa ngay.');
+ if(x==='headache')ad.push('Nghỉ yên tĩnh, đầu cao nhẹ, uống nước. Đến cấp cứu nếu đau dữ dội, kèm nôn, nhìn mờ, yếu liệt.');
+ if(x==='dizzy')ad.push('Ngồi/nằm nghỉ, đứng dậy chậm, uống nước. Đo lại sau 5–10 phút; khám ngay nếu kéo dài hoặc kèm ngất.');
+ if(x==='faint')ad.push('Nằm ngửa, nâng nhẹ chân nếu không có đau ngực/khó thở; nới lỏng quần áo.');
+ if(x==='chest')ad.push('Ngồi nghỉ, nới lỏng quần áo. Gọi cấp cứu nếu đau kéo dài, lan vai/hàm/lưng, kèm vã mồ hôi.');
+ if(x==='weak')ad.push('Yếu liệt, nói khó hoặc nhìn mờ đột ngột: gọi cấp cứu ngay và ghi thời điểm bắt đầu.');
+ if(x==='nausea')ad.push('Nghỉ, uống từng ngụm nước nhỏ. Khám ngay nếu nôn nhiều hoặc kèm đau ngực.');
+ if(x==='palpitation')ad.push('Ngồi nghỉ, hít thở chậm; tránh cà phê, rượu bia. Nếu nhanh kéo dài, kèm đau ngực, khó thở hoặc ngất: cấp cứu.');
+ if(x==='none')ad.push('Không có triệu chứng: tiếp tục theo dõi; trao đổi bác sĩ nếu bất thường lặp lại.');
+ if(s<90||d<60)ad.push('Huyết áp thấp: nghỉ, uống nước, đứng dậy chậm; không tự ngưng thuốc.');
+ if(s>=130&&x==='none')ad.push('Huyết áp cao: nghỉ 5 phút rồi đo lại; nếu vẫn cao, đặt lịch khám.');
+ if(hr!=null&&hr<60&&hc.g!=='alert')ad.push('Nhịp chậm có thể bình thường ở người tập luyện nhiều hoặc khi ngủ; khám nếu mới xuất hiện, kèm chóng mặt/ngất.');
+ if(hr!=null&&hr>100&&hc.g!=='alert')ad.push('Nhịp nhanh có thể do stress, cà phê, sốt hoặc vận động; nghỉ và đo lại sau 5–10 phút.');
+ return{em,ad};
+}
+function renderChips(){
+ $('chips').innerHTML=Object.entries(TAGS).map(([k,v])=>'<div class="chip '+(chosenTags.includes(k)?'on':'')+'" data-k="'+k+'">'+v+'</div>').join('');
+ $('chips').querySelectorAll('.chip').forEach(c=>c.onclick=()=>{const k=c.dataset.k;chosenTags=chosenTags.includes(k)?chosenTags.filter(x=>x!==k):chosenTags.concat(k);renderChips()});
+ $('tagFilter').innerHTML='<option value="all">Tất cả</option>'+Object.entries(TAGS).map(([k,v])=>'<option value="'+k+'" '+(tagFilter===k?'selected':'')+'>'+v+'</option>').join('');
+}
+function renderProfileBar(){
+ const sel=$('profileSelect');sel.innerHTML='';
+ Object.values(profiles).forEach(p=>{const o=document.createElement('option');o.value=p.id;o.textContent=p.name;sel.appendChild(o)});
+ sel.value=currentId;
+ const p=prof(),a=$('pfpBox');
+ a.innerHTML=p&&p.photo?'<img src="'+p.photo+'">':(p?p.name.slice(0,1).toUpperCase():'?');
+}
+function renderAdvice(){
+ const p=prof(),r=rows()[0],box=$('adviceBox');
+ if(!p||!r){box.textContent='Hãy tạo hồ sơ và lưu kết quả đo.';return}
+ const k=cls(r.sys,r.dia,r.symptom),hc=hrCls(r.pulse),a=advice(r,p);
+ let h='<b>Huyết áp '+r.sys+'/'+r.dia+' mmHg — '+k.t+'</b>';
+ h+='<div class="note">Nhịp tim: '+(r.pulse?r.pulse+' bpm — '+hc.t:'Chưa nhập')+'</div>';
+ if(r.tags&&r.tags.length)h+='<div class="note">Bối cảnh: '+r.tags.map(x=>TAGS[x]).join(', ')+'</div>';
+ if(a.em.length)h+='<div class="alert"><b>⚠️ Ưu tiên đánh giá y tế</b><ul>'+a.em.map(x=>'<li>'+x+'</li>').join('')+'</ul></div>';
+ h+='<div class="info" style="margin-top:10px"><b>Gợi ý sơ bộ</b><ul>'+a.ad.map(x=>'<li>'+x+'</li>').join('')+'</ul></div>';
+ box.innerHTML=h;
+}
+function renderAnalytics(){
+ const cur=rows().filter(r=>age(r)<=rangeDays),prev=rows().filter(r=>age(r)>rangeDays&&age(r)<=rangeDays*2);
+ const cs=avg(cur,'sys'),cd=avg(cur,'dia'),cp=avg(cur,'pulse'),ps=avg(prev,'sys'),pd=avg(prev,'dia');
+ const ds=cs!=null&&ps!=null?cs-ps:null,dd=cd!=null&&pd!=null?cd-pd:null;
+ const am=rows().filter(r=>new Date(r.time).getHours()<12),pm=rows().filter(r=>new Date(r.time).getHours()>=12);
+ $('analytics').innerHTML=
+  '<div class="kpi"><div class="k">Huyết áp '+rangeDays+' ngày</div><div class="v">'+(cs??'—')+'/'+(cd??'—')+'</div><div class="s">'+cur.length+' lần đo</div></div>'+
+  '<div class="kpi"><div class="k">Nhịp tim TB</div><div class="v">'+(cp??'—')+'</div><div class="s">'+(cp!=null?hrCls(cp).t:'Chưa đủ dữ liệu')+'</div></div>'+
+  '<div class="kpi"><div class="k">So kỳ trước</div><div class="v">'+(ds==null?'—':(ds>0?'+':'')+ds)+'/'+(dd==null?'—':(dd>0?'+':'')+dd)+'</div><div class="s">mmHg</div></div>'+
+  '<div class="kpi"><div class="k">Sáng / Tối</div><div class="v">'+(avg(am,'sys')??'—')+'/'+(avg(pm,'sys')??'—')+'</div><div class="s">Tâm thu TB</div></div>';
+ let t='';
+ if(ds!=null){
+  if(ds>=5||dd>=5)t='<div class="alert"><b>⚠️ Xu hướng tăng:</b> '+ds+'/'+dd+' mmHg so với kỳ trước.</div>';
+  else if(ds<=-5||dd<=-5)t='<div class="info"><b>📉 Xu hướng giảm:</b> '+Math.abs(ds)+'/'+Math.abs(dd)+' mmHg so với kỳ trước.</div>';
+  else t='<div class="info"><b>📊 Ổn định.</b></div>';
+ }
+ if(cp!=null&&(cp<50||cp>100))t+='<div class="alert"><b>⚠️ Nhịp tim TB '+cp+' bpm:</b> '+(cp<50?'rất chậm':'nhanh')+' so với ngưỡng nghỉ 60–100 bpm.</div>';
+ $('trendBox').innerHTML=t;
+}
+function destroy(c){if(c&&typeof c.destroy==='function')c.destroy()}
+function renderCharts(){
+ const data=[...rows()].sort((a,b)=>new Date(b.time)-new Date(a.time)).slice(-30);
+ destroy(bpChart);
+ bpChart=new Chart($('bpCanvas'),{type:'line',plugins:[bpZones],data:{labels:data.map(r=>fmtDT(r.time)),datasets:[
+  {label:'Tâm thu',data:data.map(r=>r.sys),borderColor:'#ef4444',borderWidth:3,pointRadius:3,tension:.38,fill:true,backgroundColor:'rgba(239,68,68,.08)'},
+  {label:'Tâm trương',data:data.map(r=>r.dia),borderColor:'#6366f1',borderWidth:3,pointRadius:3,tension:.38,fill:true,backgroundColor:'rgba(99,102,241,.08)'}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true}}},scales:{y:{min:40,max:200,title:{display:true,text:'mmHg'}},x:{ticks:{maxRotation:45,autoSkip:true}}}}});
+ destroy(pulseChart);
+ pulseChart=new Chart($('pulseCanvas'),{type:'line',plugins:[pulseZones],data:{labels:data.map(r=>fmtDT(r.time)),datasets:[
+  {label:'Nhịp tim',data:data.map(r=>r.pulse),borderColor:'#ec4899',borderWidth:3,pointRadius:4,pointBackgroundColor:'#fff',pointBorderWidth:3,tension:.38,fill:true,backgroundColor:'rgba(236,72,153,.10)',spanGaps:true}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:30,max:180,title:{display:true,text:'bpm'}},x:{ticks:{maxRotation:45,autoSkip:true}}}}});
+ const ids=Object.keys(profiles);
+ destroy(memberChart);
+ memberChart=new Chart($('memberCanvas'),{type:'bar',data:{labels:ids.map(i=>profiles[i].name),datasets:[
+  {label:'Tâm thu TB',data:ids.map(i=>avg((store[i]||[]).slice(0,7),'sys')),backgroundColor:'#6366f1',borderRadius:10},
+  {label:'Nhịp tim TB',data:ids.map(i=>avg((store[i]||[]).slice(0,7),'pulse')),backgroundColor:'#ec4899',borderRadius:10}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true}}},scales:{y:{beginAtZero:true}}}});
+}
+function renderHistory(){
+ const data=rows().filter(r=>{const k=cls(r.sys,r.dia,r.symptom),h=hrCls(r.pulse);
+  if(tagFilter!=='all'&&!(r.tags||[]).includes(tagFilter))return false;
+  if(filter==='high')return k.g==='high';if(filter==='low')return k.g==='low';
+  if(filter==='pulse')return h.g==='alert'||h.g==='watch';
+  if(filter==='symptom')return r.symptom&&r.symptom!=='none';return true});
+ const tb=$('historyBody');tb.innerHTML='';$('emptyBox').style.display=data.length?'none':'block';
+ data.forEach(r=>{const k=cls(r.sys,r.dia,r.symptom),h=hrCls(r.pulse),tr=document.createElement('tr');
+  tr.innerHTML='<td>'+fmtDT(r.time)+'</td><td><b>'+r.sys+'/'+r.dia+'</b></td><td>'+(r.pulse?r.pulse+' <span class="badge '+h.c+'">'+h.t+'</span>':'—')+'</td><td>'+(r.tags&&r.tags.length?r.tags.map(x=>TAGS[x]).join(', '):'—')+'</td><td>'+SYM[r.symptom||'none']+'</td><td><span class="badge '+k.c+'">'+k.t+'</span></td><td>'+(r.note||'—')+'</td><td><button class="btn ghost sm" data-id="'+r.id+'">Xoá</button></td>';
+  tb.appendChild(tr)});
+ tb.querySelectorAll('button').forEach(b=>b.onclick=()=>{store[currentId]=rows().filter(r=>r.id!==b.dataset.id);save();renderTracking()});
+}
+function renderTracking(){
+ try{renderChips();renderProfileBar();renderAdvice();renderAnalytics();renderCharts();renderHistory();
+  const p=prof(),r=rows()[0],recent=rows().slice(0,7),b=bmi(p),h=hrCls(r?r.pulse:null);
+  $('kpiBox').innerHTML=
+   '<div class="kpi"><div class="k">Hồ sơ</div><div class="v">'+(p?p.name:'—')+'</div><div class="s">'+(p?p.age+' tuổi':'')+'</div></div>'+
+   '<div class="kpi"><div class="k">BMI</div><div class="v">'+(b??'—')+'</div><div class="s">'+bmiT(b)+'</div></div>'+
+   '<div class="kpi"><div class="k">Huyết áp gần nhất</div><div class="v">'+(r?r.sys+'/'+r.dia:'—')+'</div><div class="s">'+(r?cls(r.sys,r.dia,r.symptom).t:'Chưa có')+'</div></div>'+
+   '<div class="kpi"><div class="k">Nhịp tim gần nhất</div><div class="v">'+(r&&r.pulse?r.pulse:'—')+'</div><div class="s">'+h.t+'</div></div>';
+ }catch(e){console.error(e);alert('Lỗi hiển thị: '+e.message)}
+}
+function renderDocs(){
+ const list=docs().filter(d=>docFilter==='all'||d.type===docFilter).sort((a,b)=>new Date(b.date)-new Date(a.date));
+ const grid=$('docGrid');grid.innerHTML='';
+ $('docEmpty').style.display=list.length?'none':'block';
+ list.forEach(d=>{
+  const card=document.createElement('div');card.className='doc';
+  const thumbs=(d.files||[]).map((f,i)=>f.type==='pdf'
+   ?'<div class="file" data-id="'+d.id+'" data-i="'+i+'" style="width:100%;height:70px;display:grid;place-items:center;background:#eef2ff">📄<br>'+((f.name||'PDF').slice(0,16))+'</div>'
+   :'<img src="'+f.data+'" data-id="'+d.id+'" data-i="'+i+'" style="width:100%;height:100px;object-fit:cover;cursor:pointer">').join('');
+  card.innerHTML='<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px">'+thumbs+'</div>'+
+   '<div class="doc-body"><span class="badge doc-type">'+DOC_TYPES[d.type]+'</span>'+
+   '<h3 style="margin-top:7px">'+(d.title||DOC_TYPES[d.type])+'</h3>'+
+   '<div class="meta">'+fmtDate(d.date)+' • '+(d.facility||'Không ghi cơ sở')+'</div>'+
+   '<div class="meta">'+d.files.length+' tệp • '+(d.note||'')+'</div>'+
+   '<div class="doc-actions"><button class="btn ghost sm" data-view="'+d.id+'">Xem tất cả</button><button class="btn ghost sm" data-edit="'+d.id+'">Sửa</button><button class="btn danger sm" data-del="'+d.id+'">Xoá</button></div></div>';
+  grid.appendChild(card);
+ });
+ grid.querySelectorAll('[data-id][data-i]').forEach(el=>el.onclick=()=>openFileViewer(docs(),el.dataset.id,+el.dataset.i));
+ grid.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>openFileViewer(docs(),b.dataset.view,0));
+ grid.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>editDoc(b.dataset.edit));
+ grid.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{if(confirm('Xoá tài liệu này?')){documents[currentId]=docs().filter(d=>d.id!==b.dataset.del);save();renderDocs()}});
+}
+function showViewerAt(i){
+ const d=viewerList&&viewerList.find(x=>x.id===viewerDocId);
+ if(!d||!d.files.length)return;
+ viewerIndex=(i+d.files.length)%d.files.length;
+ const f=d.files[viewerIndex];
+ if(f.type==='pdf'){const w=window.open();if(w)w.document.write('<iframe src="'+f.data+'" style="width:100%;height:100vh;border:0"></iframe>');return}
+ $('viewerImg').src=f.data;
+ $('viewerCount').textContent=(viewerIndex+1)+' / '+d.files.length;
+ $('viewer').classList.add('on');
+}
+function openFileViewer(list,docId,index){
+ viewerList=list;viewerDocId=docId;showViewerAt(index||0);
+}
+$('viewerPrev').onclick=e=>{e.stopPropagation();showViewerAt(viewerIndex-1)};
+$('viewerNext').onclick=e=>{e.stopPropagation();showViewerAt(viewerIndex+1)};
+$('viewerImg').onclick=e=>e.stopPropagation();
+$('viewer').onclick=()=>$('viewer').classList.remove('on');
+function editDoc(id){
+ const d=docs().find(x=>x.id===id);if(!d)return;
+ editingDocId=id;
+ $('docFormTitle').textContent='Sửa tài liệu y tế';
+ $('docType').value=d.type;$('docDate').value=d.date;$('docFacility').value=d.facility||'';$('docTitle').value=d.title||'';$('docNote').value=d.note||'';
+ pendingDocFiles.length=0;(d.files||[]).forEach(f=>pendingDocFiles.push(f));
+ renderFilePreview('docPreview',pendingDocFiles);
+ $('docSubmitBtn').textContent='Cập nhật tài liệu';
+ $('docCancelBtn').classList.remove('hidden');
+ $('docForm').scrollIntoView({behavior:'smooth'});
+}
+function resetDocForm(){
+ editingDocId=null;
+ $('docFormTitle').textContent='Thêm tài liệu y tế';
+ $('docForm').reset();pendingDocFiles.length=0;
+ renderFilePreview('docPreview',pendingDocFiles);
+ $('docSubmitBtn').textContent='Lưu tài liệu';
+ $('docCancelBtn').classList.add('hidden');
+}
+$('docCancelBtn').onclick=resetDocForm;
+function renderVisits(){
+ const list=visitsOf().slice().sort((a,b)=>new Date(b.date)-new Date(a.date));
+ const box=$('visitList');box.innerHTML='';
+ $('visitEmpty').style.display=list.length?'none':'block';
+ list.forEach(v=>{
+  const card=document.createElement('div');card.className='card';
+  const clinThumbs=(v.clinical||[]).map((f,i)=>f.type==='pdf'
+   ?'<div class="file" data-vid="'+v.id+'" data-kind="clinical" data-i="'+i+'" style="width:100%;height:60px;display:grid;place-items:center;background:#eef2ff">📄</div>'
+   :'<img src="'+f.data+'" data-vid="'+v.id+'" data-kind="clinical" data-i="'+i+'" style="width:100%;height:80px;object-fit:cover;cursor:pointer">').join('');
+  const rxThumbs=(v.rx||[]).map((f,i)=>f.type==='pdf'
+   ?'<div class="file" data-vid="'+v.id+'" data-kind="rx" data-i="'+i+'" style="width:100%;height:60px;display:grid;place-items:center;background:#eef2ff">📄</div>'
+   :'<img src="'+f.data+'" data-vid="'+v.id+'" data-kind="rx" data-i="'+i+'" style="width:100%;height:80px;object-fit:cover;cursor:pointer">').join('');
+  card.innerHTML='<span class="badge doc-type">'+fmtDate(v.date)+'</span>'+
+   '<h2 style="margin-top:9px">'+(v.facility||'Chưa ghi cơ sở y tế')+'</h2>'+
+   '<div class="sub">'+(v.doctor||'Chưa ghi bác sĩ')+(v.specialty?' • '+v.specialty:'')+'</div>'+
+   '<div class="info"><b>Lý do khám:</b> '+(v.reason||'—')+'</div>'+
+   '<div class="info"><b>Chẩn đoán:</b> '+(v.diagnosis||'—')+'</div>'+
+   '<div class="info"><b>Hướng dẫn:</b> '+(v.conclusion||'—')+'</div>'+
+   '<div class="note"><b>Cận lâm sàng ('+((v.clinical||[]).length)+'):</b></div>'+
+   '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">'+(clinThumbs||'<div class="note">Chưa có</div>')+'</div>'+
+   '<div class="note"><b>Đơn thuốc ('+((v.rx||[]).length)+'):</b></div>'+
+   '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">'+(rxThumbs||'<div class="note">Chưa có</div>')+'</div>'+
+   '<div class="row" style="margin-top:10px">'+
+   '<button class="btn ghost sm" data-clinical="'+v.id+'">📎 Xem tất cả cận lâm sàng</button>'+
+   '<button class="btn ghost sm" data-rx="'+v.id+'">💊 Xem tất cả đơn thuốc</button>'+
+   '<button class="btn ghost sm" data-edit="'+v.id+'">✏️ Sửa</button>'+
+   '<button class="btn danger sm" data-del="'+v.id+'">Xoá</button></div>';
+  box.appendChild(card);
+ });
+ box.querySelectorAll('[data-vid][data-kind][data-i]').forEach(el=>el.onclick=()=>{
+  const v=visitsOf().find(x=>x.id===el.dataset.vid);if(!v)return;
+  const files=el.dataset.kind==='clinical'?(v.clinical||[]):(v.rx||[]);
+  openFileViewer([{id:v.id,files:files}],v.id,+el.dataset.i);
+ });
+ box.querySelectorAll('[data-clinical]').forEach(b=>b.onclick=()=>showVisitFiles(b.dataset.clinical,'clinical'));
+ box.querySelectorAll('[data-rx]').forEach(b=>b.onclick=()=>showVisitFiles(b.dataset.rx,'rx'));
+ box.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>editVisit(b.dataset.edit));
+ box.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{if(confirm('Xoá lần khám này?')){visitStore[currentId]=visitsOf().filter(v=>v.id!==b.dataset.del);save();renderVisits()}});
+}
+function showVisitFiles(id,kind){
+ const v=visitsOf().find(x=>x.id===id);if(!v)return;
+ const files=kind==='clinical'?(v.clinical||[]):(v.rx||[]);
+ if(!files.length)return alert('Chưa có tệp cho phần này.');
+ openFileViewer([{id:v.id,files:files}],v.id,0);
+}
+function editVisit(id){
+ const v=visitsOf().find(x=>x.id===id);if(!v)return;
+ editingVisitId=id;
+ $('visitFormTitle').textContent='Sửa lần khám';
+ $('vDate').value=v.date;$('vFacility').value=v.facility||'';$('vDoctor').value=v.doctor||'';$('vSpecialty').value=v.specialty||'';
+ $('vReason').value=v.reason||'';$('vDiagnosis').value=v.diagnosis||'';$('vConclusion').value=v.conclusion||'';
+ pendingClinical.length=0;(v.clinical||[]).forEach(f=>pendingClinical.push(f));
+ pendingRx.length=0;(v.rx||[]).forEach(f=>pendingRx.push(f));
+ renderFilePreview('vClinicalPreview',pendingClinical);
+ renderFilePreview('vRxPreview',pendingRx);
+ $('visitSubmitBtn').textContent='Cập nhật lần khám';
+ $('visitCancelBtn').classList.remove('hidden');
+ $('visitForm').scrollIntoView({behavior:'smooth'});
+}
+function resetVisitForm(){
+ editingVisitId=null;
+ $('visitFormTitle').textContent='Thêm lần khám';
+ $('visitForm').reset();
+ pendingClinical.length=0;pendingRx.length=0;
+ renderFilePreview('vClinicalPreview',pendingClinical);
+ renderFilePreview('vRxPreview',pendingRx);
+ $('visitSubmitBtn').textContent='Lưu lần khám';
+ $('visitCancelBtn').classList.add('hidden');
+}
+$('visitCancelBtn').onclick=resetVisitForm;
+function compressImage(file){
+ return new Promise((resolve,reject)=>{
+  if(file.type==='application/pdf'){const rd=new FileReader();rd.onload=()=>resolve({name:file.name,type:'pdf',data:rd.result});rd.onerror=reject;rd.readAsDataURL(file);return}
+  const rd=new FileReader();
+  rd.onload=()=>{const img=new Image();img.onload=()=>{const max=1400;let w=img.width,h=img.height;if(w>max||h>max){const r=Math.min(max/w,max/h);w=Math.round(w*r);h=Math.round(h*r)}const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);resolve({name:file.name,type:'image',data:c.toDataURL('image/jpeg',.72)})};img.onerror=reject;img.src=rd.result};rd.onerror=reject;rd.readAsDataURL(file)});
+}
+function renderFilePreview(previewId,arr){
+ $(previewId).innerHTML=arr.map((f,i)=>f.type==='pdf'
+  ?'<div class="file" data-i="'+i+'">📄<br>'+((f.name||'PDF').slice(0,18))+'</div>'
+  :'<img src="'+f.data+'" data-i="'+i+'" title="Nhấn để xoá">').join('');
+ $(previewId).querySelectorAll('[data-i]').forEach(el=>el.onclick=()=>{arr.splice(+el.dataset.i,1);renderFilePreview(previewId,arr)});
+}
+function bindFiles(dropId,inputId,previewId,arr){
+ $(dropId).onclick=()=>$(inputId).click();
+ $(inputId).onchange=async e=>{
+  for(const f of e.target.files){try{const item=await compressImage(f);arr.push(item)}catch(err){console.error(err)}}
+  e.target.value='';renderFilePreview(previewId,arr);
+ };
+}
+bindFiles('docDrop','docFiles','docPreview',pendingDocFiles);
+bindFiles('vClinicalDrop','vClinicalFiles','vClinicalPreview',pendingClinical);
+bindFiles('vRxDrop','vRxFiles','vRxPreview',pendingRx);
+$('docForm').onsubmit=e=>{
+ e.preventDefault();
+ if(!currentId)return alert('Hãy tạo/chọn hồ sơ trước.');
+ if(!pendingDocFiles.length)return alert('Hãy chọn ít nhất một ảnh hoặc PDF.');
+ if(editingDocId){
+  const d=docs().find(x=>x.id===editingDocId);
+  if(d){d.type=$('docType').value;d.date=$('docDate').value;d.facility=$('docFacility').value.trim();d.title=$('docTitle').value.trim();d.note=$('docNote').value.trim();d.files=pendingDocFiles.slice()}
+ }else{
+  documents[currentId].unshift({id:newId(),type:$('docType').value,date:$('docDate').value,facility:$('docFacility').value.trim(),title:$('docTitle').value.trim(),note:$('docNote').value.trim(),files:pendingDocFiles.slice(),createdAt:new Date().toISOString()});
+ }
+ resetDocForm();save();renderDocs();alert('Đã lưu tài liệu.');
+};
+$('visitForm').onsubmit=e=>{
+ e.preventDefault();
+ if(!currentId)return alert('Hãy tạo/chọn hồ sơ trước.');
+ if(editingVisitId){
+  const v=visitsOf().find(x=>x.id===editingVisitId);
+  if(v){v.date=$('vDate').value;v.facility=$('vFacility').value.trim();v.doctor=$('vDoctor').value.trim();v.specialty=$('vSpecialty').value.trim();v.reason=$('vReason').value.trim();v.clinical=pendingClinical.slice();v.diagnosis=$('vDiagnosis').value.trim();v.conclusion=$('vConclusion').value.trim();v.rx=pendingRx.slice()}
+ }else{
+  visitStore[currentId].unshift({id:newId(),date:$('vDate').value,facility:$('vFacility').value.trim(),doctor:$('vDoctor').value.trim(),specialty:$('vSpecialty').value.trim(),reason:$('vReason').value.trim(),clinical:pendingClinical.slice(),diagnosis:$('vDiagnosis').value.trim(),conclusion:$('vConclusion').value.trim(),rx:pendingRx.slice(),createdAt:new Date().toISOString()});
+ }
+ resetVisitForm();save();renderVisits();alert('Đã lưu lần khám.');
+};
+$('pfpBox').onclick=()=>$('pfpInput').click();
+$('pfpInput').onchange=e=>{if(!currentId)return alert('Hãy tạo hồ sơ trước.');const f=e.target.files[0];if(!f)return;compressImage(f).then(item=>{profiles[currentId].photo=item.data;save();renderProfileBar()})};
+$('profileSelect').onchange=e=>{currentId=e.target.value;if(!store[currentId])store[currentId]=[];if(!documents[currentId])documents[currentId]=[];if(!visitStore[currentId])visitStore[currentId]=[];save();renderOverview()};
+$('readingForm').onsubmit=e=>{e.preventDefault();if(!currentId)return alert('Hãy tạo hồ sơ trước.');store[currentId].unshift({id:newId(),time:$('time').value,sys:+$('sys').value,dia:+$('dia').value,pulse:$('pulse').value?+$('pulse').value:null,arm:$('arm').value,symptom:$('symptom').value,tags:chosenTags.slice(),note:$('note').value.trim()});$('readingForm').reset();chosenTags=[];timeEdited=false;tick();save();renderTracking()};
+document.querySelectorAll('#rangeTabs .tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('#rangeTabs .tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');rangeDays=+b.dataset.days;renderAnalytics()});
+document.querySelectorAll('#tab-tracking .tab[data-filter]').forEach(b=>b.onclick=()=>{document.querySelectorAll('#tab-tracking .tab[data-filter]').forEach(x=>x.classList.remove('on'));b.classList.add('on');filter=b.dataset.filter;renderHistory()});
+$('tagFilter').onchange=e=>{tagFilter=e.target.value;renderHistory()};
+document.querySelectorAll('#docFilters .tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('#docFilters .tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');docFilter=b.dataset.type;renderDocs()});
+function download(name,content,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type:type}));a.download=name;a.click()}
+function exportJSON(){download('ho-so-suc-khoe-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify({version:35,exportedAt:new Date().toISOString(),profiles:profiles,readings:store,documents:documents,visits:visitStore},null,2),'application/json')}
+$('jsonExportBtn').onclick=exportJSON;
+$('jsonImportBtn').onclick=()=>$('jsonInput').click();
+$('jsonInput').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const o=JSON.parse(rd.result);if(!o.profiles||!o.readings)throw new Error('File không đúng định dạng.');if(!confirm('Nhập sẽ thay thế dữ liệu hiện có. Tiếp tục?'))return;profiles=o.profiles;store=o.readings;documents=o.documents||{};visitStore=o.visits||{};currentId=Object.keys(profiles)[0]||'';if(currentId){if(!store[currentId])store[currentId]=[];if(!documents[currentId])documents[currentId]=[];if(!visitStore[currentId])visitStore[currentId]=[]}save();renderOverview();alert('Đã nhập dữ liệu.')}catch(err){alert('Không thể nhập JSON: '+err.message)}};rd.readAsText(f)};
+function exportPDF(){
+ const p=prof(),data=[...rows()].sort((a,b)=>new Date(b.time)-new Date(a.time));
+ if(!p||!data.length)return alert('Hãy tạo hồ sơ và có ít nhất một kết quả đo.');
+ const recent=data.slice(0,7);
+ const rowsHtml=data.slice(0,50).map(r=>{const k=cls(r.sys,r.dia,r.symptom),h=hrCls(r.pulse);return '<tr><td>'+fmtDT(r.time)+'</td><td>'+r.sys+'/'+r.dia+'</td><td>'+(r.pulse||'—')+'</td><td>'+h.t+'</td><td>'+k.t+'</td><td>'+(r.tags&&r.tags.length?r.tags.map(x=>TAGS[x]).join(', '):'—')+'</td><td>'+(r.note||'')+'</td></tr>'}).join('');
+ const docRows=docs().sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,50).map(d=>'<tr><td>'+fmtDate(d.date)+'</td><td>'+DOC_TYPES[d.type]+'</td><td>'+(d.title||'')+'</td><td>'+(d.facility||'')+'</td><td>'+d.files.length+'</td><td>'+(d.note||'')+'</td></tr>').join('');
+ const visitRows=visitsOf().sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,50).map(v=>'<tr><td>'+fmtDate(v.date)+'</td><td>'+(v.facility||'')+'</td><td>'+(v.doctor||'')+'</td><td>'+(v.reason||'')+'</td><td>'+(v.diagnosis||'')+'</td><td>'+((v.clinical||[]).length)+'/'+((v.rx||[]).length)+'</td></tr>').join('');
+ const w=window.open('','_blank');
+ w.document.write('<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Báo cáo sức khoẻ - '+p.name+'</title><style>body{font-family:Arial;color:#111;padding:26px}h1{margin:0 0 4px;font-size:22px}h2{font-size:16px;margin:20px 0 8px;border-bottom:2px solid #4f46e5;padding-bottom:5px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:1px solid #ddd;padding:6px;text-align:left}th{background:#eef2ff}.meta{color:#555;font-size:13px}.box{background:#f5f7ff;border-left:4px solid #4f46e5;padding:10px;margin:8px 0;font-size:13px}@media print{button{display:none}}</style></head><body><h1>Báo cáo sức khoẻ</h1><div class="meta">Hồ sơ: <b>'+p.name+'</b> • '+p.age+' tuổi • '+({male:'Nam',female:'Nữ',other:'Khác'})[p.gender]+' • BMI '+(bmi(p)??'—')+'<br>Bệnh nền: '+({none:'Không',pregnant:'Đang mang thai',kidney:'Bệnh thận',diabetes:'Đái tháo đường',heart:'Bệnh tim mạch'})[p.condition||'none']+' • Xuất ngày '+new Date().toLocaleString('vi-VN')+'</div><h2>Tóm tắt 7 lần đo gần nhất</h2><div class="box">Huyết áp trung bình: <b>'+(avg(recent,'sys')??'—')+'/'+(avg(recent,'dia')??'—')+' mmHg</b> • Nhịp tim trung bình: <b>'+(avg(recent,'pulse')??'—')+' bpm</b></div><h2>Lịch sử 50 lần đo gần nhất</h2><table><thead><tr><th>Thời gian</th><th>Huyết áp</th><th>Nhịp tim</th><th>Phân loại nhịp</th><th>Phân loại HA</th><th>Bối cảnh</th><th>Ghi chú</th></tr></thead><tbody>'+rowsHtml+'</tbody></table><h2>Tài liệu y tế</h2><table><thead><tr><th>Ngày</th><th>Loại</th><th>Tên phiếu</th><th>Cơ sở</th><th>Số tệp</th><th>Ghi chú</th></tr></thead><tbody>'+(docRows||'<tr><td colspan="6">Chưa có</td></tr>')+'</tbody></table><h2>Lịch sử khám bệnh</h2><table><thead><tr><th>Ngày</th><th>Cơ sở</th><th>Bác sĩ</th><th>Lý do khám</th><th>Chẩn đoán</th><th>Cận lâm sàng / Đơn thuốc</th></tr></thead><tbody>'+(visitRows||'<tr><td colspan="6">Chưa có</td></tr>')+'</tbody></table><p class="note">Báo cáo chỉ tổng hợp dữ liệu tự theo dõi; không thay thế chẩn đoán và quyết định điều trị của bác sĩ.</p><button onclick="window.print()" style="padding:10px 16px;border:0;border-radius:8px;background:#4f46e5;color:#fff;font-weight:700;cursor:pointer">In / Lưu PDF</button></body></html>');
+ w.document.close();
+}
+$('pdfBtn').onclick=exportPDF;
+$('reminderBtn').onclick=()=>{if(!currentId)return alert('Hãy tạo hồ sơ trước.');const t=prompt('Giờ nhắc đo (ví dụ 08:00):','08:00');if(t&&/^([01]\d|2[0-3]):[0-5]\d$/.test(t)){localStorage.setItem('rem_'+currentId,t);alert('Đã lưu giờ nhắc: '+t)}};
+function tick(){if(!timeEdited)$('time').value=localNow()}
+$('time').addEventListener('input',()=>timeEdited=true);
+setInterval(tick,1000);tick();
+setInterval(()=>{if(!currentId||!('Notification' in window)||Notification.permission!=='granted')return;const t=localStorage.getItem('rem_'+currentId);if(!t)return;const n=new Date(),x=new Date();const parts=t.split(':').map(Number);x.setHours(parts[0],parts[1],0,0);if(Math.abs(n-x)<60000&&!localStorage.getItem('not_'+currentId+n.toDateString())){localStorage.setItem('not_'+currentId+n.toDateString(),'1');new Notification('Nhắc đo huyết áp',{body:'Đã đến '+t})}},20000);
+switchTab('overview');
 </script>
 </body>
 </html>

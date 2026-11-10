@@ -1,11 +1,23 @@
 <!doctype html>
 <html lang="vi">
 <head>
+ <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KCWVMPCP5T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KCWVMPCP5T');
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Hồ sơ Sức khoẻ Gia đình</title>
+<title>Theo dõi huyết áp</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Hồ sơ Sức khoẻ">
+<link rel="apple-touch-icon" href="app-icon.png">
 <style>
 :root{--brand:#6366f1;--brand2:#8b5cf6;--accent:#ec4899;--ink:#0f172a;--muted:#64748b;--line:#e6eaf3;--bg:#f6f7fd;--r:22px;--shadow:0 18px 44px rgba(79,70,229,.10)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -20,7 +32,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdro
 .user{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:999px;padding:6px 8px;min-width:0;flex:1;max-width:360px}
 .pfp{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--accent));color:#fff;display:grid;place-items:center;font-weight:800;cursor:pointer;overflow:hidden;flex:0 0 auto}
 .pfp img{width:100%;height:100%;object-fit:cover}
-.pname{flex:1;min-width:0}#profileSelect{width:100%;border:0;background:none;font:inherit;font-weight:700;outline:none}
+.pname{flex:1;min-width:0;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .btn{border:0;border-radius:14px;padding:12px 16px;font:inherit;font-weight:700;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--brand),#4338ca);transition:transform .15s,box-shadow .15s;min-height:44px}
 .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(79,70,229,.28)}
 .btn:active{transform:scale(.97)}
@@ -49,7 +61,6 @@ textarea{min-height:88px;resize:vertical}
 .badge{display:inline-block;padding:5px 10px;border-radius:999px;font-size:11.5px;font-weight:800}
 .low{background:#dbeafe;color:#1e40af}.lowwarn{background:#cffafe;color:#155e75}.normal{background:#d1fae5;color:#065f46}.elevated{background:#fef3c7;color:#92400e}.stage1{background:#ffedd5;color:#9a3412}.stage2{background:#fee2e2;color:#991b1b}.crisis{background:#7f1d1d;color:#fff}
 .hr-low{background:#dbeafe;color:#1e40af}.hr-ok{background:#d1fae5;color:#065f46}.hr-fast{background:#fef3c7;color:#92400e}.hr-alert{background:#fee2e2;color:#991b1b}
-.doc-type{background:#eef2ff;color:#4338ca}
 .alert{border:1.6px solid #fecaca;background:#fff1f2;color:#881337;border-radius:16px;padding:14px;margin-top:12px}
 .info{border:1.6px solid #c7d2fe;background:#eef2ff;color:#3730a3;border-radius:16px;padding:14px;margin-top:12px}
 ul{margin:8px 0 0;padding-left:18px}li{margin:5px 0}
@@ -65,77 +76,60 @@ td{padding:11px 8px;border-bottom:1px solid #f1f4fa;white-space:nowrap}
 .tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 .legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
 .legend div{background:#f8faff;border:1px solid var(--line);border-radius:15px;padding:13px}
-.docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
-.doc{background:#fff;border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:0 8px 20px rgba(15,23,42,.06);transition:transform .16s}
-.doc:hover{transform:translateY(-3px)}
-.doc-body{padding:13px}.doc h3{margin:0 0 4px;font-size:14.5px}.doc .meta{font-size:12px;color:var(--muted)}
-.doc-actions{display:flex;gap:7px;margin-top:10px;flex-wrap:wrap}
-.dropzone{border:2px dashed #c7d2fe;background:#f8faff;border-radius:16px;padding:22px;text-align:center;cursor:pointer}
-.dropzone:hover{border-color:var(--brand);background:#eef2ff}
-.preview{display:flex;gap:9px;flex-wrap:wrap;margin-top:11px}
-.preview img{width:84px;height:84px;object-fit:cover;border-radius:11px;border:1px solid var(--line);cursor:pointer}
-.preview .file{width:110px;border:1px solid var(--line);border-radius:11px;padding:8px;font-size:11.5px;text-align:center;background:#fff;cursor:pointer}
 .row{display:flex;gap:10px;flex-wrap:wrap}
 .modal{position:fixed;inset:0;background:rgba(15,23,42,.6);display:none;align-items:flex-end;justify-content:center;z-index:100;padding:0}
 .modal.on{display:flex}
 .sheet{background:#fff;width:100%;max-width:640px;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:22px;animation:up .28s ease}
 @keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
 @media(min-width:700px){.modal{align-items:center;padding:20px}.sheet{border-radius:24px}}
-.viewer-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
-.viewer-nav{display:flex;gap:10px;align-items:center}
-.viewer-nav span{color:#fff;font-weight:800;min-width:70px;text-align:center}
 @media(max-width:600px){.brand small{display:none}.card{padding:16px}.hi{padding:8px 12px}}
+.chart-box{position:relative;width:100%;height:340px}
+.chart-box.pulse{height:300px}
+.chart-box canvas{width:100%;height:100%;display:block}
+.sync{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#059669;background:#d1fae5;border-radius:999px;padding:5px 10px}
+.sync.off{color:#b45309;background:#fef3c7}
+.auth-tabs{display:flex;gap:8px;margin-bottom:14px}
+.remember{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin:4px 0 12px}
+.remember input{width:auto;min-height:0;margin:0}
+.link{color:var(--brand);font-weight:700;cursor:pointer;text-decoration:underline}
 </style>
 </head>
 <body>
 <header><div class="hi">
- <div class="brand"><div class="mark">🏥</div><div>Hồ sơ Sức khoẻ<small>Tổng quan • huyết áp • khám bệnh</small></div></div>
+ <div class="brand"><div class="mark">🏥</div><div>Theo dõi huyết áp<small>Huyết áp • nhịp tim</small></div></div>
  <div class="user">
   <div class="pfp" id="pfpBox" title="Nhấn để đổi ảnh">?</div>
   <input type="file" id="pfpInput" accept="image/*" class="hidden">
-  <div class="pname"><select id="profileSelect"></select></div>
+  <div class="pname" id="pname">Chưa có tên</div>
   <button class="btn ghost sm" id="editBtn">Sửa</button>
-  <button class="btn sm" id="addBtn">＋ Thêm</button>
+  <button class="btn danger sm" id="logoutBtn">Đăng xuất</button>
  </div>
 </div></header>
 
 <div class="shell">
-<div class="tabs-main" id="mainTabs">
- <button class="main-tab on" data-tab="overview">🧠 Tổng quan</button>
- <button class="main-tab" data-tab="tracking">❤️ Huyết áp & nhịp tim</button>
- <button class="main-tab" data-tab="documents">📁 Xét nghiệm</button>
- <button class="main-tab" data-tab="visits">🩺 Khám bệnh</button>
+<div id="authGate" class="card" style="max-width:480px;margin:40px auto">
+ <h2>Đăng nhập để tiếp tục</h2>
+ <p class="sub">Mỗi người dùng có dữ liệu riêng, bảo mật bằng tài khoản email + mật khẩu.</p>
+ <div class="auth-tabs">
+  <button class="tab on" id="tabLogin">Đăng nhập</button>
+  <button class="tab" id="tabSignup">Đăng ký</button>
+ </div>
+ <form id="authForm">
+  <div class="f"><label>Email</label><input type="email" id="authEmail" required></div>
+  <div class="f"><label>Mật khẩu</label><input type="password" id="authPass" required minlength="6"></div>
+  <div class="remember"><input type="checkbox" id="rememberMe"> <span>Ghi nhớ email & mật khẩu để lần sau không cần nhập lại</span></div>
+  <button class="btn" type="submit" id="authSubmit" style="width:100%">Đăng nhập</button>
+ </form>
+ <div class="note" style="text-align:center"><span class="link" id="forgotLink">Quên mật khẩu?</span></div>
+ <div id="authMsg" class="note"></div>
 </div>
 
-<section id="tab-overview" class="tabpane">
-<section class="card">
- <h2>Sao lưu, phục hồi & báo cáo</h2>
- <p class="sub">Xuất/nhập toàn bộ dữ liệu hoặc tạo báo cáo PDF.</p>
- <div class="row">
-  <button class="btn" id="jsonExportBtn">💾 Xuất JSON</button>
-  <button class="btn ghost" id="jsonImportBtn">📂 Nhập JSON</button>
-  <button class="btn ghost" id="pdfBtn">📄 Báo cáo PDF</button>
-  <input type="file" id="jsonInput" accept=".json,application/json" class="hidden">
- </div>
-</section>
-<section class="card">
- <h2>Trạng thái sức khoẻ hiện tại</h2>
- <div class="grid g2">
-  <div class="kpi" id="ovProfile"></div>
-  <div class="kpi" id="ovBp"></div>
-  <div class="kpi" id="ovHr"></div>
-  <div class="kpi" id="ovBmi"></div>
- </div>
- <div id="ovAlerts"></div>
-</section>
-<section class="card">
- <h2>Tóm tắt lịch sử khám chữa bệnh</h2>
- <div class="grid g4" id="ovStats"></div>
- <div id="ovTimeline"></div>
-</section>
-</section>
+<div id="appBody" class="hidden">
+<div class="tabs-main" id="mainTabs">
+ <button class="main-tab on" data-tab="tracking">❤️ Huyết áp & nhịp tim</button>
+</div>
 
-<section id="tab-tracking" class="tabpane hidden">
+<section id="tab-tracking" class="tabpane">
 <section class="card" id="inputCard">
  <h2>Nhập kết quả đo</h2>
  <p class="sub">Ngày giờ tự động theo thời gian thực.</p>
@@ -165,15 +159,14 @@ td{padding:11px 8px;border-bottom:1px solid #f1f4fa;white-space:nowrap}
  </div>
  <div class="grid g4" id="analytics"></div><div id="trendBox"></div>
 </section>
-<section class="card"><h2>Tư vấn lần đo gần nhất</h2><div id="adviceBox" class="info">Hãy tạo hồ sơ và lưu kết quả đo.</div></section>
+<section class="card"><h2>Tư vấn lần đo gần nhất</h2><div id="adviceBox" class="info">Hãy nhập kết quả đo đầu tiên.</div></section>
 <section class="card"><h2>Tổng quan</h2><div class="grid g4" id="kpiBox"></div></section>
 <section class="card">
  <h2>Biểu đồ huyết áp</h2>
  <p class="sub">Trái: lần đo gần nhất → Phải: các lần đo trước.</p>
- <div style="height:320px"><canvas id="bpCanvas"></canvas></div>
+ <div class="chart-box"><canvas id="bpCanvas"></canvas></div>
 </section>
-<section class="card"><h2>Biểu đồ nhịp tim</h2><div style="height:280px"><canvas id="pulseCanvas"></canvas></div></section>
-<section class="card"><h2>So sánh thành viên</h2><div style="height:280px"><canvas id="memberCanvas"></canvas></div></section>
+<section class="card"><h2>Biểu đồ nhịp tim</h2><div class="chart-box pulse"><canvas id="pulseCanvas"></canvas></div></section>
 <section class="card">
  <h2>Lịch sử đo</h2>
  <div class="tabs">
@@ -201,93 +194,35 @@ td{padding:11px 8px;border-bottom:1px solid #f1f4fa;white-space:nowrap}
   <div><span class="badge hr-alert">Nhịp nhanh</span><br>Trên 120 bpm</div>
  </div>
 </section>
-</section>
-
-<section id="tab-documents" class="tabpane hidden">
 <section class="card">
- <h2 id="docFormTitle">Thêm tài liệu y tế</h2>
- <form id="docForm">
-  <div class="fg">
-   <div class="f"><label>Loại tài liệu</label><select id="docType">
-    <option value="blood">Xét nghiệm máu</option><option value="urine">Xét nghiệm nước tiểu</option>
-    <option value="ultrasound">Siêu âm</option><option value="ecg">Điện tim (ECG)</option>
-    <option value="xray">X-quang phổi</option><option value="mri">MRI / CT</option>
-    <option value="prescription">Đơn thuốc</option><option value="other">Khác</option></select></div>
-   <div class="f"><label>Ngày kết quả</label><input type="date" id="docDate" required></div>
-   <div class="f"><label>Cơ sở y tế</label><input id="docFacility"></div>
-   <div class="f"><label>Tên phiếu / số hiệu</label><input id="docTitle"></div>
-  </div>
-  <div class="f"><label>Ghi chú</label><textarea id="docNote"></textarea></div>
-  <div class="f"><label>Ảnh / File PDF</label>
-   <div class="dropzone" id="docDrop">📷<b>Chụp ảnh hoặc chọn ảnh/PDF</b></div>
-   <input type="file" id="docFiles" accept="image/*,application/pdf" multiple class="hidden">
-   <div class="preview" id="docPreview"></div>
-  </div>
-  <div class="grid g2">
-   <button class="btn" type="submit" id="docSubmitBtn">Lưu tài liệu</button>
-   <button class="btn ghost hidden" type="button" id="docCancelBtn">Huỷ sửa</button>
-  </div>
- </form>
-</section>
-<section class="card">
- <h2>Kho tài liệu</h2>
- <div class="tabs" id="docFilters">
-  <button class="tab on" data-type="all">Tất cả</button>
-  <button class="tab" data-type="blood">Máu</button><button class="tab" data-type="urine">Nước tiểu</button>
-  <button class="tab" data-type="ultrasound">Siêu âm</button><button class="tab" data-type="ecg">Điện tim</button>
-  <button class="tab" data-type="xray">X-quang</button><button class="tab" data-type="mri">MRI/CT</button>
-  <button class="tab" data-type="prescription">Đơn thuốc</button>
+ <h2>Sao lưu, phục hồi & báo cáo</h2>
+ <p class="sub">Xuất/nhập toàn bộ dữ liệu hoặc tạo báo cáo PDF.</p>
+ <div class="row">
+  <button class="btn" id="jsonExportBtn">💾 Xuất JSON</button>
+  <button class="btn ghost" id="jsonImportBtn">📂 Nhập JSON</button>
+  <button class="btn ghost" id="pdfBtn">📄 Báo cáo PDF</button>
+  <input type="file" id="jsonInput" accept=".json,application/json" class="hidden">
  </div>
- <div class="docs" id="docGrid"></div>
- <div id="docEmpty" class="empty">Chưa có tài liệu nào.</div>
-</section>
-</section>
-
-<section id="tab-visits" class="tabpane hidden">
-<section class="card">
- <h2 id="visitFormTitle">Thêm lần khám</h2>
- <form id="visitForm">
-  <h2 style="font-size:16px">1. Thông tin hành chính</h2>
-  <div class="fg">
-   <div class="f"><label>Ngày khám</label><input type="date" id="vDate" required></div>
-   <div class="f"><label>Bệnh viện / Phòng khám</label><input id="vFacility"></div>
-   <div class="f"><label>Bác sĩ điều trị</label><input id="vDoctor"></div>
-   <div class="f"><label>Chuyên khoa</label><input id="vSpecialty"></div>
-  </div>
-  <div class="f"><label>Lý do khám / triệu chứng ban đầu</label><textarea id="vReason"></textarea></div>
-  <h2 style="font-size:16px;margin-top:16px">2. Kết quả cận lâm sàng</h2>
-  <p class="sub">Ảnh/PDF xét nghiệm máu, siêu âm, X-quang, MRI… — lưu riêng, tách biệt với đơn thuốc.</p>
-  <div class="f">
-   <div class="dropzone" id="vClinicalDrop">📎<b>Chọn ảnh hoặc PDF cận lâm sàng</b></div>
-   <input type="file" id="vClinicalFiles" accept="image/*,application/pdf" multiple class="hidden">
-   <div class="preview" id="vClinicalPreview"></div>
-  </div>
-  <h2 style="font-size:16px;margin-top:16px">3. Kết luận & đơn thuốc</h2>
-  <div class="f"><label>Chẩn đoán cuối cùng</label><textarea id="vDiagnosis"></textarea></div>
-  <div class="f"><label>Hướng dẫn / kết luận</label><textarea id="vConclusion"></textarea></div>
-  <div class="f"><label>Ảnh đơn thuốc (lưu riêng)</label>
-   <div class="dropzone" id="vRxDrop">💊<b>Chụp hoặc chọn ảnh/PDF đơn thuốc</b></div>
-   <input type="file" id="vRxFiles" accept="image/*,application/pdf" multiple class="hidden">
-   <div class="preview" id="vRxPreview"></div>
-  </div>
-  <div class="grid g2">
-   <button class="btn" type="submit" id="visitSubmitBtn">Lưu lần khám</button>
-   <button class="btn ghost hidden" type="button" id="visitCancelBtn">Huỷ sửa</button>
-  </div>
- </form>
+ <div class="note">Dữ liệu được lưu trên Supabase (đám mây) và đồng bộ tự động. <span class="sync" id="syncStatus">☁️ Đã kết nối</span></div>
 </section>
 <section class="card">
- <h2>Các lần khám đã lưu</h2>
- <div id="visitList" class="grid g2"></div>
- <div id="visitEmpty" class="empty">Chưa có lần khám nào.</div>
+ <h2>📱 Thêm vào Màn hình chính (iPhone)</h2>
+ <p class="sub">Để mở app như một ứng dụng thật, không có thanh địa chỉ Safari.</p>
+ <ol style="margin:0;padding-left:20px">
+  <li>Mở file HTML này trong <b>Safari</b> trên iPhone.</li>
+  <li>Bấm nút <b>Chia sẻ</b> (hình vuông có mũi tên lên).</li>
+  <li>Cuộn xuống, chọn <b>“Thêm vào Màn hình chính”</b>.</li>
+  <li>Đặt tên (ví dụ <b>“Huyết áp”</b>) → bấm <b>Thêm</b>.</li>
+ </ol>
+ <div class="note">Icon sẽ xuất hiện trên màn hình chính; khi mở, app chạy toàn màn hình, không có thanh địa chỉ Safari.</div>
 </section>
-</section>
+</div>
 </div>
 
 <div class="modal" id="profileModal">
  <div class="sheet">
-  <h2 id="profileTitle">Thêm hồ sơ</h2>
-  <p class="sub">Tạo hoặc chỉnh sửa người dùng.</p>
+  <h2>Thông tin cá nhân</h2>
+  <p class="sub">Chỉnh sửa thông tin của bạn.</p>
   <form id="profileForm">
    <div class="fg">
     <div class="f"><label>Tên</label><input id="pName" required></div>
@@ -297,58 +232,112 @@ td{padding:11px 8px;border-bottom:1px solid #f1f4fa;white-space:nowrap}
     <div class="f"><label>Chiều cao (cm)</label><input id="pHeight" type="number" min="80" max="230"></div>
     <div class="f"><label>Bệnh nền</label><select id="pCondition"><option value="none">Không</option><option value="pregnant">Đang mang thai</option><option value="kidney">Bệnh thận</option><option value="diabetes">Đái tháo đường</option><option value="heart">Bệnh tim mạch</option></select></div>
    </div>
-   <div class="grid g2">
-    <button class="btn" type="submit">Lưu hồ sơ</button>
-    <button class="btn danger" type="button" id="deleteBtn">Xoá hồ sơ</button>
-   </div>
+   <button class="btn" type="submit" style="width:100%">Lưu thông tin</button>
   </form>
   <button class="btn ghost" style="width:100%;margin-top:10px" id="closeProfile">Đóng</button>
- </div>
-</div>
-
-<div class="modal" id="viewer">
- <div class="viewer-wrap">
-  <img id="viewerImg" alt="" style="max-width:92vw;max-height:78vh;border-radius:14px">
-  <div class="viewer-nav">
-   <button class="btn ghost sm" id="viewerPrev">← Trước</button>
-   <span id="viewerCount"></span>
-   <button class="btn ghost sm" id="viewerNext">Sau →</button>
-  </div>
  </div>
 </div>
 
 <script>
 'use strict';
 window.addEventListener('error',e=>console.error('Lỗi app:',e.message));
-const K={p:'hsg_profiles_v35',c:'hsg_current_v35',r:'hsg_readings_v35',d:'hsg_documents_v35',v:'hsg_visits_v35'};
+/* ===== Supabase config ===== */
+const SB_URL='https://ftlltzpxpmwrldglioyk.supabase.co';
+const SB_KEY='sb_publishable_rz07EnDUgWq1S9_hgxi6oA_AvfjvgA_';
+const K={p:'hsg_profile_v47',r:'hsg_readings_v47',s:'hsg_session_v47',rem:'hsg_remember_v47'};
 const TAGS={'before_med':'Trước thuốc','after_med':'Sau thuốc','exercise':'Tập luyện','meal':'Sau ăn','coffee':'Cà phê','alcohol':'Rượu/bia','stress':'Stress','poor_sleep':'Ngủ kém','morning':'Buổi sáng','evening':'Buổi tối'};
 const SYM={none:'Không',headache:'Đau đầu',dizzy:'Chóng mặt',faint:'Ngất/gần ngất',chest:'Đau ngực/khó thở',weak:'Yếu liệt/nói khó/nhìn mờ',nausea:'Buồn nôn/nôn',palpitation:'Tim đập nhanh/không đều'};
-const DOC_TYPES={blood:'Xét nghiệm máu',urine:'Xét nghiệm nước tiểu',ultrasound:'Siêu âm',ecg:'Điện tim (ECG)',xray:'X-quang phổi',mri:'MRI / CT',prescription:'Đơn thuốc',other:'Khác'};
-let profiles=JSON.parse(localStorage.getItem(K.p)||'{}');
-let currentId=localStorage.getItem(K.c)||'';
-let store=JSON.parse(localStorage.getItem(K.r)||'{}');
-let documents=JSON.parse(localStorage.getItem(K.d)||'{}');
-let visitStore=JSON.parse(localStorage.getItem(K.v)||'{}');
-if(!store[currentId])store[currentId]=[];
-if(!documents[currentId])documents[currentId]=[];
-if(!visitStore[currentId])visitStore[currentId]=[];
-let chosenTags=[],rangeDays=7,filter='all',tagFilter='all',docFilter='all',timeEdited=false,editingProfile=false;
-let pendingDocFiles=[],pendingClinical=[],pendingRx=[];
-let editingDocId=null,editingVisitId=null;
-let bpChart=null,pulseChart=null,memberChart=null;
-let viewerList=null,viewerDocId=null,viewerIndex=0;
+let profile=JSON.parse(localStorage.getItem(K.p)||'null')||{name:'',gender:'male',age:null,weight:null,height:null,condition:'none',photo:null};
+let readings=JSON.parse(localStorage.getItem(K.r)||'[]');
+let session=JSON.parse(localStorage.getItem(K.s)||'null');
+let remember=JSON.parse(localStorage.getItem(K.rem)||'null');
+let chosenTags=[],rangeDays=7,filter='all',tagFilter='all',timeEdited=false,isSignup=false;
 const $=id=>document.getElementById(id);
-function save(){try{localStorage.setItem(K.p,JSON.stringify(profiles));localStorage.setItem(K.c,currentId);localStorage.setItem(K.r,JSON.stringify(store));localStorage.setItem(K.d,JSON.stringify(documents));localStorage.setItem(K.v,JSON.stringify(visitStore))}catch(e){alert('Bộ nhớ trình duyệt đầy. Hãy xuất JSON và xoá bớt ảnh/PDF cũ.');console.error(e)}}
-const prof=()=>profiles[currentId]||null;
-const rows=()=>store[currentId]||[];
-const docs=()=>documents[currentId]||[];
-const visitsOf=()=>visitStore[currentId]||[];
+/* ===== Supabase Auth helpers ===== */
+async function sbAuth(endpoint,body){
+ const res=await fetch(SB_URL+'/auth/v1/'+endpoint,{
+  method:'POST',
+  headers:{'apikey':SB_KEY,'Content-Type':'application/json'},
+  body:JSON.stringify(body)
+ });
+ const data=await res.json();
+ if(!res.ok)throw new Error(data.msg||data.error_description||data.error||('Lỗi '+res.status));
+ return data;
+}
+async function sbLogin(email,pass){
+ const d=await sbAuth('token?grant_type=password',{email:email,password:pass});
+ session={access_token:d.access_token,refresh_token:d.refresh_token,user_id:d.user.id,email:d.user.email};
+ localStorage.setItem(K.s,JSON.stringify(session));
+ return d;
+}
+async function sbSignup(email,pass){
+ const d=await sbAuth('signup',{email:email,password:pass});
+ if(!d.session){throw new Error('EMAIL_EXISTS')}
+ session={access_token:d.session.access_token,refresh_token:d.session.refresh_token,user_id:d.user.id,email:d.user.email};
+ localStorage.setItem(K.s,JSON.stringify(session));
+ return d;
+}
+async function sbRecover(email){
+ return sbAuth('recover',{email:email});
+}
+async function sbRefresh(){
+ if(!session||!session.refresh_token)throw new Error('Chưa có session');
+ const d=await sbAuth('token?grant_type=refresh_token',{refresh_token:session.refresh_token});
+ session={access_token:d.access_token,refresh_token:d.refresh_token,user_id:d.user.id,email:d.user.email};
+ localStorage.setItem(K.s,JSON.stringify(session));
+ return d;
+}
+function sbLogout(){session=null;localStorage.removeItem(K.s);location.reload()}
+/* ===== Supabase REST helpers (có auth) ===== */
+async function sbRequest(method,path,body){
+ if(!session)throw new Error('Chưa đăng nhập');
+ const res=await fetch(SB_URL+'/rest/v1/'+path,{
+  method:method,
+  headers:{'apikey':SB_KEY,'Authorization':'Bearer '+session.access_token,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates,return=representation'},
+  body:body?JSON.stringify(body):undefined
+ });
+ if(res.status===401){await sbRefresh();return sbRequest(method,path,body)}
+ if(!res.ok){const t=await res.text();throw new Error('Supabase '+res.status+': '+t)}
+ return res.status===204?null:res.json();
+}
+async function sbUpsertProfile(p){
+ const row={user_id:session.user_id,name:p.name||'',gender:p.gender||'male',age:p.age,weight:p.weight,height:p.height,condition:p.condition||'none',photo:p.photo||null};
+ return sbRequest('POST','profile?on_conflict=user_id',[row]);
+}
+async function sbUpsertReadings(rows){
+ if(!rows.length)return null;
+ const payload=rows.map(r=>({id:r.id,user_id:session.user_id,time:r.time,sys:r.sys,dia:r.dia,pulse:r.pulse,arm:r.arm,symptom:r.symptom,tags:r.tags||[],note:r.note||''}));
+ return sbRequest('POST','readings?on_conflict=id',payload);
+}
+async function sbLoadAll(){
+ const p=await sbRequest('GET','profile?user_id=eq.'+session.user_id);
+ const r=await sbRequest('GET','readings?user_id=eq.'+session.user_id+'&order=time.desc');
+ return{profile:p&&p[0]?p[0]:null,readings:r||[]};
+}
+function setSync(ok){
+ const el=$('syncStatus');if(!el)return;
+ el.className='sync'+(ok?'':' off');
+ el.textContent=ok?'☁️ Đã kết nối':'⚠️ Chưa kết nối';
+}
+/* ===== Local cache + cloud sync (độc lập, không chặn nhau) ===== */
+function saveLocal(){try{localStorage.setItem(K.p,JSON.stringify(profile));localStorage.setItem(K.r,JSON.stringify(readings))}catch(e){console.error(e)}}
+function save(){saveLocal();
+ if(!session)return;
+ Promise.allSettled([sbUpsertProfile(profile),sbUpsertReadings(readings)]).then(results=>{
+  const ok=results.every(r=>r.status==='fulfilled');
+  results.forEach((r,i)=>{if(r.status==='rejected')console.error('Sync lỗi ('+(i===0?'profile':'readings')+'):',r.reason)});
+  setSync(ok);
+ });
+}
+window.addEventListener('beforeunload',save);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')save()});
+const rows=()=>readings;
 const avg=(a,k)=>a.length?Math.round(a.reduce((s,r)=>s+(Number(r[k])||0),0)/a.length):null;
 const age=r=>(Date.now()-new Date(r.time))/864e5;
 const newId=()=>Date.now()+'-'+Math.random().toString(36).slice(2,9);
 const localNow=()=>new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16);
 const fmtDT=d=>new Date(d).toLocaleString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
-const fmtDate=d=>new Date(d).toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric'});
+
 function cls(s,d,x='none'){
  if(s<80||d<50||((s<90||d<60)&&['faint','chest','weak'].includes(x)))return{t:'Huyết áp thấp cần đánh giá',c:'lowwarn',g:'low'};
  if(s<90||d<60)return{t:'Huyết áp thấp',c:'low',g:'low'};
@@ -370,83 +359,106 @@ function hrCls(p){
 const bmi=p=>p&&p.weight&&p.height?+(p.weight/((p.height/100)**2)).toFixed(1):null;
 const bmiT=v=>v==null?'Chưa đủ dữ liệu':v<18.5?'Gầy':v<23?'Bình thường':v<25?'Thừa cân':v<30?'Béo phì độ I':'Béo phì độ II+';
 const bmiC=v=>v==null?'normal':v<18.5?'low':v<23?'normal':v<25?'elevated':'stage2';
-const bpZones={id:'bpZones',beforeDatasetsDraw(c){const a=c.chartArea;if(!a)return;const ctx=c.ctx,y=v=>c.scales.y.getPixelForValue(v);[[40,90,'rgba(59,130,246,.14)'],[90,120,'rgba(16,185,129,.14)'],[120,160,'rgba(245,158,11,.14)'],[160,200,'rgba(239,68,68,.17)']].forEach(([lo,hi,col])=>{ctx.save();ctx.fillStyle=col;ctx.fillRect(a.left,y(hi),a.right-a.left,y(lo)-y(hi));ctx.restore()})}};
-const pulseZones={id:'pulseZones',beforeDatasetsDraw(c){const a=c.chartArea;if(!a)return;const ctx=c.ctx,y=v=>c.scales.y.getPixelForValue(v);[[30,60,'rgba(59,130,246,.14)'],[60,100,'rgba(16,185,129,.14)'],[100,120,'rgba(245,158,11,.14)'],[120,250,'rgba(239,68,68,.17)']].forEach(([lo,hi,col])=>{ctx.save();ctx.fillStyle=col;ctx.fillRect(a.left,y(hi),a.right-a.left,y(lo)-y(hi));ctx.restore()})}};
+
+/* ===== Biểu đồ tự vẽ ===== */
+function drawLineChart(canvasId,labels,series,opts){
+ const cv=$(canvasId);if(!cv)return;
+ const box=cv.parentElement;
+ const dpr=window.devicePixelRatio||1;
+ const w=box.clientWidth||600,h=box.clientHeight||300;
+ cv.width=w*dpr;cv.height=h*dpr;
+ const ctx=cv.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+ const pad={l:44,r:12,t:14,b:34};
+ const plotW=w-pad.l-pad.r,plotH=h-pad.t-pad.b;
+ const allVals=series.flatMap(s=>s.data).filter(v=>v!=null);
+ if(!allVals.length){ctx.fillStyle='#94a3b8';ctx.font='14px sans-serif';ctx.textAlign='center';ctx.fillText('Chưa có dữ liệu',w/2,h/2);return}
+ let min=opts.yMin!=null?opts.yMin:Math.min(...allVals),max=opts.yMax!=null?opts.yMax:Math.max(...allVals);
+ if(min===max){min-=10;max+=10}
+ const y=v=>pad.t+plotH-(v-min)/(max-min)*plotH;
+ const x=i=>pad.l+(labels.length>1?i/(labels.length-1):0.5)*plotW;
+ if(opts.zones){opts.zones.forEach(z=>{ctx.fillStyle=z.c;ctx.fillRect(pad.l,y(z.hi),plotW,y(z.lo)-y(z.hi))})}
+ ctx.strokeStyle='#e6eaf3';ctx.fillStyle='#64748b';ctx.font='11px sans-serif';ctx.textAlign='right';
+ for(let i=0;i<=4;i++){const v=min+(max-min)*i/4;const yy=y(v);ctx.beginPath();ctx.moveTo(pad.l,yy);ctx.lineTo(w-pad.r,yy);ctx.stroke();ctx.fillText(Math.round(v),pad.l-6,yy+4)}
+ ctx.textAlign='center';ctx.fillStyle='#64748b';
+ const step=Math.max(1,Math.ceil(labels.length/6));
+ labels.forEach((lb,i)=>{if(i%step===0||i===labels.length-1)ctx.fillText(lb,x(i),h-12)});
+ series.forEach(s=>{
+  ctx.strokeStyle=s.color;ctx.lineWidth=2.5;ctx.beginPath();
+  let started=false;
+  s.data.forEach((v,i)=>{if(v==null)return;const px=x(i),py=y(v);if(!started){ctx.moveTo(px,py);started=true}else ctx.lineTo(px,py)});
+  ctx.stroke();
+  s.data.forEach((v,i)=>{if(v==null)return;ctx.beginPath();ctx.arc(x(i),y(v),3.5,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();ctx.strokeStyle=s.color;ctx.lineWidth=2;ctx.stroke()});
+ });
+ let lx=pad.l;ctx.font='12px sans-serif';ctx.textAlign='left';
+ series.forEach(s=>{ctx.fillStyle=s.color;ctx.fillRect(lx,h-26,12,3);ctx.fillStyle='#334155';ctx.fillText(s.label,lx+16,h-22);lx+=ctx.measureText(s.label).width+40});
+}
+function renderCharts(){
+ const data=[...rows()].sort((a,b)=>new Date(b.time)-new Date(a.time)).slice(-30);
+ const labels=data.map(r=>new Date(r.time).toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit'}));
+ drawLineChart('bpCanvas',labels,[
+  {label:'Tâm thu',data:data.map(r=>r.sys),color:'#ef4444'},
+  {label:'Tâm trương',data:data.map(r=>r.dia),color:'#6366f1'}
+ ],{yMin:40,yMax:200,zones:[
+  {lo:40,hi:90,c:'rgba(59,130,246,.10)'},
+  {lo:90,hi:120,c:'rgba(16,185,129,.10)'},
+  {lo:120,hi:160,c:'rgba(245,158,11,.10)'},
+  {lo:160,hi:200,c:'rgba(239,68,68,.12)'}
+ ]});
+ drawLineChart('pulseCanvas',labels,[
+  {label:'Nhịp tim',data:data.map(r=>r.pulse),color:'#ec4899'}
+ ],{yMin:30,yMax:180,zones:[
+  {lo:30,hi:60,c:'rgba(59,130,246,.10)'},
+  {lo:60,hi:100,c:'rgba(16,185,129,.10)'},
+  {lo:100,hi:120,c:'rgba(245,158,11,.10)'},
+  {lo:120,hi:180,c:'rgba(239,68,68,.12)'}
+ ]});
+}
 
 function switchTab(name){
  document.querySelectorAll('.main-tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===name));
- ['overview','tracking','documents','visits'].forEach(t=>{
+ ['tracking'].forEach(t=>{
   const el=$('tab-'+t);el.classList.toggle('hidden',t!==name);
   if(t===name){el.classList.remove('tabpane');void el.offsetWidth;el.classList.add('tabpane')}
  });
- if(name==='overview')renderOverview();
  if(name==='tracking')renderTracking();
- if(name==='documents')renderDocs();
- if(name==='visits')renderVisits();
  window.scrollTo({top:0,behavior:'smooth'});
 }
 document.querySelectorAll('.main-tab').forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
 
-function openProfile(edit){
- editingProfile=!!edit&&!!currentId&&!!profiles[currentId];
- const p=prof();
- $('profileTitle').textContent=editingProfile?'Sửa hồ sơ: '+p.name:'Thêm hồ sơ';
- if(editingProfile){$('pName').value=p.name;$('pGender').value=p.gender;$('pAge').value=p.age;$('pWeight').value=p.weight||'';$('pHeight').value=p.height||'';$('pCondition').value=p.condition||'none'}
- else $('profileForm').reset();
- $('deleteBtn').style.display=editingProfile?'':'none';
+function openProfile(){
+ $('pName').value=profile.name||'';
+ $('pGender').value=profile.gender||'male';
+ $('pAge').value=profile.age||'';
+ $('pWeight').value=profile.weight||'';
+ $('pHeight').value=profile.height||'';
+ $('pCondition').value=profile.condition||'none';
  $('profileModal').classList.add('on');
 }
 function closeProfile(){$('profileModal').classList.remove('on')}
-$('addBtn').onclick=()=>openProfile(false);
-$('editBtn').onclick=()=>{if(!currentId)return alert('Chưa có hồ sơ. Hãy tạo người dùng trước.');openProfile(true)};
+$('editBtn').onclick=openProfile;
 $('closeProfile').onclick=closeProfile;
 $('profileModal').onclick=e=>{if(e.target===$('profileModal'))closeProfile()};
 $('profileForm').onsubmit=e=>{
  e.preventDefault();
- const id=editingProfile?currentId:newId();
- profiles[id]={id:id,name:$('pName').value.trim(),gender:$('pGender').value,age:+$('pAge').value,weight:$('pWeight').value?+$('pWeight').value:null,height:$('pHeight').value?+$('pHeight').value:null,condition:$('pCondition').value,photo:editingProfile&&profiles[id]?profiles[id].photo:null};
- currentId=id;
- if(!store[id])store[id]=[];
- if(!documents[id])documents[id]=[];
- if(!visitStore[id])visitStore[id]=[];
- save();closeProfile();renderOverview();renderProfileBar();
- alert('Đã lưu hồ sơ: '+profiles[id].name);
+ profile.name=$('pName').value.trim();
+ profile.gender=$('pGender').value;
+ profile.age=$('pAge').value?+$('pAge').value:null;
+ profile.weight=$('pWeight').value?+$('pWeight').value:null;
+ profile.height=$('pHeight').value?+$('pHeight').value:null;
+ profile.condition=$('pCondition').value;
+ save();closeProfile();renderProfileBar();renderTracking();
+ alert('Đã lưu thông tin.');
 };
-$('deleteBtn').onclick=()=>{if(!currentId||!confirm('Xoá hồ sơ và toàn bộ dữ liệu?'))return;delete profiles[currentId];delete store[currentId];delete documents[currentId];delete visitStore[currentId];currentId=Object.keys(profiles)[0]||'';if(currentId){if(!store[currentId])store[currentId]=[];if(!documents[currentId])documents[currentId]=[];if(!visitStore[currentId])visitStore[currentId]=[]}save();closeProfile();renderOverview();renderProfileBar()};
 
-function renderOverview(){
- const p=prof(),r=rows()[0],recent=rows().slice(0,7),vs=visitsOf().slice().sort((a,b)=>new Date(b.date)-new Date(a.date));
- const cond={none:'Không có bệnh nền ghi nhận',pregnant:'Đang mang thai',kidney:'Bệnh thận',diabetes:'Đái tháo đường',heart:'Bệnh tim mạch'};
- const b=bmi(p);
- const pairs=rows().map(x=>x.sys+'/'+x.dia);
- const freq={};pairs.forEach(x=>freq[x]=(freq[x]||0)+1);
- const base=Object.entries(freq).sort((a,b)=>b[1]-a[1])[0];
- let baseTxt='Chưa đủ dữ liệu';
- if(base){const parts=base[0].split('/').map(Number);baseTxt=base[0]+' mmHg — '+cls(parts[0],parts[1]).t+' (xuất hiện '+base[1]+' lần)';}
- const hr=avg(recent,'pulse'),hc=hr!=null?hrCls(hr):null;
- $('ovProfile').innerHTML='<div class="k">Hồ sơ & thể trạng</div>'+
-  '<div style="display:flex;align-items:center;gap:12px;margin:10px 0">'+
-  (p&&p.photo?'<img src="'+p.photo+'" style="width:54px;height:54px;border-radius:50%;object-fit:cover">':'<div class="pfp" style="width:54px;height:54px">'+(p?p.name.slice(0,1):'?')+'</div>')+
-  '<div><div class="v" style="font-size:19px">'+(p?p.name:'Chưa có hồ sơ')+'</div><div class="s">'+(p?p.age+' tuổi • '+cond[p.condition||'none']:'Hãy tạo hồ sơ')+'</div></div></div>';
- $('ovBp').innerHTML='<div class="k">Huyết áp nền</div><div class="v">'+(base?base[0]:'—')+'</div><div class="s">'+baseTxt+'</div>';
- $('ovHr').innerHTML='<div class="k">Tim mạch 7 ngày</div><div class="v">'+(hr??'—')+'</div><div class="s">'+(hc?hc.t+' bpm':'Chưa đủ dữ liệu')+'</div>';
- $('ovBmi').innerHTML='<div class="k">BMI</div><div class="v">'+(b??'—')+'</div><div class="s"><span class="badge '+bmiC(b)+'">'+bmiT(b)+'</span></div>';
- let alerts='';
- if(r){const k=cls(r.sys,r.dia,r.symptom);
-  if(k.g!=='normal')alerts+='<div class="alert"><b>⚠️ Lần đo gần nhất:</b> '+r.sys+'/'+r.dia+' mmHg — '+k.t+'.</div>';
-  const h=hrCls(r.pulse);if(h.g==='alert')alerts+='<div class="alert"><b>⚠️ Nhịp tim gần nhất:</b> '+r.pulse+' bpm — '+h.t+'.</div>';
- }
- $('ovAlerts').innerHTML=alerts;
- const totalRx=vs.reduce((s,v)=>s+((v.rx||[]).length),0);
- const totalFiles=vs.reduce((s,v)=>s+((v.clinical||[]).length+(v.rx||[]).length),0);
- $('ovStats').innerHTML=
-  '<div class="kpi"><div class="k">Lần khám</div><div class="v">'+vs.length+'</div><div class="s">Tổng số lần đi khám</div></div>'+
-  '<div class="kpi"><div class="k">Đơn thuốc</div><div class="v">'+totalRx+'</div><div class="s">Ảnh/PDF đơn thuốc</div></div>'+
-  '<div class="kpi"><div class="k">Tệp y tế</div><div class="v">'+totalFiles+'</div><div class="s">Cận lâm sàng & đơn thuốc</div></div>'+
-  '<div class="kpi"><div class="k">Tài liệu xét nghiệm</div><div class="v">'+docs().length+'</div><div class="s">Trong kho hồ sơ</div></div>';
- $('ovTimeline').innerHTML=vs.length?
-  '<div style="margin-top:14px">'+vs.map(v=>'<div style="display:flex;gap:12px;margin-bottom:12px"><div style="width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--accent));margin-top:6px;flex:0 0 auto"></div><div><b>'+fmtDate(v.date)+'</b> | '+(v.facility||'Chưa ghi cơ sở')+'<div class="note" style="margin-top:2px">Chẩn đoán: '+(v.diagnosis||'Chưa ghi')+'</div></div></div>').join('')+'</div>'
-  :'<div class="empty">Chưa có lịch sử khám bệnh.</div>';
+function renderChips(){
+ $('chips').innerHTML=Object.entries(TAGS).map(([k,v])=>'<div class="chip '+(chosenTags.includes(k)?'on':'')+'" data-k="'+k+'">'+v+'</div>').join('');
+ $('chips').querySelectorAll('.chip').forEach(c=>c.onclick=()=>{const k=c.dataset.k;chosenTags=chosenTags.includes(k)?chosenTags.filter(x=>x!==k):chosenTags.concat(k);renderChips()});
+ $('tagFilter').innerHTML='<option value="all">Tất cả</option>'+Object.entries(TAGS).map(([k,v])=>'<option value="'+k+'" '+(tagFilter===k?'selected':'')+'>'+v+'</option>').join('');
+}
+function renderProfileBar(){
+ const a=$('pfpBox');
+ a.innerHTML=profile.photo?'<img src="'+profile.photo+'">':(profile.name?profile.name.slice(0,1).toUpperCase():'?');
+ $('pname').textContent=profile.name||'Chưa có tên';
 }
 function advice(r,p){
  const s=r.sys,d=r.dia,x=r.symptom||'none',hr=r.pulse,hc=hrCls(hr),em=[],ad=[];
@@ -470,22 +482,10 @@ function advice(r,p){
  if(hr!=null&&hr>100&&hc.g!=='alert')ad.push('Nhịp nhanh có thể do stress, cà phê, sốt hoặc vận động; nghỉ và đo lại sau 5–10 phút.');
  return{em,ad};
 }
-function renderChips(){
- $('chips').innerHTML=Object.entries(TAGS).map(([k,v])=>'<div class="chip '+(chosenTags.includes(k)?'on':'')+'" data-k="'+k+'">'+v+'</div>').join('');
- $('chips').querySelectorAll('.chip').forEach(c=>c.onclick=()=>{const k=c.dataset.k;chosenTags=chosenTags.includes(k)?chosenTags.filter(x=>x!==k):chosenTags.concat(k);renderChips()});
- $('tagFilter').innerHTML='<option value="all">Tất cả</option>'+Object.entries(TAGS).map(([k,v])=>'<option value="'+k+'" '+(tagFilter===k?'selected':'')+'>'+v+'</option>').join('');
-}
-function renderProfileBar(){
- const sel=$('profileSelect');sel.innerHTML='';
- Object.values(profiles).forEach(p=>{const o=document.createElement('option');o.value=p.id;o.textContent=p.name;sel.appendChild(o)});
- sel.value=currentId;
- const p=prof(),a=$('pfpBox');
- a.innerHTML=p&&p.photo?'<img src="'+p.photo+'">':(p?p.name.slice(0,1).toUpperCase():'?');
-}
 function renderAdvice(){
- const p=prof(),r=rows()[0],box=$('adviceBox');
- if(!p||!r){box.textContent='Hãy tạo hồ sơ và lưu kết quả đo.';return}
- const k=cls(r.sys,r.dia,r.symptom),hc=hrCls(r.pulse),a=advice(r,p);
+ const r=rows()[0],box=$('adviceBox');
+ if(!r){box.textContent='Hãy nhập kết quả đo đầu tiên.';return}
+ const k=cls(r.sys,r.dia,r.symptom),hc=hrCls(r.pulse),a=advice(r,profile);
  let h='<b>Huyết áp '+r.sys+'/'+r.dia+' mmHg — '+k.t+'</b>';
  h+='<div class="note">Nhịp tim: '+(r.pulse?r.pulse+' bpm — '+hc.t:'Chưa nhập')+'</div>';
  if(r.tags&&r.tags.length)h+='<div class="note">Bối cảnh: '+r.tags.map(x=>TAGS[x]).join(', ')+'</div>';
@@ -512,25 +512,6 @@ function renderAnalytics(){
  if(cp!=null&&(cp<50||cp>100))t+='<div class="alert"><b>⚠️ Nhịp tim TB '+cp+' bpm:</b> '+(cp<50?'rất chậm':'nhanh')+' so với ngưỡng nghỉ 60–100 bpm.</div>';
  $('trendBox').innerHTML=t;
 }
-function destroy(c){if(c&&typeof c.destroy==='function')c.destroy()}
-function renderCharts(){
- const data=[...rows()].sort((a,b)=>new Date(b.time)-new Date(a.time)).slice(-30);
- destroy(bpChart);
- bpChart=new Chart($('bpCanvas'),{type:'line',plugins:[bpZones],data:{labels:data.map(r=>fmtDT(r.time)),datasets:[
-  {label:'Tâm thu',data:data.map(r=>r.sys),borderColor:'#ef4444',borderWidth:3,pointRadius:3,tension:.38,fill:true,backgroundColor:'rgba(239,68,68,.08)'},
-  {label:'Tâm trương',data:data.map(r=>r.dia),borderColor:'#6366f1',borderWidth:3,pointRadius:3,tension:.38,fill:true,backgroundColor:'rgba(99,102,241,.08)'}]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true}}},scales:{y:{min:40,max:200,title:{display:true,text:'mmHg'}},x:{ticks:{maxRotation:45,autoSkip:true}}}}});
- destroy(pulseChart);
- pulseChart=new Chart($('pulseCanvas'),{type:'line',plugins:[pulseZones],data:{labels:data.map(r=>fmtDT(r.time)),datasets:[
-  {label:'Nhịp tim',data:data.map(r=>r.pulse),borderColor:'#ec4899',borderWidth:3,pointRadius:4,pointBackgroundColor:'#fff',pointBorderWidth:3,tension:.38,fill:true,backgroundColor:'rgba(236,72,153,.10)',spanGaps:true}]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:30,max:180,title:{display:true,text:'bpm'}},x:{ticks:{maxRotation:45,autoSkip:true}}}}});
- const ids=Object.keys(profiles);
- destroy(memberChart);
- memberChart=new Chart($('memberCanvas'),{type:'bar',data:{labels:ids.map(i=>profiles[i].name),datasets:[
-  {label:'Tâm thu TB',data:ids.map(i=>avg((store[i]||[]).slice(0,7),'sys')),backgroundColor:'#6366f1',borderRadius:10},
-  {label:'Nhịp tim TB',data:ids.map(i=>avg((store[i]||[]).slice(0,7),'pulse')),backgroundColor:'#ec4899',borderRadius:10}]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true}}},scales:{y:{beginAtZero:true}}}});
-}
 function renderHistory(){
  const data=rows().filter(r=>{const k=cls(r.sys,r.dia,r.symptom),h=hrCls(r.pulse);
   if(tagFilter!=='all'&&!(r.tags||[]).includes(tagFilter))return false;
@@ -541,223 +522,110 @@ function renderHistory(){
  data.forEach(r=>{const k=cls(r.sys,r.dia,r.symptom),h=hrCls(r.pulse),tr=document.createElement('tr');
   tr.innerHTML='<td>'+fmtDT(r.time)+'</td><td><b>'+r.sys+'/'+r.dia+'</b></td><td>'+(r.pulse?r.pulse+' <span class="badge '+h.c+'">'+h.t+'</span>':'—')+'</td><td>'+(r.tags&&r.tags.length?r.tags.map(x=>TAGS[x]).join(', '):'—')+'</td><td>'+SYM[r.symptom||'none']+'</td><td><span class="badge '+k.c+'">'+k.t+'</span></td><td>'+(r.note||'—')+'</td><td><button class="btn ghost sm" data-id="'+r.id+'">Xoá</button></td>';
   tb.appendChild(tr)});
- tb.querySelectorAll('button').forEach(b=>b.onclick=()=>{store[currentId]=rows().filter(r=>r.id!==b.dataset.id);save();renderTracking()});
+ tb.querySelectorAll('button').forEach(b=>b.onclick=()=>{readings=readings.filter(r=>r.id!==b.dataset.id);save();renderTracking()});
 }
 function renderTracking(){
  try{renderChips();renderProfileBar();renderAdvice();renderAnalytics();renderCharts();renderHistory();
-  const p=prof(),r=rows()[0],recent=rows().slice(0,7),b=bmi(p),h=hrCls(r?r.pulse:null);
+  const r=rows()[0],recent=rows().slice(0,7),b=bmi(profile),h=hrCls(r?r.pulse:null);
   $('kpiBox').innerHTML=
-   '<div class="kpi"><div class="k">Hồ sơ</div><div class="v">'+(p?p.name:'—')+'</div><div class="s">'+(p?p.age+' tuổi':'')+'</div></div>'+
+   '<div class="kpi"><div class="k">Hồ sơ</div><div class="v">'+(profile.name||'—')+'</div><div class="s">'+(profile.age?profile.age+' tuổi':'')+'</div></div>'+
    '<div class="kpi"><div class="k">BMI</div><div class="v">'+(b??'—')+'</div><div class="s">'+bmiT(b)+'</div></div>'+
    '<div class="kpi"><div class="k">Huyết áp gần nhất</div><div class="v">'+(r?r.sys+'/'+r.dia:'—')+'</div><div class="s">'+(r?cls(r.sys,r.dia,r.symptom).t:'Chưa có')+'</div></div>'+
    '<div class="kpi"><div class="k">Nhịp tim gần nhất</div><div class="v">'+(r&&r.pulse?r.pulse:'—')+'</div><div class="s">'+h.t+'</div></div>';
  }catch(e){console.error(e);alert('Lỗi hiển thị: '+e.message)}
 }
-function renderDocs(){
- const list=docs().filter(d=>docFilter==='all'||d.type===docFilter).sort((a,b)=>new Date(b.date)-new Date(a.date));
- const grid=$('docGrid');grid.innerHTML='';
- $('docEmpty').style.display=list.length?'none':'block';
- list.forEach(d=>{
-  const card=document.createElement('div');card.className='doc';
-  const thumbs=(d.files||[]).map((f,i)=>f.type==='pdf'
-   ?'<div class="file" data-id="'+d.id+'" data-i="'+i+'" style="width:100%;height:70px;display:grid;place-items:center;background:#eef2ff">📄<br>'+((f.name||'PDF').slice(0,16))+'</div>'
-   :'<img src="'+f.data+'" data-id="'+d.id+'" data-i="'+i+'" style="width:100%;height:100px;object-fit:cover;cursor:pointer">').join('');
-  card.innerHTML='<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px">'+thumbs+'</div>'+
-   '<div class="doc-body"><span class="badge doc-type">'+DOC_TYPES[d.type]+'</span>'+
-   '<h3 style="margin-top:7px">'+(d.title||DOC_TYPES[d.type])+'</h3>'+
-   '<div class="meta">'+fmtDate(d.date)+' • '+(d.facility||'Không ghi cơ sở')+'</div>'+
-   '<div class="meta">'+d.files.length+' tệp • '+(d.note||'')+'</div>'+
-   '<div class="doc-actions"><button class="btn ghost sm" data-view="'+d.id+'">Xem tất cả</button><button class="btn ghost sm" data-edit="'+d.id+'">Sửa</button><button class="btn danger sm" data-del="'+d.id+'">Xoá</button></div></div>';
-  grid.appendChild(card);
- });
- grid.querySelectorAll('[data-id][data-i]').forEach(el=>el.onclick=()=>openFileViewer(docs(),el.dataset.id,+el.dataset.i));
- grid.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>openFileViewer(docs(),b.dataset.view,0));
- grid.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>editDoc(b.dataset.edit));
- grid.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{if(confirm('Xoá tài liệu này?')){documents[currentId]=docs().filter(d=>d.id!==b.dataset.del);save();renderDocs()}});
-}
-function showViewerAt(i){
- const d=viewerList&&viewerList.find(x=>x.id===viewerDocId);
- if(!d||!d.files.length)return;
- viewerIndex=(i+d.files.length)%d.files.length;
- const f=d.files[viewerIndex];
- if(f.type==='pdf'){const w=window.open();if(w)w.document.write('<iframe src="'+f.data+'" style="width:100%;height:100vh;border:0"></iframe>');return}
- $('viewerImg').src=f.data;
- $('viewerCount').textContent=(viewerIndex+1)+' / '+d.files.length;
- $('viewer').classList.add('on');
-}
-function openFileViewer(list,docId,index){
- viewerList=list;viewerDocId=docId;showViewerAt(index||0);
-}
-$('viewerPrev').onclick=e=>{e.stopPropagation();showViewerAt(viewerIndex-1)};
-$('viewerNext').onclick=e=>{e.stopPropagation();showViewerAt(viewerIndex+1)};
-$('viewerImg').onclick=e=>e.stopPropagation();
-$('viewer').onclick=()=>$('viewer').classList.remove('on');
-function editDoc(id){
- const d=docs().find(x=>x.id===id);if(!d)return;
- editingDocId=id;
- $('docFormTitle').textContent='Sửa tài liệu y tế';
- $('docType').value=d.type;$('docDate').value=d.date;$('docFacility').value=d.facility||'';$('docTitle').value=d.title||'';$('docNote').value=d.note||'';
- pendingDocFiles.length=0;(d.files||[]).forEach(f=>pendingDocFiles.push(f));
- renderFilePreview('docPreview',pendingDocFiles);
- $('docSubmitBtn').textContent='Cập nhật tài liệu';
- $('docCancelBtn').classList.remove('hidden');
- $('docForm').scrollIntoView({behavior:'smooth'});
-}
-function resetDocForm(){
- editingDocId=null;
- $('docFormTitle').textContent='Thêm tài liệu y tế';
- $('docForm').reset();pendingDocFiles.length=0;
- renderFilePreview('docPreview',pendingDocFiles);
- $('docSubmitBtn').textContent='Lưu tài liệu';
- $('docCancelBtn').classList.add('hidden');
-}
-$('docCancelBtn').onclick=resetDocForm;
-function renderVisits(){
- const list=visitsOf().slice().sort((a,b)=>new Date(b.date)-new Date(a.date));
- const box=$('visitList');box.innerHTML='';
- $('visitEmpty').style.display=list.length?'none':'block';
- list.forEach(v=>{
-  const card=document.createElement('div');card.className='card';
-  const clinThumbs=(v.clinical||[]).map((f,i)=>f.type==='pdf'
-   ?'<div class="file" data-vid="'+v.id+'" data-kind="clinical" data-i="'+i+'" style="width:100%;height:60px;display:grid;place-items:center;background:#eef2ff">📄</div>'
-   :'<img src="'+f.data+'" data-vid="'+v.id+'" data-kind="clinical" data-i="'+i+'" style="width:100%;height:80px;object-fit:cover;cursor:pointer">').join('');
-  const rxThumbs=(v.rx||[]).map((f,i)=>f.type==='pdf'
-   ?'<div class="file" data-vid="'+v.id+'" data-kind="rx" data-i="'+i+'" style="width:100%;height:60px;display:grid;place-items:center;background:#eef2ff">📄</div>'
-   :'<img src="'+f.data+'" data-vid="'+v.id+'" data-kind="rx" data-i="'+i+'" style="width:100%;height:80px;object-fit:cover;cursor:pointer">').join('');
-  card.innerHTML='<span class="badge doc-type">'+fmtDate(v.date)+'</span>'+
-   '<h2 style="margin-top:9px">'+(v.facility||'Chưa ghi cơ sở y tế')+'</h2>'+
-   '<div class="sub">'+(v.doctor||'Chưa ghi bác sĩ')+(v.specialty?' • '+v.specialty:'')+'</div>'+
-   '<div class="info"><b>Lý do khám:</b> '+(v.reason||'—')+'</div>'+
-   '<div class="info"><b>Chẩn đoán:</b> '+(v.diagnosis||'—')+'</div>'+
-   '<div class="info"><b>Hướng dẫn:</b> '+(v.conclusion||'—')+'</div>'+
-   '<div class="note"><b>Cận lâm sàng ('+((v.clinical||[]).length)+'):</b></div>'+
-   '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">'+(clinThumbs||'<div class="note">Chưa có</div>')+'</div>'+
-   '<div class="note"><b>Đơn thuốc ('+((v.rx||[]).length)+'):</b></div>'+
-   '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">'+(rxThumbs||'<div class="note">Chưa có</div>')+'</div>'+
-   '<div class="row" style="margin-top:10px">'+
-   '<button class="btn ghost sm" data-clinical="'+v.id+'">📎 Xem tất cả cận lâm sàng</button>'+
-   '<button class="btn ghost sm" data-rx="'+v.id+'">💊 Xem tất cả đơn thuốc</button>'+
-   '<button class="btn ghost sm" data-edit="'+v.id+'">✏️ Sửa</button>'+
-   '<button class="btn danger sm" data-del="'+v.id+'">Xoá</button></div>';
-  box.appendChild(card);
- });
- box.querySelectorAll('[data-vid][data-kind][data-i]').forEach(el=>el.onclick=()=>{
-  const v=visitsOf().find(x=>x.id===el.dataset.vid);if(!v)return;
-  const files=el.dataset.kind==='clinical'?(v.clinical||[]):(v.rx||[]);
-  openFileViewer([{id:v.id,files:files}],v.id,+el.dataset.i);
- });
- box.querySelectorAll('[data-clinical]').forEach(b=>b.onclick=()=>showVisitFiles(b.dataset.clinical,'clinical'));
- box.querySelectorAll('[data-rx]').forEach(b=>b.onclick=()=>showVisitFiles(b.dataset.rx,'rx'));
- box.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>editVisit(b.dataset.edit));
- box.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{if(confirm('Xoá lần khám này?')){visitStore[currentId]=visitsOf().filter(v=>v.id!==b.dataset.del);save();renderVisits()}});
-}
-function showVisitFiles(id,kind){
- const v=visitsOf().find(x=>x.id===id);if(!v)return;
- const files=kind==='clinical'?(v.clinical||[]):(v.rx||[]);
- if(!files.length)return alert('Chưa có tệp cho phần này.');
- openFileViewer([{id:v.id,files:files}],v.id,0);
-}
-function editVisit(id){
- const v=visitsOf().find(x=>x.id===id);if(!v)return;
- editingVisitId=id;
- $('visitFormTitle').textContent='Sửa lần khám';
- $('vDate').value=v.date;$('vFacility').value=v.facility||'';$('vDoctor').value=v.doctor||'';$('vSpecialty').value=v.specialty||'';
- $('vReason').value=v.reason||'';$('vDiagnosis').value=v.diagnosis||'';$('vConclusion').value=v.conclusion||'';
- pendingClinical.length=0;(v.clinical||[]).forEach(f=>pendingClinical.push(f));
- pendingRx.length=0;(v.rx||[]).forEach(f=>pendingRx.push(f));
- renderFilePreview('vClinicalPreview',pendingClinical);
- renderFilePreview('vRxPreview',pendingRx);
- $('visitSubmitBtn').textContent='Cập nhật lần khám';
- $('visitCancelBtn').classList.remove('hidden');
- $('visitForm').scrollIntoView({behavior:'smooth'});
-}
-function resetVisitForm(){
- editingVisitId=null;
- $('visitFormTitle').textContent='Thêm lần khám';
- $('visitForm').reset();
- pendingClinical.length=0;pendingRx.length=0;
- renderFilePreview('vClinicalPreview',pendingClinical);
- renderFilePreview('vRxPreview',pendingRx);
- $('visitSubmitBtn').textContent='Lưu lần khám';
- $('visitCancelBtn').classList.add('hidden');
-}
-$('visitCancelBtn').onclick=resetVisitForm;
-function compressImage(file){
- return new Promise((resolve,reject)=>{
-  if(file.type==='application/pdf'){const rd=new FileReader();rd.onload=()=>resolve({name:file.name,type:'pdf',data:rd.result});rd.onerror=reject;rd.readAsDataURL(file);return}
-  const rd=new FileReader();
-  rd.onload=()=>{const img=new Image();img.onload=()=>{const max=1400;let w=img.width,h=img.height;if(w>max||h>max){const r=Math.min(max/w,max/h);w=Math.round(w*r);h=Math.round(h*r)}const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);resolve({name:file.name,type:'image',data:c.toDataURL('image/jpeg',.72)})};img.onerror=reject;img.src=rd.result};rd.onerror=reject;rd.readAsDataURL(file)});
-}
-function renderFilePreview(previewId,arr){
- $(previewId).innerHTML=arr.map((f,i)=>f.type==='pdf'
-  ?'<div class="file" data-i="'+i+'">📄<br>'+((f.name||'PDF').slice(0,18))+'</div>'
-  :'<img src="'+f.data+'" data-i="'+i+'" title="Nhấn để xoá">').join('');
- $(previewId).querySelectorAll('[data-i]').forEach(el=>el.onclick=()=>{arr.splice(+el.dataset.i,1);renderFilePreview(previewId,arr)});
-}
-function bindFiles(dropId,inputId,previewId,arr){
- $(dropId).onclick=()=>$(inputId).click();
- $(inputId).onchange=async e=>{
-  for(const f of e.target.files){try{const item=await compressImage(f);arr.push(item)}catch(err){console.error(err)}}
-  e.target.value='';renderFilePreview(previewId,arr);
- };
-}
-bindFiles('docDrop','docFiles','docPreview',pendingDocFiles);
-bindFiles('vClinicalDrop','vClinicalFiles','vClinicalPreview',pendingClinical);
-bindFiles('vRxDrop','vRxFiles','vRxPreview',pendingRx);
-$('docForm').onsubmit=e=>{
- e.preventDefault();
- if(!currentId)return alert('Hãy tạo/chọn hồ sơ trước.');
- if(!pendingDocFiles.length)return alert('Hãy chọn ít nhất một ảnh hoặc PDF.');
- if(editingDocId){
-  const d=docs().find(x=>x.id===editingDocId);
-  if(d){d.type=$('docType').value;d.date=$('docDate').value;d.facility=$('docFacility').value.trim();d.title=$('docTitle').value.trim();d.note=$('docNote').value.trim();d.files=pendingDocFiles.slice()}
- }else{
-  documents[currentId].unshift({id:newId(),type:$('docType').value,date:$('docDate').value,facility:$('docFacility').value.trim(),title:$('docTitle').value.trim(),note:$('docNote').value.trim(),files:pendingDocFiles.slice(),createdAt:new Date().toISOString()});
- }
- resetDocForm();save();renderDocs();alert('Đã lưu tài liệu.');
-};
-$('visitForm').onsubmit=e=>{
- e.preventDefault();
- if(!currentId)return alert('Hãy tạo/chọn hồ sơ trước.');
- if(editingVisitId){
-  const v=visitsOf().find(x=>x.id===editingVisitId);
-  if(v){v.date=$('vDate').value;v.facility=$('vFacility').value.trim();v.doctor=$('vDoctor').value.trim();v.specialty=$('vSpecialty').value.trim();v.reason=$('vReason').value.trim();v.clinical=pendingClinical.slice();v.diagnosis=$('vDiagnosis').value.trim();v.conclusion=$('vConclusion').value.trim();v.rx=pendingRx.slice()}
- }else{
-  visitStore[currentId].unshift({id:newId(),date:$('vDate').value,facility:$('vFacility').value.trim(),doctor:$('vDoctor').value.trim(),specialty:$('vSpecialty').value.trim(),reason:$('vReason').value.trim(),clinical:pendingClinical.slice(),diagnosis:$('vDiagnosis').value.trim(),conclusion:$('vConclusion').value.trim(),rx:pendingRx.slice(),createdAt:new Date().toISOString()});
- }
- resetVisitForm();save();renderVisits();alert('Đã lưu lần khám.');
-};
 $('pfpBox').onclick=()=>$('pfpInput').click();
-$('pfpInput').onchange=e=>{if(!currentId)return alert('Hãy tạo hồ sơ trước.');const f=e.target.files[0];if(!f)return;compressImage(f).then(item=>{profiles[currentId].photo=item.data;save();renderProfileBar()})};
-$('profileSelect').onchange=e=>{currentId=e.target.value;if(!store[currentId])store[currentId]=[];if(!documents[currentId])documents[currentId]=[];if(!visitStore[currentId])visitStore[currentId]=[];save();renderOverview()};
-$('readingForm').onsubmit=e=>{e.preventDefault();if(!currentId)return alert('Hãy tạo hồ sơ trước.');store[currentId].unshift({id:newId(),time:$('time').value,sys:+$('sys').value,dia:+$('dia').value,pulse:$('pulse').value?+$('pulse').value:null,arm:$('arm').value,symptom:$('symptom').value,tags:chosenTags.slice(),note:$('note').value.trim()});$('readingForm').reset();chosenTags=[];timeEdited=false;tick();save();renderTracking()};
+$('pfpInput').onchange=e=>{const f=e.target.files[0];if(!f)return;compressImage(f).then(item=>{profile.photo=item.data;save();renderProfileBar()})};
+$('readingForm').onsubmit=e=>{e.preventDefault();readings.unshift({id:newId(),time:$('time').value,sys:+$('sys').value,dia:+$('dia').value,pulse:$('pulse').value?+$('pulse').value:null,arm:$('arm').value,symptom:$('symptom').value,tags:chosenTags.slice(),note:$('note').value.trim()});$('readingForm').reset();chosenTags=[];timeEdited=false;tick();save();renderTracking()};
 document.querySelectorAll('#rangeTabs .tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('#rangeTabs .tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');rangeDays=+b.dataset.days;renderAnalytics()});
 document.querySelectorAll('#tab-tracking .tab[data-filter]').forEach(b=>b.onclick=()=>{document.querySelectorAll('#tab-tracking .tab[data-filter]').forEach(x=>x.classList.remove('on'));b.classList.add('on');filter=b.dataset.filter;renderHistory()});
 $('tagFilter').onchange=e=>{tagFilter=e.target.value;renderHistory()};
-document.querySelectorAll('#docFilters .tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('#docFilters .tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');docFilter=b.dataset.type;renderDocs()});
 function download(name,content,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type:type}));a.download=name;a.click()}
-function exportJSON(){download('ho-so-suc-khoe-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify({version:35,exportedAt:new Date().toISOString(),profiles:profiles,readings:store,documents:documents,visits:visitStore},null,2),'application/json')}
+function exportJSON(){download('ho-so-suc-khoe-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify({version:47,exportedAt:new Date().toISOString(),profile:profile,readings:readings},null,2),'application/json')}
 $('jsonExportBtn').onclick=exportJSON;
 $('jsonImportBtn').onclick=()=>$('jsonInput').click();
-$('jsonInput').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const o=JSON.parse(rd.result);if(!o.profiles||!o.readings)throw new Error('File không đúng định dạng.');if(!confirm('Nhập sẽ thay thế dữ liệu hiện có. Tiếp tục?'))return;profiles=o.profiles;store=o.readings;documents=o.documents||{};visitStore=o.visits||{};currentId=Object.keys(profiles)[0]||'';if(currentId){if(!store[currentId])store[currentId]=[];if(!documents[currentId])documents[currentId]=[];if(!visitStore[currentId])visitStore[currentId]=[]}save();renderOverview();alert('Đã nhập dữ liệu.')}catch(err){alert('Không thể nhập JSON: '+err.message)}};rd.readAsText(f)};
+$('jsonInput').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const o=JSON.parse(rd.result);if(!o.profile||!o.readings)throw new Error('File không đúng định dạng.');if(!confirm('Nhập sẽ thay thế dữ liệu hiện có. Tiếp tục?'))return;profile=o.profile;readings=o.readings;save();renderTracking();alert('Đã nhập dữ liệu.')}catch(err){alert('Không thể nhập JSON: '+err.message)}};rd.readAsText(f)};
 function exportPDF(){
- const p=prof(),data=[...rows()].sort((a,b)=>new Date(b.time)-new Date(a.time));
- if(!p||!data.length)return alert('Hãy tạo hồ sơ và có ít nhất một kết quả đo.');
+ const data=[...rows()].sort((a,b)=>new Date(b.time)-new Date(a.time));
+ if(!data.length)return alert('Hãy nhập ít nhất một kết quả đo.');
  const recent=data.slice(0,7);
  const rowsHtml=data.slice(0,50).map(r=>{const k=cls(r.sys,r.dia,r.symptom),h=hrCls(r.pulse);return '<tr><td>'+fmtDT(r.time)+'</td><td>'+r.sys+'/'+r.dia+'</td><td>'+(r.pulse||'—')+'</td><td>'+h.t+'</td><td>'+k.t+'</td><td>'+(r.tags&&r.tags.length?r.tags.map(x=>TAGS[x]).join(', '):'—')+'</td><td>'+(r.note||'')+'</td></tr>'}).join('');
- const docRows=docs().sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,50).map(d=>'<tr><td>'+fmtDate(d.date)+'</td><td>'+DOC_TYPES[d.type]+'</td><td>'+(d.title||'')+'</td><td>'+(d.facility||'')+'</td><td>'+d.files.length+'</td><td>'+(d.note||'')+'</td></tr>').join('');
- const visitRows=visitsOf().sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,50).map(v=>'<tr><td>'+fmtDate(v.date)+'</td><td>'+(v.facility||'')+'</td><td>'+(v.doctor||'')+'</td><td>'+(v.reason||'')+'</td><td>'+(v.diagnosis||'')+'</td><td>'+((v.clinical||[]).length)+'/'+((v.rx||[]).length)+'</td></tr>').join('');
  const w=window.open('','_blank');
- w.document.write('<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Báo cáo sức khoẻ - '+p.name+'</title><style>body{font-family:Arial;color:#111;padding:26px}h1{margin:0 0 4px;font-size:22px}h2{font-size:16px;margin:20px 0 8px;border-bottom:2px solid #4f46e5;padding-bottom:5px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:1px solid #ddd;padding:6px;text-align:left}th{background:#eef2ff}.meta{color:#555;font-size:13px}.box{background:#f5f7ff;border-left:4px solid #4f46e5;padding:10px;margin:8px 0;font-size:13px}@media print{button{display:none}}</style></head><body><h1>Báo cáo sức khoẻ</h1><div class="meta">Hồ sơ: <b>'+p.name+'</b> • '+p.age+' tuổi • '+({male:'Nam',female:'Nữ',other:'Khác'})[p.gender]+' • BMI '+(bmi(p)??'—')+'<br>Bệnh nền: '+({none:'Không',pregnant:'Đang mang thai',kidney:'Bệnh thận',diabetes:'Đái tháo đường',heart:'Bệnh tim mạch'})[p.condition||'none']+' • Xuất ngày '+new Date().toLocaleString('vi-VN')+'</div><h2>Tóm tắt 7 lần đo gần nhất</h2><div class="box">Huyết áp trung bình: <b>'+(avg(recent,'sys')??'—')+'/'+(avg(recent,'dia')??'—')+' mmHg</b> • Nhịp tim trung bình: <b>'+(avg(recent,'pulse')??'—')+' bpm</b></div><h2>Lịch sử 50 lần đo gần nhất</h2><table><thead><tr><th>Thời gian</th><th>Huyết áp</th><th>Nhịp tim</th><th>Phân loại nhịp</th><th>Phân loại HA</th><th>Bối cảnh</th><th>Ghi chú</th></tr></thead><tbody>'+rowsHtml+'</tbody></table><h2>Tài liệu y tế</h2><table><thead><tr><th>Ngày</th><th>Loại</th><th>Tên phiếu</th><th>Cơ sở</th><th>Số tệp</th><th>Ghi chú</th></tr></thead><tbody>'+(docRows||'<tr><td colspan="6">Chưa có</td></tr>')+'</tbody></table><h2>Lịch sử khám bệnh</h2><table><thead><tr><th>Ngày</th><th>Cơ sở</th><th>Bác sĩ</th><th>Lý do khám</th><th>Chẩn đoán</th><th>Cận lâm sàng / Đơn thuốc</th></tr></thead><tbody>'+(visitRows||'<tr><td colspan="6">Chưa có</td></tr>')+'</tbody></table><p class="note">Báo cáo chỉ tổng hợp dữ liệu tự theo dõi; không thay thế chẩn đoán và quyết định điều trị của bác sĩ.</p><button onclick="window.print()" style="padding:10px 16px;border:0;border-radius:8px;background:#4f46e5;color:#fff;font-weight:700;cursor:pointer">In / Lưu PDF</button></body></html>');
+ w.document.write('<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Báo cáo sức khoẻ - '+(profile.name||'')+'</title><style>body{font-family:Arial;color:#111;padding:26px}h1{margin:0 0 4px;font-size:22px}h2{font-size:16px;margin:20px 0 8px;border-bottom:2px solid #4f46e5;padding-bottom:5px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:1px solid #ddd;padding:6px;text-align:left}th{background:#eef2ff}.meta{color:#555;font-size:13px}.box{background:#f5f7ff;border-left:4px solid #4f46e5;padding:10px;margin:8px 0;font-size:13px}@media print{button{display:none}}</style></head><body><h1>Báo cáo sức khoẻ</h1><div class="meta">Hồ sơ: <b>'+(profile.name||'')+'</b> • '+(profile.age||'')+' tuổi • '+({male:'Nam',female:'Nữ',other:'Khác'})[profile.gender||'male']+' • BMI '+(bmi(profile)??'—')+'<br>Bệnh nền: '+({none:'Không',pregnant:'Đang mang thai',kidney:'Bệnh thận',diabetes:'Đái tháo đường',heart:'Bệnh tim mạch'})[profile.condition||'none']+' • Xuất ngày '+new Date().toLocaleString('vi-VN')+'</div><h2>Tóm tắt 7 lần đo gần nhất</h2><div class="box">Huyết áp trung bình: <b>'+(avg(recent,'sys')??'—')+'/'+(avg(recent,'dia')??'—')+' mmHg</b> • Nhịp tim trung bình: <b>'+(avg(recent,'pulse')??'—')+' bpm</b></div><h2>Lịch sử 50 lần đo gần nhất</h2><table><thead><tr><th>Thời gian</th><th>Huyết áp</th><th>Nhịp tim</th><th>Phân loại nhịp</th><th>Phân loại HA</th><th>Bối cảnh</th><th>Ghi chú</th></tr></thead><tbody>'+rowsHtml+'</tbody></table><p class="note">Báo cáo chỉ tổng hợp dữ liệu tự theo dõi; không thay thế chẩn đoán và quyết định điều trị của bác sĩ.</p><button onclick="window.print()" style="padding:10px 16px;border:0;border-radius:8px;background:#4f46e5;color:#fff;font-weight:700;cursor:pointer">In / Lưu PDF</button></body></html>');
  w.document.close();
 }
 $('pdfBtn').onclick=exportPDF;
-$('reminderBtn').onclick=()=>{if(!currentId)return alert('Hãy tạo hồ sơ trước.');const t=prompt('Giờ nhắc đo (ví dụ 08:00):','08:00');if(t&&/^([01]\d|2[0-3]):[0-5]\d$/.test(t)){localStorage.setItem('rem_'+currentId,t);alert('Đã lưu giờ nhắc: '+t)}};
+$('reminderBtn').onclick=()=>{const t=prompt('Giờ nhắc đo (ví dụ 08:00):','08:00');if(t&&/^([01]\d|2[0-3]):[0-5]\d$/.test(t)){localStorage.setItem('rem_time',t);alert('Đã lưu giờ nhắc: '+t)}};
+function compressImage(file){
+ return new Promise((resolve,reject)=>{
+  const rd=new FileReader();
+  rd.onload=()=>{const img=new Image();img.onload=()=>{const max=800;let w=img.width,h=img.height;if(w>max||h>max){const r=Math.min(max/w,max/h);w=Math.round(w*r);h=Math.round(h*r)}const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);resolve({data:c.toDataURL('image/jpeg',.7)})};img.onerror=reject;img.src=rd.result};rd.onerror=reject;rd.readAsDataURL(file)});
+}
 function tick(){if(!timeEdited)$('time').value=localNow()}
 $('time').addEventListener('input',()=>timeEdited=true);
 setInterval(tick,1000);tick();
-setInterval(()=>{if(!currentId||!('Notification' in window)||Notification.permission!=='granted')return;const t=localStorage.getItem('rem_'+currentId);if(!t)return;const n=new Date(),x=new Date();const parts=t.split(':').map(Number);x.setHours(parts[0],parts[1],0,0);if(Math.abs(n-x)<60000&&!localStorage.getItem('not_'+currentId+n.toDateString())){localStorage.setItem('not_'+currentId+n.toDateString(),'1');new Notification('Nhắc đo huyết áp',{body:'Đã đến '+t})}},20000);
-switchTab('overview');
+setInterval(()=>{if(!('Notification' in window)||Notification.permission!=='granted')return;const t=localStorage.getItem('rem_time');if(!t)return;const n=new Date(),x=new Date();const parts=t.split(':').map(Number);x.setHours(parts[0],parts[1],0,0);if(Math.abs(n-x)<60000&&!localStorage.getItem('not_'+n.toDateString())){localStorage.setItem('not_'+n.toDateString(),'1');new Notification('Nhắc đo huyết áp',{body:'Đã đến '+t})}},20000);
+/* ===== Auth UI + Remember me + Forgot password ===== */
+$('tabLogin').onclick=()=>{isSignup=false;$('tabLogin').classList.add('on');$('tabSignup').classList.remove('on');$('authSubmit').textContent='Đăng nhập'};
+$('tabSignup').onclick=()=>{isSignup=true;$('tabSignup').classList.add('on');$('tabLogin').classList.remove('on');$('authSubmit').textContent='Đăng ký'};
+$('authForm').onsubmit=async e=>{
+ e.preventDefault();
+ const email=$('authEmail').value.trim(),pass=$('authPass').value;
+ const rememberMe=$('rememberMe').checked;
+ if(rememberMe){remember={email:email,pass:pass};localStorage.setItem(K.rem,JSON.stringify(remember))}
+ else{remember=null;localStorage.removeItem(K.rem)}
+ $('authMsg').textContent='Đang xử lý...';
+ try{
+  if(isSignup){
+   await sbSignup(email,pass);
+   $('authMsg').textContent='Đăng ký thành công.';
+   await initAfterAuth();
+  }else{
+   await sbLogin(email,pass);
+   $('authMsg').textContent='Đăng nhập thành công.';
+   await initAfterAuth();
+  }
+ }catch(err){
+  const msg=err.message||'';
+  if(msg.includes('EMAIL_EXISTS')||msg.toLowerCase().includes('already registered')||msg.toLowerCase().includes('already been registered')){
+   $('authMsg').textContent='⚠️ Email này đã tồn tại. Hãy chọn "Đăng nhập" (không phải "Đăng ký").';
+  }else if(msg.toLowerCase().includes('invalid login credentials')||msg.toLowerCase().includes('invalid')){
+   $('authMsg').textContent='⚠️ Email hoặc mật khẩu không đúng.';
+  }else{
+   $('authMsg').textContent='Lỗi: '+msg;
+  }
+ }
+};
+$('forgotLink').onclick=async()=>{
+ const email=$('authEmail').value.trim();
+ if(!email)return alert('Hãy nhập email trước.');
+ try{await sbRecover(email);$('authMsg').textContent='Đã gửi email đặt lại mật khẩu. Kiểm tra hộp thư (cả Spam).'}
+ catch(err){$('authMsg').textContent='Lỗi: '+err.message}
+};
+$('logoutBtn').onclick=()=>{if(confirm('Đăng xuất?'))sbLogout()};
+function showApp(){$('authGate').classList.add('hidden');$('appBody').classList.remove('hidden')}
+function showAuth(){
+ $('authGate').classList.remove('hidden');$('appBody').classList.add('hidden');
+ if(remember){$('authEmail').value=remember.email||'';$('authPass').value=remember.pass||'';$('rememberMe').checked=true}
+}
+async function initAfterAuth(){
+ if(!session)return showAuth();
+ showApp();
+ try{
+  const data=await sbLoadAll();
+  if(data.profile&&data.profile.name){profile=data.profile}
+  if(data.readings&&data.readings.length){readings=data.readings}
+  saveLocal();setSync(true);
+ }catch(e){console.error('Không tải được từ Supabase:',e);setSync(false)}
+ renderTracking();
+}
+/* ===== Khởi động ===== */
+(async function init(){
+ if(session){
+  try{await sbRefresh()}catch(e){session=null;localStorage.removeItem(K.s)}
+ }
+ if(session){await initAfterAuth()}else{showAuth()}
+})();
 </script>
 </body>
 </html>
